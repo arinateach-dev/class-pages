@@ -1,0 +1,861 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Leçon A2 – Christian Louboutin</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap');
+
+  :root {
+    --red: #c0001a;
+    --black: #1a1a1a;
+    --cream: #fdf6ee;
+    --sand: #e8ddd0;
+    --gold: #b89a5a;
+    --text: #2e2e2e;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--cream);
+    color: var(--text);
+    min-height: 100vh;
+  }
+
+  /* HEADER */
+  header {
+    background: var(--black);
+    color: white;
+    padding: 48px 40px 36px;
+    position: relative;
+    overflow: hidden;
+  }
+  header::before {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--red) 0%, var(--gold) 100%);
+  }
+  .header-tag {
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 12px;
+  }
+  header h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(28px, 5vw, 48px);
+    font-weight: 700;
+    line-height: 1.1;
+    margin-bottom: 8px;
+  }
+  header h1 span { color: var(--red); font-style: italic; }
+  .header-meta {
+    display: flex; gap: 20px; flex-wrap: wrap;
+    margin-top: 20px;
+  }
+  .badge {
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.15);
+    padding: 5px 14px;
+    border-radius: 20px;
+    font-size: 12px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.75);
+  }
+
+  /* MAIN LAYOUT */
+  main {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 40px 24px 80px;
+  }
+
+  /* SECTION */
+  .section { margin-bottom: 52px; }
+
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 24px;
+  }
+  .section-num {
+    width: 36px; height: 36px;
+    border-radius: 50%;
+    background: var(--black);
+    color: white;
+    font-family: 'Playfair Display', serif;
+    font-size: 15px;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--black);
+  }
+  .section-subtitle {
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--red);
+    font-weight: 500;
+    margin-bottom: 6px;
+  }
+
+  /* CARD */
+  .card {
+    background: white;
+    border-radius: 12px;
+    padding: 28px;
+    border: 1px solid var(--sand);
+    box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+  }
+
+  /* AUDIO PLAYER */
+  .audio-wrapper {
+    background: var(--black);
+    border-radius: 12px;
+    padding: 24px 28px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+  .audio-wrapper audio {
+    width: 100%;
+    filter: invert(1);
+    border-radius: 6px;
+  }
+  .audio-label {
+    font-size: 13px;
+    color: rgba(255,255,255,0.6);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+  .audio-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 17px;
+    color: white;
+    margin-bottom: 14px;
+  }
+
+  /* ÉCHAUFFEMENT */
+  .warm-questions { display: flex; flex-direction: column; gap: 14px; }
+  .warm-q {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    padding: 14px 18px;
+    background: var(--cream);
+    border-left: 3px solid var(--red);
+    border-radius: 0 8px 8px 0;
+    font-size: 15px;
+    line-height: 1.5;
+  }
+  .warm-q .q-num {
+    color: var(--red);
+    font-weight: 700;
+    font-family: 'Playfair Display', serif;
+    font-size: 16px;
+    flex-shrink: 0;
+  }
+
+  /* TRANSCRIPTION */
+  .transcript-box {
+    background: #1a1a1a;
+    color: #e8ddd0;
+    border-radius: 12px;
+    padding: 28px;
+    font-size: 14.5px;
+    line-height: 1.9;
+    position: relative;
+  }
+  .transcript-box::before {
+    content: '🎧';
+    position: absolute;
+    top: 20px; right: 24px;
+    font-size: 22px;
+    opacity: 0.5;
+  }
+  .transcript-box strong { color: var(--gold); font-weight: 500; }
+
+  /* COMPREHENSION */
+  .question-block { margin-bottom: 28px; }
+  .question-block:last-child { margin-bottom: 0; }
+  .q-label {
+    font-weight: 600;
+    font-size: 15px;
+    margin-bottom: 14px;
+    color: var(--black);
+  }
+  .q-label span {
+    display: inline-block;
+    background: var(--red);
+    color: white;
+    width: 24px; height: 24px;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 24px;
+    font-size: 13px;
+    margin-right: 8px;
+  }
+
+  /* IMAGE CHOICES */
+  .img-choices {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+  }
+  .img-choice {
+    border: 2px solid var(--sand);
+    border-radius: 10px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: border-color 0.2s, transform 0.15s;
+    background: white;
+  }
+  .img-choice:hover { border-color: var(--red); transform: translateY(-2px); }
+  .img-choice.selected { border-color: var(--red); background: #fff5f5; }
+  .img-choice.correct { border-color: #22a350; background: #f0faf4; }
+  .img-choice img {
+    width: 100%;
+    height: 110px;
+    object-fit: contain;
+    padding: 8px;
+    display: block;
+    background: #f9f9f9;
+  }
+  .img-choice-label {
+    font-size: 12px;
+    text-align: center;
+    padding: 6px 8px;
+    color: #666;
+    border-top: 1px solid var(--sand);
+  }
+
+  /* TEXT CHOICES */
+  .text-choices { display: flex; flex-direction: column; gap: 8px; }
+  .text-choice {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 11px 16px;
+    border: 2px solid var(--sand);
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14.5px;
+    transition: border-color 0.2s, background 0.2s;
+    background: white;
+    user-select: none;
+  }
+  .text-choice:hover { border-color: var(--red); background: #fff8f8; }
+  .text-choice.selected { border-color: var(--red); background: #fff0f0; }
+  .text-choice.correct { border-color: #22a350; background: #f0faf4; }
+  .text-choice .checkbox {
+    width: 18px; height: 18px;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+    transition: all 0.2s;
+  }
+  .text-choice.selected .checkbox { border-color: var(--red); background: var(--red); }
+  .text-choice.correct .checkbox { border-color: #22a350; background: #22a350; }
+  .text-choice .checkbox::after {
+    content: '';
+    width: 5px; height: 9px;
+    border: 2px solid white;
+    border-top: none; border-left: none;
+    transform: rotate(45deg) translateY(-1px);
+    display: none;
+  }
+  .text-choice.selected .checkbox::after,
+  .text-choice.correct .checkbox::after { display: block; }
+
+  /* DRAG SORT */
+  .sort-pool-label, .sort-answer-label {
+    font-size: 11px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: #999;
+    margin-bottom: 8px;
+  }
+  .sort-pool {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    min-height: 48px;
+    padding: 12px;
+    background: #f7f3ee;
+    border-radius: 10px;
+    border: 2px dashed var(--sand);
+  }
+  .sort-answer {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    min-height: 56px;
+    padding: 12px;
+    background: white;
+    border-radius: 10px;
+    border: 2px dashed var(--gold);
+  }
+  .sort-tag {
+    background: var(--black);
+    color: white;
+    padding: 7px 14px;
+    border-radius: 6px;
+    font-size: 13px;
+    cursor: pointer;
+    user-select: none;
+    transition: background 0.2s, transform 0.15s;
+    white-space: nowrap;
+  }
+  .sort-tag:hover { background: var(--red); transform: translateY(-1px); }
+  .sort-tag.placed { background: var(--gold); color: var(--black); }
+  .sort-slot {
+    flex: 1;
+    text-align: center;
+    color: #aaa;
+    font-style: italic;
+    font-size: 13px;
+    padding: 6px;
+    align-self: center;
+  }
+
+  /* BUTTONS & FEEDBACK */
+  .btn-verify {
+    background: var(--red);
+    color: white;
+    border: none;
+    padding: 11px 28px;
+    border-radius: 8px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    letter-spacing: 0.5px;
+    transition: background 0.2s, transform 0.15s;
+    margin-top: 16px;
+  }
+  .btn-verify:hover { background: #a0001a; transform: translateY(-1px); }
+  .feedback {
+    margin-top: 12px;
+    font-size: 14px;
+    padding: 10px 16px;
+    border-radius: 8px;
+    display: none;
+  }
+  .feedback.correct { background: #e8f8ef; color: #1a7a3a; border: 1px solid #b3e8c8; display: block; }
+  .feedback.incorrect { background: #fef0f0; color: #a00; border: 1px solid #f5c0c0; display: block; }
+
+  /* DISCUSS */
+  .discuss-list { display: flex; flex-direction: column; gap: 12px; }
+  .discuss-item {
+    display: flex;
+    gap: 14px;
+    padding: 16px 18px;
+    background: white;
+    border-radius: 10px;
+    border: 1px solid var(--sand);
+    align-items: flex-start;
+  }
+  .discuss-icon { font-size: 20px; flex-shrink: 0; margin-top: 1px; }
+  .discuss-text { font-size: 14.5px; line-height: 1.6; }
+  .discuss-text strong { color: var(--red); }
+
+  /* DEVOIRS */
+  .devoirs-list { display: flex; flex-direction: column; gap: 10px; }
+  .devoir-item {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    padding: 14px 18px;
+    background: white;
+    border-radius: 10px;
+    border: 1px solid var(--sand);
+  }
+  .devoir-num {
+    background: var(--black);
+    color: white;
+    width: 24px; height: 24px;
+    border-radius: 50%;
+    font-size: 12px;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+  .devoir-text { font-size: 14.5px; line-height: 1.6; }
+  .devoir-text em { color: var(--gold); font-style: normal; font-weight: 500; }
+
+  /* OBJECTIFS */
+  .objectifs-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 12px;
+  }
+  .obj-item {
+    background: white;
+    border: 1px solid var(--sand);
+    border-radius: 10px;
+    padding: 14px 16px;
+    font-size: 13.5px;
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+  }
+  .obj-dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: var(--red);
+    flex-shrink: 0;
+    margin-top: 5px;
+  }
+
+  /* DIVIDER */
+  .divider {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--sand) 30%, var(--sand) 70%, transparent);
+    margin: 48px 0;
+  }
+
+  @media (max-width: 600px) {
+    .img-choices { grid-template-columns: repeat(3, 1fr); }
+    .img-choice img { height: 70px; }
+    header { padding: 36px 20px 28px; }
+    main { padding: 28px 16px 60px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-tag">Compréhension orale · Niveau A2</div>
+  <h1>Christian<br><span>Louboutin</span></h1>
+  <div class="header-meta">
+    <span class="badge">🎧 Document audio</span>
+    <span class="badge">⏱ 45–60 min</span>
+    <span class="badge">📖 Vocabulaire de la mode</span>
+  </div>
+</header>
+
+<main>
+
+  <!-- OBJECTIFS -->
+  <div class="section">
+    <div class="section-header">
+      <div style="width:36px;height:36px;border-radius:50%;background:var(--gold);display:flex;align-items:center;justify-content:center;color:white;font-size:16px;">★</div>
+      <div>
+        <div class="section-subtitle">Objectifs de la leçon</div>
+        <div class="section-title">Ce que vous allez apprendre</div>
+      </div>
+    </div>
+    <div class="objectifs-grid">
+      <div class="obj-item"><div class="obj-dot"></div>Comprendre un document audio biographique</div>
+      <div class="obj-item"><div class="obj-dot"></div>Repérer des informations précises à l'oral</div>
+      <div class="obj-item"><div class="obj-dot"></div>Remettre des événements dans l'ordre chronologique</div>
+      <div class="obj-item"><div class="obj-dot"></div>Vocabulaire : la mode, la biographie, le parcours professionnel</div>
+      <div class="obj-item"><div class="obj-dot"></div>Exprimer son opinion sur la mode et le luxe</div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- ÉCHAUFFEMENT -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">É</div>
+      <div>
+        <div class="section-subtitle">Avant d'écouter</div>
+        <div class="section-title">Échauffement</div>
+      </div>
+    </div>
+    <div class="card">
+      <p style="font-size:14px;color:#888;margin-bottom:18px;">Discutez avec votre professeur ou réfléchissez à ces questions :</p>
+      <div class="warm-questions">
+        <div class="warm-q"><span class="q-num">1.</span> Connaissez-vous des marques de mode françaises ? Pouvez-vous en citer quelques-unes ?</div>
+        <div class="warm-q"><span class="q-num">2.</span> Regardez les images ci-dessous : une écharpe, un parapluie, des chaussures à talon rouge. À votre avis, quelle est la spécialité d'un grand styliste français ?</div>
+        <div class="warm-q"><span class="q-num">3.</span> Qu'est-ce que c'est pour vous le luxe ? Avez-vous déjà acheté ou rêvé d'acheter un produit de luxe ?</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- AUDIO -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">🎧</div>
+      <div>
+        <div class="section-subtitle">Document audio · Piste 19</div>
+        <div class="section-title">Écoutez l'enregistrement</div>
+      </div>
+    </div>
+    <div class="audio-wrapper">
+      <div style="width:100%">
+        <div class="audio-label">Atelier A2 — Piste 19</div>
+        <div class="audio-title">Christian Louboutin</div>
+        <audio controls style="width:100%;filter:none;accent-color:var(--red);">
+          <source src="atelier_a2_mn_piste_19.mp3" type="audio/mpeg">
+          Votre navigateur ne supporte pas l'élément audio.
+        </audio>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- TRANSCRIPTION -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num" style="font-size:13px;">T</div>
+      <div>
+        <div class="section-subtitle">Script de l'audio</div>
+        <div class="section-title">Transcription</div>
+      </div>
+    </div>
+    <details>
+      <summary style="cursor:pointer;font-size:14px;color:var(--red);margin-bottom:12px;user-select:none;">▶ Afficher / masquer la transcription</summary>
+      <div class="transcript-box" style="margin-top:12px;">
+        Aujourd'hui, nous parlons de <strong>Christian Louboutin</strong>, un grand, peut-être même le plus grand styliste français pour les chaussures. Il a révolutionné le monde de nos pieds, surtout celui des femmes avec ses célèbres <strong>chaussures à la semelle rouge</strong> ! Né en 1964 dans une famille bretonne, adolescent, il fréquentait les théâtres. C'est là qu'il a commencé à dessiner des chaussures (celles des spectateurs) et surtout qu'il a découvert un panneau interdisant les chaussures à talons hauts parce qu'elles pouvaient abîmer les sols. À partir de ce moment, il a dessiné et redessiné ce type de chaussures.
+        <br><br>
+        Avant d'avoir son baccalauréat, il a décidé d'abandonner le lycée et de partir visiter <strong>l'Inde</strong>. Il était très heureux de découvrir une autre vie ! Dans les années 1980, il avait plein d'emplois différents, pour gagner sa vie, de l'expérience. En même temps, il commençait à créer sa vision de la chaussure. C'est en <strong>1991</strong> qu'il a créé sa marque, avec deux amis, et depuis, son succès ne s'est jamais arrêté. Il a transformé la chaussure chez les plus grands couturiers : <strong>Yves-Saint-Laurent, Dior, Givenchy</strong>. Il a ouvert plusieurs magasins en France mais pas seulement, à New York aussi. Un peu plus tard, il a un peu changé de voie et remis au goût du jour le sac à main.
+      </div>
+    </details>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- ACTIVITÉ 1 -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">1</div>
+      <div>
+        <div class="section-subtitle">Activité 1</div>
+        <div class="section-title">Écoutez. Choisissez la bonne réponse.</div>
+      </div>
+    </div>
+    <div class="card">
+
+      <!-- Q a -->
+      <div class="question-block" id="qa">
+        <div class="q-label"><span>a</span> Quelle est la spécialité de Christian Louboutin ?</div>
+        <div class="img-choices">
+          <div class="img-choice" onclick="selectImgChoice('qa', this, false)">
+            <!-- ÉCHARPE -->
+            <svg viewBox="0 0 120 100" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:110px;display:block;padding:8px;">
+              <path d="M20,30 Q40,10 60,25 Q80,40 100,20" stroke="#c0001a" stroke-width="12" fill="none" stroke-linecap="round"/>
+              <path d="M15,45 Q35,25 55,40 Q75,55 95,35" stroke="#e63050" stroke-width="8" fill="none" stroke-linecap="round"/>
+              <line x1="95" y1="35" x2="105" y2="55" stroke="#c0001a" stroke-width="3"/>
+              <line x1="99" y1="37" x2="109" y2="57" stroke="#c0001a" stroke-width="3"/>
+              <line x1="103" y1="39" x2="113" y2="59" stroke="#c0001a" stroke-width="3"/>
+            </svg>
+            <div class="img-choice-label">Une écharpe</div>
+          </div>
+          <div class="img-choice" onclick="selectImgChoice('qa', this, false)">
+            <!-- PARAPLUIE -->
+            <svg viewBox="0 0 120 110" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:110px;display:block;padding:8px;">
+              <path d="M60,15 Q15,20 10,55 Q35,38 60,42 Q85,38 110,55 Q105,20 60,15Z" fill="#e87020" stroke="#c05010" stroke-width="1.5"/>
+              <line x1="60" y1="15" x2="60" y2="42" stroke="#c05010" stroke-width="1.5"/>
+              <line x1="35" y1="28" x2="60" y2="42" stroke="#c05010" stroke-width="1"/>
+              <line x1="85" y1="28" x2="60" y2="42" stroke="#c05010" stroke-width="1"/>
+              <line x1="60" y1="42" x2="60" y2="90" stroke="#6b3a1f" stroke-width="3" stroke-linecap="round"/>
+              <path d="M60,90 Q55,95 50,92" stroke="#6b3a1f" stroke-width="3" fill="none" stroke-linecap="round"/>
+            </svg>
+            <div class="img-choice-label">Un parapluie</div>
+          </div>
+          <div class="img-choice" onclick="selectImgChoice('qa', this, true)">
+            <!-- CHAUSSURE TALON ROUGE -->
+            <svg viewBox="0 0 120 100" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:110px;display:block;padding:8px;">
+              <path d="M15,70 Q20,45 45,38 Q70,32 95,40 Q105,44 105,52 Q105,60 90,62 L30,68 Q20,70 15,70Z" fill="#1a1a1a"/>
+              <path d="M15,70 L18,75 L88,70 L90,62 L30,68Z" fill="#c0001a"/>
+              <path d="M90,62 L105,52 L108,58 L108,72 L90,70Z" fill="#1a1a1a"/>
+              <path d="M108,72 L108,78 L104,78 L104,72Z" fill="#333"/>
+              <path d="M45,38 Q50,25 62,22 Q72,20 78,28 Q82,34 80,38" fill="#1a1a1a" stroke="#1a1a1a" stroke-width="1"/>
+            </svg>
+            <div class="img-choice-label">Des chaussures</div>
+          </div>
+        </div>
+        <div class="feedback" id="qa-fb"></div>
+      </div>
+
+      <hr style="border:none;border-top:1px solid var(--sand);margin:24px 0">
+
+      <!-- Q b -->
+      <div class="question-block" id="qb">
+        <div class="q-label"><span>b</span> Où a-t-il eu l'idée de dessiner des chaussures à talons hauts ?</div>
+        <div class="text-choices">
+          <div class="text-choice" onclick="selectTextChoice('qb', this, false)"><div class="checkbox"></div>Dans une école de mode.</div>
+          <div class="text-choice" onclick="selectTextChoice('qb', this, true)"><div class="checkbox"></div>Au théâtre.</div>
+          <div class="text-choice" onclick="selectTextChoice('qb', this, false)"><div class="checkbox"></div>Dans un musée.</div>
+        </div>
+        <div class="feedback" id="qb-fb"></div>
+      </div>
+
+      <hr style="border:none;border-top:1px solid var(--sand);margin:24px 0">
+
+      <!-- Q c -->
+      <div class="question-block" id="qc">
+        <div class="q-label"><span>c</span> Où aimait-il aller quand il était jeune ?</div>
+        <div class="img-choices">
+          <div class="img-choice" onclick="selectImgChoice('qc', this, true)">
+            <!-- THÉÂTRE -->
+            <svg viewBox="0 0 120 100" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:110px;display:block;padding:6px;">
+              <!-- curtains -->
+              <rect x="5" y="5" width="110" height="90" fill="#1a0a0a" rx="3"/>
+              <path d="M5,5 Q25,30 18,95 L5,95Z" fill="#8b0000"/>
+              <path d="M115,5 Q95,30 102,95 L115,95Z" fill="#8b0000"/>
+              <!-- stage floor -->
+              <rect x="5" y="78" width="110" height="17" fill="#5a3a1a" rx="2"/>
+              <!-- spotlight -->
+              <path d="M60,5 L40,78 L80,78Z" fill="rgba(255,240,180,0.18)"/>
+              <!-- figure on stage -->
+              <circle cx="60" cy="62" r="5" fill="#f0d0a0"/>
+              <rect x="57" y="67" width="6" height="10" fill="#2a2a6a" rx="1"/>
+            </svg>
+            <div class="img-choice-label">Le théâtre</div>
+          </div>
+          <div class="img-choice" onclick="selectImgChoice('qc', this, false)">
+            <!-- CIRQUE -->
+            <svg viewBox="0 0 120 100" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:110px;display:block;padding:6px;">
+              <!-- big top tent -->
+              <path d="M60,5 L5,50 L15,50 L15,90 L105,90 L105,50 L115,50Z" fill="#e63050"/>
+              <path d="M60,5 L38,50 L82,50Z" fill="white"/>
+              <path d="M60,5 L16,50 L38,50Z" fill="#e63050"/>
+              <path d="M60,5 L82,50 L104,50Z" fill="white"/>
+              <!-- ground -->
+              <rect x="5" y="88" width="110" height="7" fill="#c8a850" rx="2"/>
+              <!-- flag -->
+              <line x1="60" y1="3" x2="60" y2="0" stroke="#555" stroke-width="1.5"/>
+              <polygon points="60,0 68,3 60,6" fill="#ffcc00"/>
+            </svg>
+            <div class="img-choice-label">Le cirque</div>
+          </div>
+          <div class="img-choice" onclick="selectImgChoice('qc', this, false)">
+            <!-- CINÉMA -->
+            <svg viewBox="0 0 120 100" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:110px;display:block;padding:6px;">
+              <!-- dark room -->
+              <rect x="5" y="5" width="110" height="90" fill="#0d0d0d" rx="4"/>
+              <!-- screen -->
+              <rect x="15" y="10" width="90" height="55" fill="white" rx="2"/>
+              <rect x="18" y="13" width="84" height="49" fill="#e8f0ff" rx="1"/>
+              <!-- play symbol on screen -->
+              <polygon points="48,28 48,48 72,38" fill="rgba(100,120,200,0.4)"/>
+              <!-- seats -->
+              <rect x="20" y="72" width="18" height="10" fill="#c0001a" rx="3"/>
+              <rect x="42" y="72" width="18" height="10" fill="#c0001a" rx="3"/>
+              <rect x="64" y="72" width="18" height="10" fill="#c0001a" rx="3"/>
+              <rect x="86" y="72" width="14" height="10" fill="#c0001a" rx="3"/>
+              <!-- heads -->
+              <circle cx="29" cy="70" r="4" fill="#d4a870"/>
+              <circle cx="51" cy="70" r="4" fill="#a07850"/>
+              <circle cx="73" cy="70" r="4" fill="#d4a870"/>
+            </svg>
+            <div class="img-choice-label">Le cinéma</div>
+          </div>
+        </div>
+        <div class="feedback" id="qc-fb"></div>
+      </div>
+
+      <hr style="border:none;border-top:1px solid var(--sand);margin:24px 0">
+
+      <!-- Q d -->
+      <div class="question-block" id="qd">
+        <div class="q-label"><span>d</span> Dans quel pays a-t-il voyagé ?</div>
+        <div class="text-choices">
+          <div class="text-choice" onclick="selectTextChoice('qd', this, true)"><div class="checkbox"></div>En Inde.</div>
+          <div class="text-choice" onclick="selectTextChoice('qd', this, false)"><div class="checkbox"></div>En Chine.</div>
+          <div class="text-choice" onclick="selectTextChoice('qd', this, false)"><div class="checkbox"></div>Au Japon.</div>
+        </div>
+        <div class="feedback" id="qd-fb"></div>
+      </div>
+
+      <hr style="border:none;border-top:1px solid var(--sand);margin:24px 0">
+
+      <!-- Q e -->
+      <div class="question-block" id="qe">
+        <div class="q-label"><span>e</span> Où sont ses magasins ?</div>
+        <div class="text-choices">
+          <div class="text-choice" onclick="selectTextChoice('qe', this, false)"><div class="checkbox"></div>En France.</div>
+          <div class="text-choice" onclick="selectTextChoice('qe', this, false)"><div class="checkbox"></div>En Europe.</div>
+          <div class="text-choice" onclick="selectTextChoice('qe', this, true)"><div class="checkbox"></div>Dans le monde.</div>
+        </div>
+        <div class="feedback" id="qe-fb"></div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- ACTIVITÉ 2 -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">2</div>
+      <div>
+        <div class="section-subtitle">Activité 2</div>
+        <div class="section-title">Replacez les étapes dans l'ordre chronologique.</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="sort-pool-label">Étapes à classer (cliquez pour placer) :</div>
+      <div class="sort-pool" id="sort-pool">
+        <div class="sort-tag" onclick="moveTag(this)">Fin du lycée</div>
+        <div class="sort-tag" onclick="moveTag(this)">Voyage</div>
+        <div class="sort-tag" onclick="moveTag(this)">Création de sacs</div>
+        <div class="sort-tag" onclick="moveTag(this)">Ouverture de magasins</div>
+        <div class="sort-tag" onclick="moveTag(this)">Découverte du monde du spectacle</div>
+        <div class="sort-tag" onclick="moveTag(this)">Contacts avec les grands couturiers</div>
+        <div class="sort-tag" onclick="moveTag(this)">Lancement de sa marque</div>
+      </div>
+      <br>
+      <div class="sort-answer-label">Votre ordre (cliquez sur une étape pour la retirer) :</div>
+      <div class="sort-answer" id="sort-answer">
+        <div class="sort-slot" id="sort-placeholder">Cliquez sur les étapes ci-dessus pour les placer ici…</div>
+      </div>
+      <button class="btn-verify" onclick="checkOrder()">Vérifier l'ordre</button>
+      <div class="feedback" id="sort-fb"></div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- DISCUSSION -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">💬</div>
+      <div>
+        <div class="section-subtitle">Production orale</div>
+        <div class="section-title">Questions à discuter</div>
+      </div>
+    </div>
+    <div class="discuss-list">
+      <div class="discuss-item">
+        <div class="discuss-icon">👠</div>
+        <div class="discuss-text">Christian Louboutin a quitté le lycée avant son bac. Pensez-vous que c'était une bonne décision ? <strong>Pourquoi ?</strong></div>
+      </div>
+      <div class="discuss-item">
+        <div class="discuss-icon">✈️</div>
+        <div class="discuss-text">Il a voyagé en Inde pour « découvrir une autre vie ». <strong>Si vous partiez dans un autre pays pour changer votre vie, où iriez-vous ?</strong> Pourquoi ce pays ?</div>
+      </div>
+      <div class="discuss-item">
+        <div class="discuss-icon">🧵</div>
+        <div class="discuss-text">Louboutin dit que la mode est un art. <strong>Êtes-vous d'accord ?</strong> Pour vous, la mode est-elle importante ou superficielle ?</div>
+      </div>
+      <div class="discuss-item">
+        <div class="discuss-icon">💡</div>
+        <div class="discuss-text">Il a eu une idée originale (peindre la semelle en rouge) qui est devenue sa signature. <strong>Avez-vous déjà eu une idée originale</strong> dans votre travail ou votre vie personnelle ?</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- DEVOIRS -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">📝</div>
+      <div>
+        <div class="section-subtitle">Pour la prochaine fois</div>
+        <div class="section-title">Devoirs à domicile</div>
+      </div>
+    </div>
+    <div class="devoirs-list">
+      <div class="devoir-item">
+        <div class="devoir-num">1</div>
+        <div class="devoir-text"><em>Production écrite :</em> Écrivez un court paragraphe (60–80 mots) sur le parcours d'une personne célèbre de votre pays. Utilisez le <strong>passé composé</strong> et l'<strong>imparfait</strong>.</div>
+      </div>
+      <div class="devoir-item">
+        <div class="devoir-num">2</div>
+        <div class="devoir-text"><em>Vocabulaire :</em> Apprenez 8 mots nouveaux du texte. Écrivez une phrase avec chaque mot. Exemple : <em>styliste, semelle, baccalauréat, couturier, marque, spectateur, talon, abîmer.</em></div>
+      </div>
+      <div class="devoir-item">
+        <div class="devoir-num">3</div>
+        <div class="devoir-text"><em>Recherche :</em> Cherchez sur Internet une autre marque de mode française (ex. Chanel, Hermès, Dior). Préparez 3–4 phrases pour présenter son histoire à la prochaine leçon.</div>
+      </div>
+      <div class="devoir-item">
+        <div class="devoir-num">4</div>
+        <div class="devoir-text"><em>Bonus :</em> Regardez une courte vidéo en français sur YouTube sur la mode ou un styliste. Notez 5 mots ou expressions que vous ne connaissez pas encore.</div>
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<script>
+function selectImgChoice(qId, el, isCorrect) {
+  document.getElementById(qId).querySelectorAll('.img-choice').forEach(c => c.classList.remove('selected','correct'));
+  el.classList.add(isCorrect ? 'correct' : 'selected');
+  const fb = document.getElementById(qId + '-fb');
+  fb.className = 'feedback ' + (isCorrect ? 'correct' : 'incorrect');
+  fb.textContent = isCorrect ? '✓ Bonne réponse !' : '✗ Ce n\'est pas la bonne réponse. Réécoutez le texte.';
+}
+
+function selectTextChoice(qId, el, isCorrect) {
+  document.getElementById(qId).querySelectorAll('.text-choice').forEach(c => c.classList.remove('selected','correct'));
+  el.classList.add(isCorrect ? 'correct' : 'selected');
+  const fb = document.getElementById(qId + '-fb');
+  fb.className = 'feedback ' + (isCorrect ? 'correct' : 'incorrect');
+  fb.textContent = isCorrect ? '✓ Bonne réponse !' : '✗ Ce n\'est pas la bonne réponse. Réécoutez le texte.';
+}
+
+function moveTag(el) {
+  const pool = document.getElementById('sort-pool');
+  const answer = document.getElementById('sort-answer');
+  const placeholder = document.getElementById('sort-placeholder');
+  if (el.parentElement === pool) {
+    el.classList.add('placed');
+    answer.appendChild(el);
+    if (placeholder) placeholder.remove();
+  } else {
+    el.classList.remove('placed');
+    pool.appendChild(el);
+    if (answer.children.length === 0) {
+      const ph = document.createElement('div');
+      ph.className = 'sort-slot';
+      ph.id = 'sort-placeholder';
+      ph.textContent = 'Cliquez sur les étapes ci-dessus pour les placer ici…';
+      answer.appendChild(ph);
+    }
+  }
+  document.getElementById('sort-fb').className = 'feedback';
+}
+
+function checkOrder() {
+  const correctOrder = [
+    'Découverte du monde du spectacle',
+    'Fin du lycée',
+    'Voyage',
+    'Contacts avec les grands couturiers',
+    'Lancement de sa marque',
+    'Ouverture de magasins',
+    'Création de sacs'
+  ];
+  const placed = [...document.getElementById('sort-answer').querySelectorAll('.sort-tag')].map(t => t.textContent.trim());
+  const fb = document.getElementById('sort-fb');
+  if (placed.length < 7) {
+    fb.className = 'feedback incorrect';
+    fb.textContent = 'Placez toutes les étapes avant de vérifier !';
+    return;
+  }
+  const correct = placed.filter((t, i) => t === correctOrder[i]).length;
+  if (correct === 7) {
+    fb.className = 'feedback correct';
+    fb.textContent = '✓ Parfait ! Vous avez bien remis toutes les étapes dans l\'ordre.';
+  } else {
+    fb.className = 'feedback incorrect';
+    fb.textContent = `✗ ${correct}/7 étapes sont dans le bon ordre. L'ordre correct : ${correctOrder.join(' → ')}`;
+  }
+}
+</script>
+</body>
+</html>
