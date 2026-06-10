@@ -1,0 +1,1076 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Holidays & Travel – Past Simple | A1 English</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  
+  :root {
+    --sand: #F5EDD6;
+    --sand-dark: #E8D9B0;
+    --terracotta: #C4622D;
+    --terracotta-light: #F0E0D0;
+    --ocean: #2D6E8E;
+    --ocean-light: #D4E9F2;
+    --text-dark: #1E1E1E;
+    --text-mid: #4A4A4A;
+    --text-muted: #888;
+    --white: #FFFFFF;
+    --border: #D9CFBF;
+    --success-bg: #E8F4E8;
+    --success: #2E7D32;
+    --error-bg: #FDECEA;
+    --error: #C62828;
+    --neutral-bg: #F0EDE8;
+  }
+
+  body {
+    font-family: 'Georgia', serif;
+    background: var(--sand);
+    color: var(--text-dark);
+    min-height: 100vh;
+  }
+
+  /* NAV */
+  .nav-bar {
+    background: var(--terracotta);
+    padding: 0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    display: flex;
+    align-items: stretch;
+  }
+  .brand {
+    padding: 14px 24px;
+    color: white;
+    font-family: 'Georgia', serif;
+    font-size: 13px;
+    letter-spacing: 0.08em;
+    opacity: 0.9;
+    border-right: 1px solid rgba(255,255,255,0.2);
+    white-space: nowrap;
+  }
+  .nav-tabs {
+    display: flex;
+    overflow-x: auto;
+    scrollbar-width: none;
+    flex: 1;
+  }
+  .nav-tabs::-webkit-scrollbar { display: none; }
+  .nav-tab {
+    padding: 14px 20px;
+    color: rgba(255,255,255,0.75);
+    font-family: sans-serif;
+    font-size: 13px;
+    cursor: pointer;
+    white-space: nowrap;
+    border: none;
+    background: none;
+    transition: color 0.2s, background 0.2s;
+    border-bottom: 3px solid transparent;
+  }
+  .nav-tab:hover { color: white; background: rgba(255,255,255,0.08); }
+  .nav-tab.active { color: white; border-bottom-color: var(--sand); background: rgba(255,255,255,0.12); }
+  .nav-dot {
+    display: inline-block;
+    width: 7px; height: 7px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.4);
+    margin-right: 7px;
+    vertical-align: middle;
+    transition: background 0.2s;
+  }
+  .nav-tab.active .nav-dot { background: var(--sand-dark); }
+  .nav-tab.done .nav-dot { background: #90EE90; }
+
+  /* PAGES */
+  .page { display: none; }
+  .page.active { display: block; }
+
+  /* HERO BANNER */
+  .page-hero {
+    background: linear-gradient(135deg, var(--terracotta) 0%, #8B3A1A 100%);
+    padding: 40px 32px 32px;
+    color: white;
+    position: relative;
+    overflow: hidden;
+  }
+  .page-hero::after {
+    content: '';
+    position: absolute;
+    right: -30px; top: -30px;
+    width: 180px; height: 180px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.06);
+  }
+  .hero-tag {
+    font-family: sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    opacity: 0.7;
+    margin-bottom: 8px;
+  }
+  .hero-title {
+    font-size: 28px;
+    font-weight: normal;
+    line-height: 1.3;
+    margin-bottom: 8px;
+  }
+  .hero-sub {
+    font-family: sans-serif;
+    font-size: 14px;
+    opacity: 0.8;
+  }
+
+  /* CONTENT */
+  .content {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 28px 24px 60px;
+  }
+
+  /* SECTION HEADERS */
+  .section-label {
+    font-family: sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--terracotta);
+    margin-bottom: 12px;
+  }
+
+  /* CARDS */
+  .card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 20px 22px;
+    margin-bottom: 18px;
+  }
+  .card-title {
+    font-size: 16px;
+    font-weight: bold;
+    font-family: sans-serif;
+    margin-bottom: 10px;
+    color: var(--text-dark);
+  }
+
+  /* CITY CARDS */
+  .cities-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-bottom: 20px;
+  }
+  .city-card {
+    border-radius: 10px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+    background: white;
+  }
+  .city-img {
+    width: 100%;
+    height: 160px;
+    object-fit: cover;
+    display: block;
+    background: var(--neutral-bg);
+  }
+  .city-img-placeholder {
+    width: 100%;
+    height: 160px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 60px;
+  }
+  .city-info {
+    padding: 14px 16px;
+  }
+  .city-name {
+    font-size: 17px;
+    font-weight: bold;
+    font-family: sans-serif;
+    margin-bottom: 4px;
+  }
+  .city-fact {
+    font-family: sans-serif;
+    font-size: 12px;
+    color: var(--text-muted);
+    line-height: 1.5;
+  }
+  .city-badge {
+    display: inline-block;
+    margin-top: 8px;
+    font-family: sans-serif;
+    font-size: 11px;
+    padding: 3px 9px;
+    border-radius: 20px;
+    font-weight: 600;
+  }
+  .badge-dubai { background: var(--ocean-light); color: var(--ocean); }
+  .badge-seville { background: var(--terracotta-light); color: var(--terracotta); }
+
+  /* DISCUSSION QUESTIONS */
+  .q-list { list-style: none; }
+  .q-list li {
+    padding: 10px 0;
+    border-bottom: 1px solid var(--border);
+    font-family: sans-serif;
+    font-size: 15px;
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+  }
+  .q-list li:last-child { border-bottom: none; }
+  .q-num {
+    color: var(--terracotta);
+    font-weight: bold;
+    min-width: 20px;
+  }
+
+  /* VOCAB CARDS */
+  .vocab-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 10px;
+    margin-bottom: 16px;
+  }
+  .vocab-item {
+    background: var(--neutral-bg);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 10px 12px;
+    text-align: center;
+    cursor: pointer;
+    transition: background 0.15s, border-color 0.15s;
+    user-select: none;
+  }
+  .vocab-item:hover { background: var(--sand-dark); border-color: var(--terracotta); }
+  .vocab-item.flipped { background: var(--terracotta-light); border-color: var(--terracotta); }
+  .vocab-en {
+    font-size: 15px;
+    font-family: sans-serif;
+    font-weight: bold;
+    color: var(--text-dark);
+  }
+  .vocab-translate {
+    font-size: 12px;
+    color: var(--text-muted);
+    font-family: sans-serif;
+    margin-top: 4px;
+    display: none;
+  }
+  .vocab-item.flipped .vocab-translate { display: block; color: var(--terracotta); }
+  .vocab-hint {
+    font-family: sans-serif;
+    font-size: 12px;
+    color: var(--text-muted);
+    text-align: center;
+    margin-bottom: 12px;
+  }
+
+  /* SENTENCE BUILDER */
+  .sentence-task {
+    margin-bottom: 20px;
+    padding: 16px 18px;
+    background: var(--neutral-bg);
+    border-radius: 8px;
+    border-left: 3px solid var(--ocean);
+  }
+  .sentence-prompt {
+    font-family: sans-serif;
+    font-size: 13px;
+    color: var(--text-muted);
+    margin-bottom: 6px;
+  }
+  .sentence-notes {
+    font-size: 15px;
+    color: var(--text-dark);
+    margin-bottom: 10px;
+    font-family: sans-serif;
+  }
+  .sentence-input {
+    width: 100%;
+    padding: 9px 12px;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    font-size: 14px;
+    font-family: sans-serif;
+    background: white;
+    color: var(--text-dark);
+    transition: border-color 0.2s;
+  }
+  .sentence-input:focus { outline: none; border-color: var(--ocean); }
+  .sentence-input.correct { border-color: var(--success); background: var(--success-bg); }
+  .sentence-input.incorrect { border-color: var(--error); background: var(--error-bg); }
+  .feedback-msg {
+    font-family: sans-serif;
+    font-size: 12px;
+    margin-top: 5px;
+    padding: 4px 8px;
+    border-radius: 4px;
+    display: none;
+  }
+  .feedback-msg.show { display: block; }
+  .feedback-msg.correct { background: var(--success-bg); color: var(--success); }
+  .feedback-msg.incorrect { background: var(--error-bg); color: var(--error); }
+
+  /* ROLEPLAY CARDS */
+  .roleplay-wrapper {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+  .role-card {
+    border-radius: 10px;
+    border: 2px solid var(--border);
+    overflow: hidden;
+  }
+  .role-header {
+    padding: 12px 16px;
+    font-family: sans-serif;
+    font-size: 13px;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+  .role-header.student-a { background: var(--ocean); color: white; }
+  .role-header.student-b { background: var(--terracotta); color: white; }
+  .role-body { padding: 14px 16px; }
+  .role-city {
+    font-size: 17px;
+    font-family: sans-serif;
+    font-weight: bold;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .notes-list { list-style: none; }
+  .notes-list li {
+    font-family: sans-serif;
+    font-size: 13px;
+    padding: 5px 0;
+    border-bottom: 1px solid var(--border);
+    color: var(--text-mid);
+    display: flex;
+    gap: 7px;
+  }
+  .notes-list li:last-child { border-bottom: none; }
+  .bullet {
+    color: var(--terracotta);
+    font-weight: bold;
+  }
+  .role-instructions {
+    margin-top: 14px;
+    padding: 10px 12px;
+    background: var(--neutral-bg);
+    border-radius: 6px;
+    font-family: sans-serif;
+    font-size: 12px;
+    color: var(--text-mid);
+    line-height: 1.5;
+  }
+
+  /* GRAMMAR BOX */
+  .grammar-box {
+    background: var(--ocean-light);
+    border: 1px solid #A8C8DA;
+    border-radius: 8px;
+    padding: 16px 18px;
+    margin-bottom: 16px;
+  }
+  .grammar-title {
+    font-family: sans-serif;
+    font-size: 13px;
+    font-weight: bold;
+    color: var(--ocean);
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+  .grammar-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 10px;
+    margin-bottom: 8px;
+  }
+  .grammar-cell {
+    background: white;
+    border-radius: 6px;
+    padding: 8px 10px;
+    text-align: center;
+    font-family: sans-serif;
+  }
+  .grammar-cell-label {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-muted);
+    margin-bottom: 3px;
+  }
+  .grammar-cell-verb {
+    font-size: 15px;
+    font-weight: bold;
+    color: var(--ocean);
+  }
+
+  /* QUIZ */
+  .quiz-q {
+    margin-bottom: 20px;
+    padding: 14px 16px;
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+  }
+  .quiz-text {
+    font-family: sans-serif;
+    font-size: 15px;
+    margin-bottom: 12px;
+    color: var(--text-dark);
+  }
+  .quiz-blank {
+    display: inline-block;
+    min-width: 100px;
+    border-bottom: 2px solid var(--ocean);
+    padding: 0 4px;
+    font-weight: bold;
+    color: var(--ocean);
+  }
+  .options-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+  .option-btn {
+    padding: 8px 12px;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    background: var(--neutral-bg);
+    font-family: sans-serif;
+    font-size: 14px;
+    cursor: pointer;
+    text-align: left;
+    transition: all 0.15s;
+  }
+  .option-btn:hover:not(:disabled) { border-color: var(--ocean); background: var(--ocean-light); }
+  .option-btn.correct { background: var(--success-bg); border-color: var(--success); color: var(--success); font-weight: bold; }
+  .option-btn.wrong { background: var(--error-bg); border-color: var(--error); color: var(--error); }
+  .option-btn:disabled { cursor: default; }
+
+  /* PROGRESS BAR */
+  .progress-wrap {
+    background: rgba(255,255,255,0.25);
+    border-radius: 20px;
+    height: 4px;
+    margin-top: 16px;
+  }
+  .progress-fill {
+    height: 4px;
+    border-radius: 20px;
+    background: var(--sand);
+    transition: width 0.4s;
+  }
+
+  /* BUTTONS */
+  .btn {
+    display: inline-block;
+    padding: 10px 22px;
+    border-radius: 7px;
+    font-family: sans-serif;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    border: none;
+    transition: opacity 0.15s, transform 0.1s;
+  }
+  .btn:hover { opacity: 0.88; }
+  .btn:active { transform: scale(0.98); }
+  .btn-primary { background: var(--terracotta); color: white; }
+  .btn-secondary { background: var(--ocean); color: white; }
+  .btn-outline { background: transparent; border: 1.5px solid var(--border); color: var(--text-dark); }
+
+  /* CHECKLIST */
+  .checklist { list-style: none; }
+  .checklist li {
+    font-family: sans-serif;
+    font-size: 14px;
+    padding: 8px 0;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    gap: 10px;
+    align-items: center;
+  }
+  .checklist li:last-child { border-bottom: none; }
+  .check-box {
+    width: 18px; height: 18px;
+    border: 1.5px solid var(--border);
+    border-radius: 4px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    transition: background 0.15s;
+  }
+  .check-box.checked { background: var(--terracotta); border-color: var(--terracotta); }
+  .check-tick { color: white; font-size: 12px; display: none; }
+  .check-box.checked .check-tick { display: block; }
+
+  /* HOMEWORK CARD */
+  .hw-task {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 14px 16px;
+    margin-bottom: 12px;
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+  }
+  .hw-icon {
+    font-size: 24px;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+  .hw-title {
+    font-family: sans-serif;
+    font-size: 14px;
+    font-weight: bold;
+    margin-bottom: 4px;
+  }
+  .hw-desc {
+    font-family: sans-serif;
+    font-size: 13px;
+    color: var(--text-mid);
+    line-height: 1.5;
+  }
+
+  /* DIVIDER */
+  .divider {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 22px 0;
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 560px) {
+    .cities-grid, .roleplay-wrapper, .grammar-row, .options-grid { grid-template-columns: 1fr; }
+    .page-hero { padding: 28px 18px 22px; }
+    .hero-title { font-size: 22px; }
+    .content { padding: 20px 16px 50px; }
+    .nav-tab { padding: 12px 14px; font-size: 12px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav-bar">
+  <div class="brand">✈ arinateach</div>
+  <div class="nav-tabs">
+    <button class="nav-tab active" onclick="goTo('warmup', this)">
+      <span class="nav-dot"></span>Warm-up
+    </button>
+    <button class="nav-tab" onclick="goTo('leadin', this)">
+      <span class="nav-dot"></span>Lead-in
+    </button>
+    <button class="nav-tab" onclick="goTo('task', this)">
+      <span class="nav-dot"></span>Task
+    </button>
+    <button class="nav-tab" onclick="goTo('grammar', this)">
+      <span class="nav-dot"></span>Grammar
+    </button>
+    <button class="nav-tab" onclick="goTo('homework', this)">
+      <span class="nav-dot"></span>Homework
+    </button>
+  </div>
+</nav>
+
+<!-- ===================== WARM-UP ===================== -->
+<div id="page-warmup" class="page active">
+  <div class="page-hero">
+    <div class="hero-tag">Warm-up · 5 min</div>
+    <div class="hero-title">Where would you go?</div>
+    <div class="hero-sub">Holidays & travel · Past Simple</div>
+    <div class="progress-wrap"><div class="progress-fill" style="width:20%"></div></div>
+  </div>
+  <div class="content">
+    <p class="section-label">Today's destinations</p>
+    <div class="cities-grid">
+      <!-- Dubai -->
+      <div class="city-card">
+        <div class="city-img-placeholder" style="background: linear-gradient(160deg, #B8D4E8, #E8C87A);">🏙️</div>
+        <div class="city-info">
+          <div class="city-name">Dubai, UAE</div>
+          <div class="city-fact">In the north of the UAE · Hot desert climate · Famous for its skyline and shopping</div>
+          <span class="city-badge badge-dubai">Student A 🇦🇪</span>
+        </div>
+      </div>
+      <!-- Seville -->
+      <div class="city-card">
+        <div class="city-img-placeholder" style="background: linear-gradient(160deg, #F5C77A, #E88A4A);">🌸</div>
+        <div class="city-info">
+          <div class="city-name">Seville, Spain</div>
+          <div class="city-fact">In the south of Spain · Flamenco, tapas, historic squares · Second-largest old town in Europe</div>
+          <span class="city-badge badge-seville">Student B 🇪🇸</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">💬 Discussion questions</div>
+      <ul class="q-list">
+        <li><span class="q-num">1.</span> <span>Have you ever been on holiday? Where did you go?</span></li>
+        <li><span class="q-num">2.</span> <span>Do you prefer cities or nature on holiday?</span></li>
+        <li><span class="q-num">3.</span> <span>Look at the two cities. What do you know about them?</span></li>
+        <li><span class="q-num">4.</span> <span>Which city would you prefer to visit? Why?</span></li>
+      </ul>
+    </div>
+
+    <button class="btn btn-primary" onclick="goToByName('leadin')">Continue to Lead-in →</button>
+  </div>
+</div>
+
+<!-- ===================== LEAD-IN ===================== -->
+<div id="page-leadin" class="page">
+  <div class="page-hero">
+    <div class="hero-tag">Lead-in · 10 min</div>
+    <div class="hero-title">Key words for today</div>
+    <div class="hero-sub">Tap each card to reveal the translation</div>
+    <div class="progress-wrap"><div class="progress-fill" style="width:40%"></div></div>
+  </div>
+  <div class="content">
+
+    <p class="section-label">🚌 Transport</p>
+    <p class="vocab-hint">Tap a word to see the translation</p>
+    <div class="vocab-grid">
+      <div class="vocab-item" onclick="flipCard(this)">
+        <div class="vocab-en">plane ✈️</div>
+        <div class="vocab-translate">самолёт</div>
+      </div>
+      <div class="vocab-item" onclick="flipCard(this)">
+        <div class="vocab-en">train 🚂</div>
+        <div class="vocab-translate">поезд</div>
+      </div>
+      <div class="vocab-item" onclick="flipCard(this)">
+        <div class="vocab-en">taxi 🚕</div>
+        <div class="vocab-translate">такси</div>
+      </div>
+      <div class="vocab-item" onclick="flipCard(this)">
+        <div class="vocab-en">bus 🚌</div>
+        <div class="vocab-translate">автобус</div>
+      </div>
+    </div>
+
+    <hr class="divider">
+    <p class="section-label">🏖️ Holiday verbs</p>
+    <div class="vocab-grid">
+      <div class="vocab-item" onclick="flipCard(this)">
+        <div class="vocab-en">stay in a hotel</div>
+        <div class="vocab-translate">остановиться в отеле</div>
+      </div>
+      <div class="vocab-item" onclick="flipCard(this)">
+        <div class="vocab-en">take photos</div>
+        <div class="vocab-translate">фотографировать</div>
+      </div>
+      <div class="vocab-item" onclick="flipCard(this)">
+        <div class="vocab-en">go shopping</div>
+        <div class="vocab-translate">ходить по магазинам</div>
+      </div>
+      <div class="vocab-item" onclick="flipCard(this)">
+        <div class="vocab-en">eat in restaurants</div>
+        <div class="vocab-translate">есть в ресторанах</div>
+      </div>
+      <div class="vocab-item" onclick="flipCard(this)">
+        <div class="vocab-en">visit a city</div>
+        <div class="vocab-translate">посетить город</div>
+      </div>
+      <div class="vocab-item" onclick="flipCard(this)">
+        <div class="vocab-en">go to a concert</div>
+        <div class="vocab-translate">сходить на концерт</div>
+      </div>
+      <div class="vocab-item" onclick="flipCard(this)">
+        <div class="vocab-en">buy clothes</div>
+        <div class="vocab-translate">купить одежду</div>
+      </div>
+      <div class="vocab-item" onclick="flipCard(this)">
+        <div class="vocab-en">like it</div>
+        <div class="vocab-translate">понравилось</div>
+      </div>
+    </div>
+
+    <hr class="divider">
+    <p class="section-label">📝 Pre-task: make sentences</p>
+    <div class="card">
+      <div class="card-title">Practice before the roleplay</div>
+      <p style="font-family:sans-serif; font-size:13px; color:var(--text-muted); margin-bottom:14px;">Complete each sentence about Dubai. Use the word in brackets.</p>
+
+      <div class="sentence-task">
+        <div class="sentence-prompt">Notes: "plane to Dubai"</div>
+        <div class="sentence-notes">→ Make a sentence using <strong>fly</strong></div>
+        <input class="sentence-input" placeholder="I flew to Dubai by plane." data-answer="flew" oninput="softCheck(this)">
+        <div class="feedback-msg"></div>
+      </div>
+
+      <div class="sentence-task" style="border-left-color: var(--terracotta);">
+        <div class="sentence-prompt">Notes: "didn't stay in a hotel → my brother's flat"</div>
+        <div class="sentence-notes">→ Make two sentences using <strong>stay</strong></div>
+        <input class="sentence-input" placeholder="I didn't stay in a hotel. I stayed in my brother's flat." data-answer="stay" oninput="softCheck(this)">
+        <div class="feedback-msg"></div>
+      </div>
+
+      <div class="sentence-task">
+        <div class="sentence-prompt">Notes: "restaurants – very good food"</div>
+        <div class="sentence-notes">→ Make a sentence using <strong>eat</strong></div>
+        <input class="sentence-input" placeholder="I ate in restaurants. The food was very good." data-answer="ate" oninput="softCheck(this)">
+        <div class="feedback-msg"></div>
+      </div>
+    </div>
+
+    <button class="btn btn-primary" onclick="goToByName('task')">Continue to Task →</button>
+  </div>
+</div>
+
+<!-- ===================== TASK ===================== -->
+<div id="page-task" class="page">
+  <div class="page-hero">
+    <div class="hero-tag">Task · 20 min</div>
+    <div class="hero-title">Tell me about your trip!</div>
+    <div class="hero-sub">Roleplay · Speak · Compare</div>
+    <div class="progress-wrap"><div class="progress-fill" style="width:60%"></div></div>
+  </div>
+  <div class="content">
+
+    <div class="card" style="border-left: 3px solid var(--ocean); background: var(--ocean-light);">
+      <div class="card-title" style="color:var(--ocean);">📋 How to do the task</div>
+      <ul class="checklist" id="task-steps">
+        <li><span class="check-box" onclick="toggleCheck(this)"><span class="check-tick">✓</span></span><span><strong>Step 1.</strong> Read your card (A or B). Write 6–8 sentences from the notes.</span></li>
+        <li><span class="check-box" onclick="toggleCheck(this)"><span class="check-tick">✓</span></span><span><strong>Step 2.</strong> Tell your partner about your trip. Use past simple!</span></li>
+        <li><span class="check-box" onclick="toggleCheck(this)"><span class="check-tick">✓</span></span><span><strong>Step 3.</strong> Listen to your partner. Find <strong>4 things you both did</strong>.</span></li>
+        <li><span class="check-box" onclick="toggleCheck(this)"><span class="check-tick">✓</span></span><span><strong>Step 4.</strong> Report to the teacher: "We both…"</span></li>
+      </ul>
+    </div>
+
+    <hr class="divider">
+
+    <div class="roleplay-wrapper">
+      <!-- Student A -->
+      <div class="role-card">
+        <div class="role-header student-a">🇦🇪 Student A — Dubai</div>
+        <div class="role-body">
+          <div class="role-city">Dubai, UAE</div>
+          <ul class="notes-list">
+            <li><span class="bullet">•</span> in the north of the UAE</li>
+            <li><span class="bullet">•</span> plane to Dubai …</li>
+            <li><span class="bullet">•</span> didn't stay in a hotel …</li>
+            <li><span class="bullet">•</span> … my brother's flat (he lives in Dubai)</li>
+            <li><span class="bullet">•</span> … then taxi around the city</li>
+            <li><span class="bullet">•</span> a lot of photos</li>
+            <li><span class="bullet">•</span> shopping – a lot of clothes</li>
+            <li><span class="bullet">•</span> restaurants – very good food</li>
+          </ul>
+          <div class="role-instructions">
+            a. Read the notes. Make full sentences.<br>
+            b. Listen to Student B talk about Seville.<br>
+            c. Find 4 things you both did on your trips.
+          </div>
+        </div>
+      </div>
+      <!-- Student B -->
+      <div class="role-card">
+        <div class="role-header student-b">🇪🇸 Student B — Seville</div>
+        <div class="role-body">
+          <div class="role-city">Seville, Spain</div>
+          <ul class="notes-list">
+            <li><span class="bullet">•</span> in the south of Spain</li>
+            <li><span class="bullet">•</span> plane to Madrid …</li>
+            <li><span class="bullet">•</span> … then train to Seville</li>
+            <li><span class="bullet">•</span> small hotel – city centre</li>
+            <li><span class="bullet">•</span> a lot of photos</li>
+            <li><span class="bullet">•</span> shopping – didn't buy anything</li>
+            <li><span class="bullet">•</span> restaurants – very good food</li>
+            <li><span class="bullet">•</span> a concert – you liked it!</li>
+          </ul>
+          <div class="role-instructions">
+            a. Read the notes. Make full sentences.<br>
+            b. Tell Student A about your trip.<br>
+            c. Listen to Student A. Find 4 things you both did.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <hr class="divider">
+
+    <p class="section-label">✍️ Write your sentences here</p>
+    <div class="card">
+      <p style="font-family:sans-serif; font-size:13px; color:var(--text-muted); margin-bottom:12px;">Write 6–8 sentences from your notes (past simple). You'll read them aloud to your partner.</p>
+      <textarea id="student-sentences" style="width:100%; height:150px; padding:10px 12px; border:1px solid var(--border); border-radius:8px; font-family:sans-serif; font-size:14px; resize:vertical; background:white; color:var(--text-dark);" placeholder="I flew to Dubai...&#10;I didn't stay in a hotel...&#10;I stayed in my brother's flat..."></textarea>
+    </div>
+
+    <p class="section-label">🔗 Things we both did</p>
+    <div class="card">
+      <p style="font-family:sans-serif; font-size:13px; color:var(--text-muted); margin-bottom:12px;">After listening to your partner, write the 4 things you had in common. Start with "We both…"</p>
+      <div id="common-inputs">
+        <input style="width:100%; margin-bottom:8px; padding:8px 12px; border:1px solid var(--border); border-radius:6px; font-family:sans-serif; font-size:14px; background:white; color:var(--text-dark);" placeholder="We both flew to our city by plane.">
+        <input style="width:100%; margin-bottom:8px; padding:8px 12px; border:1px solid var(--border); border-radius:6px; font-family:sans-serif; font-size:14px; background:white; color:var(--text-dark);" placeholder="We both took a lot of photos.">
+        <input style="width:100%; margin-bottom:8px; padding:8px 12px; border:1px solid var(--border); border-radius:6px; font-family:sans-serif; font-size:14px; background:white; color:var(--text-dark);" placeholder="We both…">
+        <input style="width:100%; padding:8px 12px; border:1px solid var(--border); border-radius:6px; font-family:sans-serif; font-size:14px; background:white; color:var(--text-dark);" placeholder="We both…">
+      </div>
+    </div>
+
+    <button class="btn btn-primary" onclick="goToByName('grammar')">Continue to Grammar →</button>
+  </div>
+</div>
+
+<!-- ===================== GRAMMAR ===================== -->
+<div id="page-grammar" class="page">
+  <div class="page-hero">
+    <div class="hero-tag">Language focus · 10 min</div>
+    <div class="hero-title">Past simple – how it works</div>
+    <div class="hero-sub">Regular · Irregular · Negative</div>
+    <div class="progress-wrap"><div class="progress-fill" style="width:80%"></div></div>
+  </div>
+  <div class="content">
+
+    <div class="grammar-box">
+      <div class="grammar-title">Key verbs from today</div>
+      <div class="grammar-row">
+        <div class="grammar-cell">
+          <div class="grammar-cell-label">Infinitive</div>
+          <div class="grammar-cell-verb">go</div>
+        </div>
+        <div class="grammar-cell">
+          <div class="grammar-cell-label">Past ✅</div>
+          <div class="grammar-cell-verb" style="color:var(--success)">went</div>
+        </div>
+        <div class="grammar-cell">
+          <div class="grammar-cell-label">Negative ❌</div>
+          <div class="grammar-cell-verb" style="color:var(--error); font-size:13px">didn't go</div>
+        </div>
+      </div>
+      <div class="grammar-row">
+        <div class="grammar-cell"><div class="grammar-cell-label">Infinitive</div><div class="grammar-cell-verb">fly</div></div>
+        <div class="grammar-cell"><div class="grammar-cell-label">Past ✅</div><div class="grammar-cell-verb" style="color:var(--success)">flew</div></div>
+        <div class="grammar-cell"><div class="grammar-cell-label">Negative ❌</div><div class="grammar-cell-verb" style="color:var(--error); font-size:13px">didn't fly</div></div>
+      </div>
+      <div class="grammar-row">
+        <div class="grammar-cell"><div class="grammar-cell-label">Infinitive</div><div class="grammar-cell-verb">stay</div></div>
+        <div class="grammar-cell"><div class="grammar-cell-label">Past ✅</div><div class="grammar-cell-verb" style="color:var(--success)">stayed</div></div>
+        <div class="grammar-cell"><div class="grammar-cell-label">Negative ❌</div><div class="grammar-cell-verb" style="color:var(--error); font-size:13px">didn't stay</div></div>
+      </div>
+      <div class="grammar-row">
+        <div class="grammar-cell"><div class="grammar-cell-label">Infinitive</div><div class="grammar-cell-verb">eat</div></div>
+        <div class="grammar-cell"><div class="grammar-cell-label">Past ✅</div><div class="grammar-cell-verb" style="color:var(--success)">ate</div></div>
+        <div class="grammar-cell"><div class="grammar-cell-label">Negative ❌</div><div class="grammar-cell-verb" style="color:var(--error); font-size:13px">didn't eat</div></div>
+      </div>
+      <div class="grammar-row">
+        <div class="grammar-cell"><div class="grammar-cell-label">Infinitive</div><div class="grammar-cell-verb">buy</div></div>
+        <div class="grammar-cell"><div class="grammar-cell-label">Past ✅</div><div class="grammar-cell-verb" style="color:var(--success)">bought</div></div>
+        <div class="grammar-cell"><div class="grammar-cell-label">Negative ❌</div><div class="grammar-cell-verb" style="color:var(--error); font-size:13px">didn't buy</div></div>
+      </div>
+    </div>
+
+    <hr class="divider">
+    <p class="section-label">🎯 Quick quiz</p>
+    <p style="font-family:sans-serif; font-size:13px; color:var(--text-muted); margin-bottom:14px;">Choose the correct past simple form.</p>
+
+    <div class="quiz-q" id="q1">
+      <div class="quiz-text">Yesterday I <span class="quiz-blank" id="blank1">____</span> to Paris by train.</div>
+      <div class="options-grid">
+        <button class="option-btn" onclick="answerQuiz('q1','blank1',this,'taked','travel')">taked</button>
+        <button class="option-btn" onclick="answerQuiz('q1','blank1',this,'travelled','travel')">travelled ✓</button>
+        <button class="option-btn" onclick="answerQuiz('q1','blank1',this,'travel','travel')">travel</button>
+        <button class="option-btn" onclick="answerQuiz('q1','blank1',this,'travelling','travel')">travelling</button>
+      </div>
+    </div>
+
+    <div class="quiz-q" id="q2">
+      <div class="quiz-text">She <span class="quiz-blank" id="blank2">____</span> in a big hotel last summer.</div>
+      <div class="options-grid">
+        <button class="option-btn" onclick="answerQuiz('q2','blank2',this,'stayed','stay')">stayed ✓</button>
+        <button class="option-btn" onclick="answerQuiz('q2','blank2',this,'stays','stay')">stays</button>
+        <button class="option-btn" onclick="answerQuiz('q2','blank2',this,'staid','stay')">staid</button>
+        <button class="option-btn" onclick="answerQuiz('q2','blank2',this,'staying','stay')">staying</button>
+      </div>
+    </div>
+
+    <div class="quiz-q" id="q3">
+      <div class="quiz-text">We <span class="quiz-blank" id="blank3">____</span> a lot of photos in Seville.</div>
+      <div class="options-grid">
+        <button class="option-btn" onclick="answerQuiz('q3','blank3',this,'taked','take')">taked</button>
+        <button class="option-btn" onclick="answerQuiz('q3','blank3',this,'take','take')">take</button>
+        <button class="option-btn" onclick="answerQuiz('q3','blank3',this,'took','take')">took ✓</button>
+        <button class="option-btn" onclick="answerQuiz('q3','blank3',this,'tooks','take')">tooks</button>
+      </div>
+    </div>
+
+    <div class="quiz-q" id="q4">
+      <div class="quiz-text">I <span class="quiz-blank" id="blank4">____</span> any clothes. The shops were too expensive!</div>
+      <div class="options-grid">
+        <button class="option-btn" onclick="answerQuiz('q4','blank4',this,'didn\'t buy','buy')">didn't buy ✓</button>
+        <button class="option-btn" onclick="answerQuiz('q4','blank4',this,'didn\'t bought','buy')">didn't bought</button>
+        <button class="option-btn" onclick="answerQuiz('q4','blank4',this,'don\'t buy','buy')">don't buy</button>
+        <button class="option-btn" onclick="answerQuiz('q4','blank4',this,'not buyed','buy')">not buyed</button>
+      </div>
+    </div>
+
+    <div id="quiz-result" style="display:none;" class="card" style="text-align:center; margin-top:16px;">
+      <div id="quiz-score" style="font-size:22px; font-weight:bold; font-family:sans-serif; color:var(--ocean); text-align:center;"></div>
+    </div>
+
+    <button class="btn btn-primary" onclick="goToByName('homework')">Continue to Homework →</button>
+  </div>
+</div>
+
+<!-- ===================== HOMEWORK ===================== -->
+<div id="page-homework" class="page">
+  <div class="page-hero">
+    <div class="hero-tag">Homework</div>
+    <div class="hero-title">For next class 📚</div>
+    <div class="hero-sub">Choose one or do both!</div>
+    <div class="progress-wrap"><div class="progress-fill" style="width:100%"></div></div>
+  </div>
+  <div class="content">
+
+    <p class="section-label">✏️ Writing task</p>
+    <div class="hw-task">
+      <div class="hw-icon">✍️</div>
+      <div>
+        <div class="hw-title">Write about a real or imaginary holiday (8–10 sentences)</div>
+        <div class="hw-desc">
+          Where did you go? How did you travel? Where did you stay? What did you do? What did you eat?<br><br>
+          Use past simple. Try to include: <strong>went, flew / took a train, stayed, ate, took photos, bought, liked.</strong>
+        </div>
+      </div>
+    </div>
+
+    <p class="section-label">📖 Vocabulary task</p>
+    <div class="hw-task">
+      <div class="hw-icon">📓</div>
+      <div>
+        <div class="hw-title">Learn 10 irregular verbs</div>
+        <div class="hw-desc">
+          Write the infinitive → past simple → translation in your vocabulary notebook.<br>
+          Start with: <em>go/went, fly/flew, eat/ate, buy/bought, take/took, see/saw, have/had, come/came, give/gave, get/got.</em>
+        </div>
+      </div>
+    </div>
+
+    <p class="section-label">🎧 Optional listening</p>
+    <div class="hw-task">
+      <div class="hw-icon">🎧</div>
+      <div>
+        <div class="hw-title">Watch a 2–3 min video about Dubai or Seville in English</div>
+        <div class="hw-desc">
+          Search "Dubai travel guide for beginners" or "Seville city tour" on YouTube.<br>
+          Write 3 sentences about what you learned. Use past simple if possible.
+        </div>
+      </div>
+    </div>
+
+    <hr class="divider">
+
+    <div class="card" style="background: var(--terracotta-light); border-color: var(--terracotta); text-align:center; padding: 24px;">
+      <div style="font-size: 28px; margin-bottom: 8px;">🎉</div>
+      <div style="font-family: sans-serif; font-size: 16px; font-weight: bold; margin-bottom: 6px;">Great work today!</div>
+      <div style="font-family: sans-serif; font-size: 13px; color: var(--text-mid);">You practised past simple through real communication.<br>Next class: we'll check your writing and look at questions in past simple.</div>
+    </div>
+  </div>
+</div>
+
+<script>
+let quizAnswers = 0;
+let quizTotal = 4;
+
+function goTo(name, btn) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('page-' + name).classList.add('active');
+  btn.classList.add('active');
+  window.scrollTo(0,0);
+}
+
+function goToByName(name) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav-tab').forEach(t => {
+    if (t.textContent.trim().toLowerCase().includes(name) || 
+        t.getAttribute('onclick').includes("'"+name+"'")) {
+      t.classList.add('active');
+      t.classList.add('done');
+    }
+  });
+  document.getElementById('page-' + name).classList.add('active');
+  window.scrollTo(0,0);
+}
+
+function flipCard(el) {
+  el.classList.toggle('flipped');
+}
+
+function softCheck(input) {
+  const answer = input.dataset.answer.toLowerCase();
+  const val = input.value.toLowerCase();
+  const msg = input.nextElementSibling;
+  if (val.length < 3) {
+    input.className = 'sentence-input';
+    msg.className = 'feedback-msg';
+    return;
+  }
+  if (val.includes(answer)) {
+    input.className = 'sentence-input correct';
+    msg.className = 'feedback-msg correct show';
+    msg.textContent = '✓ Great! Past simple used correctly.';
+  } else {
+    input.className = 'sentence-input';
+    msg.className = 'feedback-msg';
+  }
+}
+
+function toggleCheck(box) {
+  box.classList.toggle('checked');
+}
+
+function answerQuiz(qId, blankId, btn, chosen, verb) {
+  const qEl = document.getElementById(qId);
+  const allBtns = qEl.querySelectorAll('.option-btn');
+  allBtns.forEach(b => b.disabled = true);
+  
+  const correctMap = {
+    'q1': 'travelled',
+    'q2': 'stayed',
+    'q3': 'took',
+    'q4': "didn't buy"
+  };
+  const correct = correctMap[qId];
+  
+  if (chosen === correct) {
+    btn.classList.add('correct');
+    document.getElementById(blankId).textContent = chosen;
+    quizAnswers++;
+  } else {
+    btn.classList.add('wrong');
+    allBtns.forEach(b => {
+      if (b.textContent.trim().startsWith(correct) || b.textContent.includes('✓')) {
+        b.classList.add('correct');
+      }
+    });
+    document.getElementById(blankId).textContent = correct;
+  }
+
+  let answered = document.querySelectorAll('.option-btn[disabled]').length;
+  if (answered >= quizTotal * 2) {
+    const result = document.getElementById('quiz-result');
+    result.style.display = 'block';
+    const msgs = ['Keep practising! 💪', 'Good try! Review the grammar box above. 📖', 'Good job! Almost there! 👍', 'Excellent! 🌟', 'Perfect score! 🏆'];
+    document.getElementById('quiz-score').textContent = quizAnswers + ' / ' + quizTotal + ' — ' + msgs[quizAnswers];
+  }
+}
+</script>
+</body>
+</html>
