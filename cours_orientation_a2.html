@@ -1,0 +1,1554 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>La course d'orientation · A2</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Sora:wght@700;800&display=swap');
+
+:root {
+  --blue: #1a5fbd;
+  --blue-light: #e8f0fc;
+  --blue-mid: #90b8f0;
+  --green: #1e9b5b;
+  --green-light: #e6f9ee;
+  --orange: #d97706;
+  --orange-light: #fef3c7;
+  --red: #dc2626;
+  --red-light: #fee2e2;
+  --bg: #f6f8fc;
+  --card: #ffffff;
+  --text: #1a202c;
+  --muted: #64748b;
+  --border: #e2e8f0;
+  --radius: 14px;
+  --shadow: 0 2px 16px rgba(26,95,189,0.08);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Inter', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  padding-bottom: 90px;
+}
+
+/* ── TOP BAR ── */
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: white;
+  border-bottom: 1px solid var(--border);
+  padding: 0 20px;
+  box-shadow: 0 1px 8px rgba(0,0,0,0.06);
+}
+.topbar-inner {
+  max-width: 780px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  height: 54px;
+}
+.lesson-label {
+  font-family: 'Sora', sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--blue);
+  white-space: nowrap;
+}
+.tabs {
+  display: flex;
+  gap: 4px;
+  overflow-x: auto;
+  scrollbar-width: none;
+  flex: 1;
+}
+.tabs::-webkit-scrollbar { display: none; }
+.tab-btn {
+  background: none;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--muted);
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.18s;
+}
+.tab-btn.active {
+  background: var(--blue-light);
+  color: var(--blue);
+}
+.tab-btn.done {
+  color: var(--green);
+}
+
+/* ── PROGRESS ── */
+.progress-track {
+  height: 3px;
+  background: var(--border);
+  position: relative;
+}
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--blue), #4fa3ff);
+  border-radius: 2px;
+  transition: width 0.35s ease;
+}
+
+/* ── MAIN CONTENT ── */
+.page {
+  max-width: 780px;
+  margin: 0 auto;
+  padding: 28px 20px;
+}
+
+.section {
+  display: none;
+  animation: fadeIn 0.25s ease;
+}
+.section.active {
+  display: block;
+}
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── SECTION HEADER ── */
+.section-header {
+  margin-bottom: 24px;
+}
+.section-eyebrow {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--muted);
+  margin-bottom: 6px;
+}
+.section-title {
+  font-family: 'Sora', sans-serif;
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--text);
+  line-height: 1.25;
+}
+.section-subtitle {
+  font-size: 14px;
+  color: var(--muted);
+  margin-top: 5px;
+}
+
+/* ── CARDS ── */
+.card {
+  background: var(--card);
+  border-radius: var(--radius);
+  padding: 22px 24px;
+  margin-bottom: 16px;
+  box-shadow: var(--shadow);
+  border: 1px solid var(--border);
+}
+.card-title {
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  color: var(--muted);
+  margin-bottom: 14px;
+}
+.card.blue-bg  { background: var(--blue-light);  border-color: var(--blue-mid); }
+.card.green-bg { background: var(--green-light); border-color: #8ad4b0; }
+.card.orange-bg { background: var(--orange-light); border-color: #fbbf24; }
+
+/* ── VIDEO SECTION ── */
+.video-wrapper {
+  position: relative;
+  padding-top: 56.25%;
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: #000;
+  box-shadow: var(--shadow);
+  margin-bottom: 20px;
+}
+.video-wrapper iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+.pre-questions {
+  list-style: none;
+  padding: 0;
+}
+.pre-questions li {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 9px 0;
+  border-bottom: 1px solid var(--border);
+  font-size: 15px;
+}
+.pre-questions li:last-child { border-bottom: none; }
+.pre-questions li::before {
+  content: '?';
+  background: var(--blue);
+  color: white;
+  font-size: 11px;
+  font-weight: 800;
+  width: 20px; height: 20px;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+.post-check {
+  list-style: none;
+  padding: 0;
+}
+.post-check li {
+  padding: 8px 0 8px 30px;
+  position: relative;
+  font-size: 15px;
+  border-bottom: 1px solid #d1fae5;
+  color: #065f46;
+}
+.post-check li:last-child { border-bottom: none; }
+.post-check li::before {
+  content: '✓';
+  position: absolute;
+  left: 4px;
+  font-weight: 800;
+  color: var(--green);
+}
+
+/* ── VOCABULARY GRID ── */
+.vocab-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+  margin-bottom: 20px;
+}
+.vocab-item {
+  background: white;
+  border: 2px solid var(--border);
+  border-radius: 12px;
+  padding: 16px 16px 14px;
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+.vocab-item:hover {
+  border-color: var(--blue-mid);
+  box-shadow: 0 4px 14px rgba(26,95,189,0.1);
+}
+.vocab-emoji { font-size: 30px; flex-shrink: 0; line-height: 1; }
+.vocab-word {
+  font-family: 'Sora', sans-serif;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 3px;
+}
+.vocab-def {
+  font-size: 12px;
+  color: var(--muted);
+  line-height: 1.4;
+}
+.vocab-example {
+  font-size: 12px;
+  color: var(--blue);
+  font-style: italic;
+  margin-top: 4px;
+}
+
+/* orienteering map SVG section */
+.map-illustration {
+  border-radius: var(--radius);
+  overflow: hidden;
+  border: 1px solid var(--border);
+  margin-bottom: 20px;
+  background: #f0f7e6;
+}
+
+/* ── GRAMMAR ── */
+.imperatif-intro {
+  background: linear-gradient(135deg, #1a5fbd, #2d7dd2);
+  border-radius: var(--radius);
+  padding: 22px 24px;
+  color: white;
+  margin-bottom: 20px;
+}
+.imperatif-intro h3 {
+  font-family: 'Sora', sans-serif;
+  font-size: 17px;
+  font-weight: 800;
+  margin-bottom: 10px;
+}
+.imperatif-intro p {
+  font-size: 14px;
+  opacity: 0.9;
+  line-height: 1.6;
+}
+.rule-tag {
+  display: inline-block;
+  background: rgba(255,255,255,0.2);
+  border: 1px solid rgba(255,255,255,0.35);
+  border-radius: 8px;
+  padding: 4px 12px;
+  font-size: 13px;
+  font-weight: 600;
+  margin-top: 12px;
+}
+
+.grammar-table {
+  width: 100%;
+  border-collapse: collapse;
+  border-radius: 10px;
+  overflow: hidden;
+  font-size: 14px;
+  margin-bottom: 16px;
+}
+.grammar-table thead tr { background: #1a5fbd; color: white; }
+.grammar-table th {
+  padding: 11px 16px;
+  text-align: left;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+.grammar-table tbody tr:nth-child(odd)  { background: #f4f8ff; }
+.grammar-table tbody tr:nth-child(even) { background: white; }
+.grammar-table td {
+  padding: 10px 16px;
+  border-bottom: 1px solid var(--border);
+}
+.grammar-table td:first-child { color: var(--muted); font-style: italic; }
+.grammar-table .imp { font-weight: 700; color: var(--blue); }
+.grammar-table .exc { font-size: 11px; color: var(--orange); font-weight: 600; background: var(--orange-light); padding: 2px 6px; border-radius: 4px; }
+
+.examples-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 14px;
+}
+.ex-pill {
+  background: var(--blue-light);
+  border: 1px solid var(--blue-mid);
+  border-radius: 20px;
+  padding: 6px 14px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #1a3c7a;
+}
+
+/* ── QUIZ ── */
+.quiz-question {
+  font-size: 15px;
+  font-weight: 600;
+  margin-bottom: 12px;
+  color: var(--text);
+}
+.quiz-option {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  border: 2px solid var(--border);
+  border-radius: 10px;
+  margin-bottom: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: all 0.18s;
+  user-select: none;
+  background: white;
+}
+.quiz-option:hover { border-color: var(--blue-mid); background: var(--blue-light); }
+.quiz-option.selected-wrong  { border-color: var(--red);   background: var(--red-light);   color: var(--red); }
+.quiz-option.selected-right  { border-color: var(--green); background: var(--green-light); color: var(--green); font-weight: 700; }
+.quiz-option .opt-letter {
+  width: 26px; height: 26px;
+  border-radius: 50%;
+  background: var(--border);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 12px;
+  font-weight: 800;
+  flex-shrink: 0;
+  transition: background 0.18s;
+}
+.quiz-option.selected-right .opt-letter { background: var(--green); color: white; }
+.quiz-option.selected-wrong .opt-letter { background: var(--red);   color: white; }
+.quiz-feedback {
+  font-size: 13px;
+  margin-top: 10px;
+  padding: 8px 14px;
+  border-radius: 8px;
+  display: none;
+  font-weight: 600;
+}
+.quiz-feedback.show { display: block; }
+.quiz-feedback.right { background: var(--green-light); color: #065f46; }
+.quiz-feedback.wrong { background: var(--red-light);   color: #7f1d1d; }
+
+/* ── EXERCISES ── */
+.exercise-num {
+  display: inline-flex;
+  width: 26px; height: 26px;
+  background: var(--blue);
+  color: white;
+  border-radius: 50%;
+  align-items: center; justify-content: center;
+  font-size: 12px;
+  font-weight: 800;
+  flex-shrink: 0;
+}
+
+.fill-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--border);
+  font-size: 15px;
+  flex-wrap: wrap;
+}
+.fill-row:last-child { border-bottom: none; }
+.fill-row .hint {
+  font-size: 12px;
+  color: var(--muted);
+  font-style: italic;
+}
+input.blank {
+  border: none;
+  border-bottom: 2px solid var(--blue);
+  background: var(--blue-light);
+  border-radius: 6px 6px 0 0;
+  padding: 5px 10px;
+  font-size: 15px;
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  color: var(--blue);
+  width: 130px;
+  outline: none;
+  transition: background 0.15s;
+}
+input.blank:focus { background: #dce9fc; }
+input.blank::placeholder { color: #a0b4d0; font-weight: 400; }
+
+.scenario-block {
+  background: var(--bg);
+  border-radius: 12px;
+  padding: 16px 18px;
+  margin-bottom: 14px;
+  border: 1px solid var(--border);
+}
+.scenario-text {
+  font-size: 14px;
+  color: var(--muted);
+  font-style: italic;
+  margin-bottom: 12px;
+  padding-bottom: 10px;
+  border-bottom: 1px dashed var(--border);
+}
+.radio-opt {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 12px;
+  border-radius: 8px;
+  margin: 5px 0;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background 0.15s;
+}
+.radio-opt:hover { background: white; }
+.radio-opt input[type=radio] { accent-color: var(--blue); width: 16px; height: 16px; }
+
+/* ── PRODUCTION ── */
+.mission-header {
+  background: linear-gradient(135deg, #1e9b5b, #15803d);
+  border-radius: var(--radius) var(--radius) 0 0;
+  padding: 18px 22px;
+  color: white;
+}
+.mission-header h3 {
+  font-family: 'Sora', sans-serif;
+  font-weight: 800;
+  font-size: 16px;
+  margin-bottom: 4px;
+}
+.mission-header p { font-size: 13px; opacity: 0.88; }
+.mission-body {
+  background: var(--green-light);
+  border: 1px solid #a7f3d0;
+  border-top: none;
+  border-radius: 0 0 var(--radius) var(--radius);
+  padding: 18px 22px;
+  margin-bottom: 16px;
+}
+.mission-step {
+  display: flex;
+  gap: 12px;
+  padding: 7px 0;
+  font-size: 14px;
+  align-items: flex-start;
+}
+.step-dot {
+  width: 22px; height: 22px;
+  background: var(--green);
+  color: white;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 11px;
+  font-weight: 800;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+.speak-box {
+  background: white;
+  border: 2px dashed var(--green);
+  border-radius: var(--radius);
+  padding: 18px 20px;
+  text-align: center;
+  color: var(--green);
+  font-weight: 600;
+  font-size: 14px;
+  margin-bottom: 16px;
+}
+.speak-box .speak-icon { font-size: 32px; display: block; margin-bottom: 8px; }
+
+/* ── HOMEWORK ── */
+.miro-banner {
+  background: linear-gradient(135deg, #7c3aed, #9f57f0);
+  border-radius: var(--radius);
+  padding: 18px 22px;
+  color: white;
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  margin-bottom: 22px;
+}
+.miro-icon { font-size: 32px; flex-shrink: 0; }
+.miro-banner h4 {
+  font-family: 'Sora', sans-serif;
+  font-weight: 800;
+  font-size: 14px;
+  margin-bottom: 5px;
+}
+.miro-banner p { font-size: 13px; opacity: 0.9; line-height: 1.5; }
+
+.hw-part {
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  margin-bottom: 16px;
+  box-shadow: var(--shadow);
+}
+.hw-part-header {
+  background: #1a5fbd;
+  color: white;
+  padding: 12px 18px;
+  font-family: 'Sora', sans-serif;
+  font-weight: 700;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.hw-part-body { padding: 18px 20px; }
+
+.match-cols {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+.match-col h5 {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--muted);
+  margin-bottom: 10px;
+}
+.match-item {
+  padding: 8px 10px;
+  border-radius: 8px;
+  font-size: 14px;
+  margin-bottom: 5px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+}
+.match-item select, .match-item input {
+  width: 100%;
+  margin-top: 6px;
+  padding: 5px 8px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  font-size: 13px;
+  font-family: 'Inter', sans-serif;
+  background: white;
+  color: var(--text);
+}
+
+textarea.hw-text {
+  width: 100%;
+  min-height: 130px;
+  padding: 12px 14px;
+  border: 2px solid var(--border);
+  border-radius: 10px;
+  font-size: 14px;
+  font-family: 'Inter', sans-serif;
+  resize: vertical;
+  outline: none;
+  transition: border-color 0.18s;
+  line-height: 1.6;
+}
+textarea.hw-text:focus { border-color: var(--blue); }
+
+.hw-checklist {
+  list-style: none;
+  padding: 0;
+  margin-bottom: 14px;
+}
+.hw-checklist li {
+  padding: 5px 0 5px 26px;
+  position: relative;
+  font-size: 13px;
+  color: var(--muted);
+}
+.hw-checklist li::before {
+  content: '☐';
+  position: absolute;
+  left: 2px;
+  color: var(--blue);
+  font-size: 15px;
+}
+.word-count {
+  font-size: 12px;
+  color: var(--muted);
+  text-align: right;
+  margin-top: 6px;
+}
+
+/* ── BOTTOM NAV ── */
+.bottom-nav {
+  position: fixed;
+  bottom: 0;
+  left: 0; right: 0;
+  background: white;
+  border-top: 1px solid var(--border);
+  padding: 12px 20px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  box-shadow: 0 -4px 20px rgba(0,0,0,0.07);
+  z-index: 100;
+}
+.bottom-nav-inner {
+  max-width: 780px;
+  margin: 0 auto;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.nav-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 20px;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 700;
+  border: none;
+  cursor: pointer;
+  transition: all 0.18s;
+  font-family: 'Inter', sans-serif;
+}
+#prev-btn {
+  background: var(--bg);
+  color: var(--muted);
+  border: 1px solid var(--border);
+}
+#prev-btn:hover:not(:disabled) { background: var(--border); color: var(--text); }
+#prev-btn:disabled { opacity: 0.35; cursor: default; }
+#next-btn {
+  background: var(--blue);
+  color: white;
+  margin-left: auto;
+}
+#next-btn:hover:not(:disabled) { background: #1a4fa0; }
+#next-btn:disabled { opacity: 0.35; cursor: default; }
+
+.section-counter {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--muted);
+  white-space: nowrap;
+}
+.section-name-nav {
+  font-size: 13px;
+  color: var(--text);
+  font-weight: 600;
+  flex: 1;
+  text-align: center;
+}
+
+/* ── DIVIDER ── */
+.divider {
+  height: 1px;
+  background: var(--border);
+  margin: 20px 0;
+}
+
+/* ── INFO BOX ── */
+.info-box {
+  display: flex;
+  gap: 12px;
+  padding: 14px 16px;
+  background: var(--orange-light);
+  border: 1px solid #fbbf24;
+  border-radius: 10px;
+  font-size: 13px;
+  margin-bottom: 16px;
+  align-items: flex-start;
+  line-height: 1.5;
+}
+.info-box .info-icon { font-size: 18px; flex-shrink: 0; margin-top: 1px; }
+
+/* ── TRANSFORM EXERCISE ── */
+.transform-item {
+  background: var(--bg);
+  border-radius: 10px;
+  padding: 14px 16px;
+  margin-bottom: 10px;
+  border: 1px solid var(--border);
+}
+.transform-from {
+  font-size: 14px;
+  color: var(--muted);
+  margin-bottom: 8px;
+  font-style: italic;
+}
+.transform-from strong { color: var(--text); font-style: normal; }
+.transform-arrow {
+  font-size: 13px;
+  color: var(--blue);
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+input.transform-input {
+  border: none;
+  border-bottom: 2px solid var(--blue);
+  background: white;
+  border-radius: 6px 6px 0 0;
+  padding: 6px 10px;
+  font-size: 14px;
+  font-family: 'Inter', sans-serif;
+  color: var(--blue);
+  font-weight: 600;
+  width: 100%;
+  outline: none;
+}
+input.transform-input::placeholder { color: #a0b4d0; font-weight: 400; }
+
+@media (max-width: 600px) {
+  .vocab-grid { grid-template-columns: 1fr; }
+  .match-cols { grid-template-columns: 1fr; }
+  .tabs { display: none; }
+}
+</style>
+</head>
+<body>
+
+<!-- ══ TOP BAR ══ -->
+<div class="topbar">
+  <div class="topbar-inner">
+    <span class="lesson-label">🧭 A2 · La course d'orientation</span>
+    <div class="tabs" id="tabs-container"></div>
+  </div>
+  <div class="progress-track">
+    <div class="progress-fill" id="progress-fill" style="width:14.28%"></div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+     SECTION 1 — VIDÉO
+══════════════════════════════════════ -->
+<div class="page">
+
+<div class="section active" id="s0">
+  <div class="section-header">
+    <div class="section-eyebrow">Introduction · 10 min</div>
+    <div class="section-title">Avant de regarder la vidéo</div>
+    <div class="section-subtitle">Réponds à ces questions avec ton professeur.</div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">💬 Questions de départ</div>
+    <ul class="pre-questions">
+      <li>Tu fais du sport ? Quel sport ?</li>
+      <li>Tu aimes les activités en plein air ? Pourquoi ?</li>
+      <li>Tu connais la course d'orientation ? Tu en as déjà entendu parler ?</li>
+      <li>À ton avis, qu'est-ce qu'on utilise dans ce sport ?</li>
+    </ul>
+  </div>
+
+  <div class="card blue-bg">
+    <div class="card-title">🎯 Dans cette vidéo, regarde…</div>
+    <ul class="post-check">
+      <li>De quel sport s'agit-il ?</li>
+      <li>Quels objets on utilise ?</li>
+      <li>Est-ce qu'on peut faire ce sport seul ou en équipe ?</li>
+      <li>C'est un sport difficile pour les débutants ?</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <div class="card-title">🎬 Vidéo — FFCO : Découvrir la course d'orientation</div>
+    <div class="video-wrapper">
+      <iframe
+        src="https://www.youtube.com/embed/evYFjPed8Zs?end=64"
+        title="FFCO - Découvrir la course d'orientation"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen>
+      </iframe>
+    </div>
+    <div class="info-box">
+      <span class="info-icon">⏱️</span>
+      <span>Regarde de <strong>0:00 à 1:04</strong> — c'est suffisant pour répondre à toutes les questions ! La vidéo s'arrête automatiquement à 1:04.</span>
+    </div>
+  </div>
+
+  <div class="card green-bg">
+    <div class="card-title">✅ Après la vidéo — vérifie ta compréhension</div>
+    <ul class="post-check">
+      <li>La course d'orientation, c'est un sport de nature.</li>
+      <li>On utilise une carte et une boussole.</li>
+      <li>On cherche des balises (des points de contrôle).</li>
+      <li>On peut faire ce sport seul ou en équipe.</li>
+      <li>C'est accessible à tout le monde.</li>
+    </ul>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+     SECTION 2 — VOCABULAIRE
+══════════════════════════════════════ -->
+<div class="section" id="s1">
+  <div class="section-header">
+    <div class="section-eyebrow">Présentation · 10 min</div>
+    <div class="section-title">Le vocabulaire de la vidéo</div>
+    <div class="section-subtitle">Les mots importants pour parler de ce sport.</div>
+  </div>
+
+  <!-- SVG Map Illustration -->
+  <div class="map-illustration">
+    <svg viewBox="0 0 700 300" xmlns="http://www.w3.org/2000/svg" style="width:100%;display:block;">
+      <!-- Background terrain -->
+      <rect width="700" height="300" fill="#eef4e2"/>
+      <!-- Forest zones -->
+      <ellipse cx="120" cy="80"  rx="90" ry="65" fill="#c5dda0" opacity="0.8"/>
+      <ellipse cx="580" cy="200" rx="95" ry="70" fill="#c5dda0" opacity="0.8"/>
+      <ellipse cx="350" cy="240" rx="70" ry="45" fill="#c5dda0" opacity="0.7"/>
+      <!-- Trees in forest -->
+      <g fill="#6aa84f" opacity="0.9">
+        <polygon points="105,35 90,68 120,68"/>
+        <polygon points="130,40 115,70 145,70"/>
+        <polygon points="80,55 67,82 93,82"/>
+        <polygon points="150,50 137,78 163,78"/>
+        <polygon points="565,155 552,183 578,183"/>
+        <polygon points="590,148 577,178 603,178"/>
+        <polygon points="610,162 597,190 623,190"/>
+        <polygon points="545,170 532,198 558,198"/>
+        <polygon points="575,178 562,205 588,205"/>
+        <polygon points="340,210 327,238 353,238"/>
+        <polygon points="365,205 352,232 378,232"/>
+        <polygon points="350,220 337,248 363,248"/>
+      </g>
+      <!-- Paths/routes -->
+      <path d="M 60,150 C 130,130 200,170 270,145 S 380,100 450,130 S 550,160 620,140"
+            stroke="#b08040" stroke-width="3" fill="none" stroke-dasharray="8,4" opacity="0.7"/>
+      <path d="M 270,145 C 290,190 310,230 350,255"
+            stroke="#b08040" stroke-width="2.5" fill="none" stroke-dasharray="6,4" opacity="0.6"/>
+      <path d="M 450,130 C 480,180 520,195 555,190"
+            stroke="#b08040" stroke-width="2.5" fill="none" stroke-dasharray="6,4" opacity="0.6"/>
+      <!-- Water/river -->
+      <path d="M 200,260 C 240,245 280,265 320,250 S 370,240 400,255"
+            stroke="#7ec8e3" stroke-width="8" fill="none" opacity="0.8"/>
+      <text x="290" y="272" font-size="11" fill="#2577a0" font-weight="600" font-family="Inter,sans-serif">la rivière</text>
+      <!-- Checkpoints (balises) — orange/white triangles -->
+      <g>
+        <!-- Checkpoint 1 -->
+        <polygon points="130,140 121,158 139,158" fill="white" stroke="#e07000" stroke-width="2.5"/>
+        <polygon points="130,140 121,158 130,149" fill="#e07000"/>
+        <text x="142" y="155" font-size="10" fill="#e07000" font-weight="700" font-family="Inter,sans-serif">1</text>
+        <!-- Checkpoint 2 -->
+        <polygon points="270,143 261,161 279,161" fill="white" stroke="#e07000" stroke-width="2.5"/>
+        <polygon points="270,143 261,161 270,152" fill="#e07000"/>
+        <text x="282" y="158" font-size="10" fill="#e07000" font-weight="700" font-family="Inter,sans-serif">2</text>
+        <!-- Checkpoint 3 -->
+        <polygon points="355,253 346,271 364,271" fill="white" stroke="#e07000" stroke-width="2.5"/>
+        <polygon points="355,253 346,271 355,262" fill="#e07000"/>
+        <text x="367" y="268" font-size="10" fill="#e07000" font-weight="700" font-family="Inter,sans-serif">3</text>
+        <!-- Checkpoint 4 -->
+        <polygon points="450,128 441,146 459,146" fill="white" stroke="#e07000" stroke-width="2.5"/>
+        <polygon points="450,128 441,146 450,137" fill="#e07000"/>
+        <text x="462" y="143" font-size="10" fill="#e07000" font-weight="700" font-family="Inter,sans-serif">4</text>
+        <!-- Checkpoint 5 / Finish -->
+        <polygon points="555,188 546,206 564,206" fill="white" stroke="#e07000" stroke-width="2.5"/>
+        <polygon points="555,188 546,206 555,197" fill="#e07000"/>
+        <circle cx="555" cy="197" r="10" fill="none" stroke="#cc2200" stroke-width="2.5"/>
+        <text x="567" y="203" font-size="10" fill="#cc2200" font-weight="700" font-family="Inter,sans-serif">FIN</text>
+      </g>
+      <!-- Start triangle (double) -->
+      <polygon points="60,150 46,173 74,173" fill="none" stroke="#cc2200" stroke-width="2.5"/>
+      <polygon points="60,155 50,171 70,171" fill="#cc2200" opacity="0.3"/>
+      <text x="38" y="188" font-size="11" fill="#cc2200" font-weight="700" font-family="Inter,sans-serif">DÉPART</text>
+      <!-- Compass rose -->
+      <g transform="translate(648,50)">
+        <circle r="26" fill="white" stroke="#cdd5e0" stroke-width="1.5" opacity="0.95"/>
+        <polygon points="0,-20 -5,-5 5,-5"  fill="#cc2200"/>
+        <polygon points="0,20  -5,5  5,5"   fill="#666"/>
+        <polygon points="-20,0 -5,-5 -5,5"  fill="#999"/>
+        <polygon points="20,0   5,-5  5,5"  fill="#999"/>
+        <circle r="4" fill="white" stroke="#ccc" stroke-width="1"/>
+        <text x="-3" y="-22" font-size="9" fill="#cc2200" font-weight="800" font-family="Inter,sans-serif">N</text>
+      </g>
+      <!-- Legend -->
+      <rect x="10" y="255" width="170" height="40" rx="6" fill="white" opacity="0.85"/>
+      <polygon points="25,270 18,284 32,284" fill="white" stroke="#e07000" stroke-width="1.8"/>
+      <polygon points="25,270 18,284 25,277" fill="#e07000"/>
+      <text x="38" y="281" font-size="11" fill="#555" font-family="Inter,sans-serif">balise (point de contrôle)</text>
+    </svg>
+  </div>
+
+  <div class="card-title" style="padding: 0 4px; margin-bottom: 12px; font-size:12px; color:var(--muted); text-transform:uppercase; letter-spacing:0.6px; font-weight:700;">Le matériel et le sport</div>
+  <div class="vocab-grid">
+    <div class="vocab-item">
+      <span class="vocab-emoji">🗺️</span>
+      <div>
+        <div class="vocab-word">une carte</div>
+        <div class="vocab-def">Plan détaillé du terrain — forêts, chemins, rivières</div>
+        <div class="vocab-example">« Je regarde la carte. »</div>
+      </div>
+    </div>
+    <div class="vocab-item">
+      <span class="vocab-emoji">🧭</span>
+      <div>
+        <div class="vocab-word">une boussole</div>
+        <div class="vocab-def">Instrument qui indique le nord</div>
+        <div class="vocab-example">« La boussole montre le nord. »</div>
+      </div>
+    </div>
+    <div class="vocab-item">
+      <span class="vocab-emoji">🚩</span>
+      <div>
+        <div class="vocab-word">une balise</div>
+        <div class="vocab-def">Marqueur orange et blanc à trouver sur le parcours</div>
+        <div class="vocab-example">« Il y a 5 balises. »</div>
+      </div>
+    </div>
+    <div class="vocab-item">
+      <span class="vocab-emoji">🛤️</span>
+      <div>
+        <div class="vocab-word">un parcours</div>
+        <div class="vocab-def">Le chemin que l'on suit du départ à l'arrivée</div>
+        <div class="vocab-example">« Le parcours est difficile. »</div>
+      </div>
+    </div>
+    <div class="vocab-item">
+      <span class="vocab-emoji">🏃</span>
+      <div>
+        <div class="vocab-word">s'orienter</div>
+        <div class="vocab-def">Trouver sa direction dans l'espace</div>
+        <div class="vocab-example">« Je m'oriente avec la carte. »</div>
+      </div>
+    </div>
+    <div class="vocab-item">
+      <span class="vocab-emoji">👥</span>
+      <div>
+        <div class="vocab-word">une équipe</div>
+        <div class="vocab-def">Groupe de personnes qui jouent ensemble</div>
+        <div class="vocab-example">« On joue en équipe ou seul. »</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="card-title" style="padding: 0 4px; margin-bottom: 12px; font-size:12px; color:var(--muted); text-transform:uppercase; letter-spacing:0.6px; font-weight:700;">Les directions</div>
+  <div class="vocab-grid">
+    <div class="vocab-item">
+      <span class="vocab-emoji">⬅️</span>
+      <div>
+        <div class="vocab-word">tourner à gauche</div>
+        <div class="vocab-def">Changer de direction vers la gauche</div>
+      </div>
+    </div>
+    <div class="vocab-item">
+      <span class="vocab-emoji">➡️</span>
+      <div>
+        <div class="vocab-word">tourner à droite</div>
+        <div class="vocab-def">Changer de direction vers la droite</div>
+      </div>
+    </div>
+    <div class="vocab-item">
+      <span class="vocab-emoji">⬆️</span>
+      <div>
+        <div class="vocab-word">continuer tout droit</div>
+        <div class="vocab-def">Avancer sans changer de direction</div>
+      </div>
+    </div>
+    <div class="vocab-item">
+      <span class="vocab-emoji">🔀</span>
+      <div>
+        <div class="vocab-word">traverser</div>
+        <div class="vocab-def">Passer d'un côté à l'autre (un parc, une rivière…)</div>
+      </div>
+    </div>
+    <div class="vocab-item">
+      <span class="vocab-emoji">🔍</span>
+      <div>
+        <div class="vocab-word">chercher</div>
+        <div class="vocab-def">Essayer de trouver quelque chose</div>
+      </div>
+    </div>
+    <div class="vocab-item">
+      <span class="vocab-emoji">🌲</span>
+      <div>
+        <div class="vocab-word">la forêt / le bois</div>
+        <div class="vocab-def">Zone avec beaucoup d'arbres</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+     SECTION 3 — GRAMMAIRE
+══════════════════════════════════════ -->
+<div class="section" id="s2">
+  <div class="section-header">
+    <div class="section-eyebrow">Présentation · 10 min</div>
+    <div class="section-title">La grammaire : l'impératif</div>
+    <div class="section-subtitle">Pour donner des directions et des consignes.</div>
+  </div>
+
+  <div class="imperatif-intro">
+    <h3>Qu'est-ce que l'impératif ?</h3>
+    <p>
+      L'impératif est le mode qu'on utilise pour <strong>donner des ordres</strong>,
+      des <strong>conseils</strong> ou des <strong>directions</strong>.
+      À la course d'orientation, on l'utilise tout le temps pour guider quelqu'un sur un parcours !
+    </p>
+    <span class="rule-tag">⚠️ Règle clé : on supprime le pronom sujet (je, tu, nous…)</span>
+  </div>
+
+  <div class="card">
+    <div class="card-title">📐 Conjugaison — verbes du 1er groupe (-er)</div>
+    <table class="grammar-table">
+      <thead>
+        <tr><th>Infinitif</th><th>Tu</th><th>Nous</th><th>Vous</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>tourner</td><td class="imp">Tourne !</td><td class="imp">Tournons !</td><td class="imp">Tournez !</td></tr>
+        <tr><td>continuer</td><td class="imp">Continue !</td><td class="imp">Continuons !</td><td class="imp">Continuez !</td></tr>
+        <tr><td>traverser</td><td class="imp">Traverse !</td><td class="imp">Traversons !</td><td class="imp">Traversez !</td></tr>
+        <tr><td>chercher</td><td class="imp">Cherche !</td><td class="imp">Cherchons !</td><td class="imp">Cherchez !</td></tr>
+        <tr><td>regarder</td><td class="imp">Regarde !</td><td class="imp">Regardons !</td><td class="imp">Regardez !</td></tr>
+      </tbody>
+    </table>
+
+    <div class="info-box">
+      <span class="info-icon">⚠️</span>
+      <div>
+        <strong>Verbes irréguliers à retenir :</strong><br>
+        <em>prendre</em> → <strong>Prends !</strong> (tu) / <strong>Prenons !</strong> / <strong>Prenez !</strong><br>
+        <em>aller</em> → <strong>Va !</strong> (tu) / <strong>Allons !</strong> / <strong>Allez !</strong>
+      </div>
+    </div>
+
+    <div class="examples-row">
+      <span class="ex-pill">⬅️ Tourne à gauche !</span>
+      <span class="ex-pill">⬆️ Continue tout droit !</span>
+      <span class="ex-pill">🔀 Traverse le pont !</span>
+      <span class="ex-pill">🔍 Cherche la balise !</span>
+      <span class="ex-pill">🗺️ Prends la carte !</span>
+    </div>
+  </div>
+
+  <div class="card orange-bg">
+    <div class="card-title">❓ Mini-quiz — Clique sur la bonne réponse</div>
+    <div style="margin-bottom:20px;">
+      <div class="quiz-question">1. Comment dit-on « you continue » à l'impératif (tu) ?</div>
+      <div class="quiz-option" onclick="checkQuiz(this,'wrong')">
+        <span class="opt-letter">a</span> Tu continues tout droit.
+      </div>
+      <div class="quiz-option" onclick="checkQuiz(this,'right')">
+        <span class="opt-letter">b</span> Continue tout droit !
+      </div>
+      <div class="quiz-feedback right">✅ Bravo ! On supprime le pronom « tu ».</div>
+      <div class="quiz-feedback wrong">❌ Pas tout à fait — à l'impératif, on supprime le pronom sujet !</div>
+    </div>
+    <div>
+      <div class="quiz-question">2. Quelle forme est correcte à l'impératif (vous) pour « prendre » ?</div>
+      <div class="quiz-option" onclick="checkQuiz(this,'wrong')">
+        <span class="opt-letter">a</span> Vous prenez la carte !
+      </div>
+      <div class="quiz-option" onclick="checkQuiz(this,'right')">
+        <span class="opt-letter">b</span> Prenez la carte !
+      </div>
+      <div class="quiz-feedback right">✅ Exactement ! « Prenez la carte ! »</div>
+      <div class="quiz-feedback wrong">❌ Non — la forme correcte est « Prenez ! » sans « vous ».</div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+     SECTION 4 — EXERCICE 1
+══════════════════════════════════════ -->
+<div class="section" id="s3">
+  <div class="section-header">
+    <div class="section-eyebrow">Practice · 10 min</div>
+    <div class="section-title">Exercice 1 — L'impératif</div>
+    <div class="section-subtitle">Écris la forme correcte de l'impératif (forme <em>tu</em>).</div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">✏️ Partie A — Complète avec l'impératif</div>
+    <div class="info-box">
+      <span class="info-icon">📖</span>
+      <span>Conjugue le verbe entre parenthèses à l'impératif — forme <strong>tu</strong>.</span>
+    </div>
+
+    <div class="fill-row">
+      <span class="exercise-num">1</span>
+      <input class="blank" type="text" placeholder="…" />
+      <span class="hint">(tourner)</span>
+      <span>à droite.</span>
+    </div>
+    <div class="fill-row">
+      <span class="exercise-num">2</span>
+      <input class="blank" type="text" placeholder="…" />
+      <span class="hint">(continuer)</span>
+      <span>tout droit.</span>
+    </div>
+    <div class="fill-row">
+      <span class="exercise-num">3</span>
+      <input class="blank" type="text" placeholder="…" />
+      <span class="hint">(chercher)</span>
+      <span>la balise numéro 3.</span>
+    </div>
+    <div class="fill-row">
+      <span class="exercise-num">4</span>
+      <input class="blank" type="text" placeholder="…" />
+      <span class="hint">(traverser)</span>
+      <span>la rivière.</span>
+    </div>
+    <div class="fill-row">
+      <span class="exercise-num">5</span>
+      <input class="blank" type="text" placeholder="…" />
+      <span class="hint">(prendre)</span>
+      <span>la carte et la boussole.</span>
+    </div>
+    <div class="fill-row">
+      <span class="exercise-num">6</span>
+      <input class="blank" type="text" placeholder="…" />
+      <span class="hint">(regarder)</span>
+      <span>la carte avant de partir.</span>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">✏️ Partie B — Complète avec l'impératif <em>vous</em></div>
+    <div class="fill-row">
+      <span class="exercise-num">7</span>
+      <input class="blank" type="text" placeholder="…" />
+      <span class="hint">(tourner)</span>
+      <span>à gauche après le pont.</span>
+    </div>
+    <div class="fill-row">
+      <span class="exercise-num">8</span>
+      <input class="blank" type="text" placeholder="…" />
+      <span class="hint">(continuer)</span>
+      <span>tout droit pendant 200 mètres.</span>
+    </div>
+    <div class="fill-row">
+      <span class="exercise-num">9</span>
+      <input class="blank" type="text" placeholder="…" />
+      <span class="hint">(chercher)</span>
+      <span>la balise dans la forêt.</span>
+    </div>
+    <div class="fill-row">
+      <span class="exercise-num">10</span>
+      <input class="blank" type="text" placeholder="…" />
+      <span class="hint">(aller)</span>
+      <span>vers le nord.</span>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+     SECTION 5 — EXERCICE 2
+══════════════════════════════════════ -->
+<div class="section" id="s4">
+  <div class="section-header">
+    <div class="section-eyebrow">Practice · 10 min</div>
+    <div class="section-title">Exercice 2 — Donne les bonnes instructions</div>
+    <div class="section-subtitle">Pour chaque situation sur la carte, choisis la bonne consigne.</div>
+  </div>
+
+  <!-- Mini map reference -->
+  <div class="card blue-bg" style="margin-bottom:20px;">
+    <div class="card-title">🗺️ Référence — Regarde la carte du parcours</div>
+    <svg viewBox="0 0 500 200" xmlns="http://www.w3.org/2000/svg" style="width:100%;display:block;border-radius:8px;background:#eef4e2;">
+      <rect width="500" height="200" fill="#eef4e2"/>
+      <ellipse cx="80" cy="60" rx="60" ry="45" fill="#c5dda0" opacity="0.8"/>
+      <ellipse cx="420" cy="140" rx="65" ry="50" fill="#c5dda0" opacity="0.8"/>
+      <g fill="#6aa84f" opacity="0.9">
+        <polygon points="72,22 63,45 81,45"/>
+        <polygon points="90,28 81,50 99,50"/>
+        <polygon points="56,38 48,58 64,58"/>
+        <polygon points="408,102 399,123 417,123"/>
+        <polygon points="425,108 416,130 434,130"/>
+        <polygon points="440,118 431,138 449,138"/>
+      </g>
+      <!-- river -->
+      <path d="M 160,170 C 200,155 240,175 280,160 S 330,148 360,162"
+            stroke="#7ec8e3" stroke-width="10" fill="none" opacity="0.8"/>
+      <text x="240" y="183" font-size="10" fill="#2577a0" font-weight="600" font-family="Inter,sans-serif">la rivière</text>
+      <!-- road -->
+      <line x1="200" y1="0" x2="200" y2="200" stroke="#d4b483" stroke-width="6" opacity="0.6"/>
+      <text x="204" y="15" font-size="10" fill="#8b6914" font-weight="600" font-family="Inter,sans-serif">route</text>
+      <!-- path -->
+      <path d="M 30,100 C 90,95 150,105 200,100 S 290,80 360,95 S 430,115 470,110"
+            stroke="#b08040" stroke-width="2.5" fill="none" stroke-dasharray="7,4" opacity="0.8"/>
+      <!-- START -->
+      <polygon points="30,100 20,118 40,118" fill="none" stroke="#cc2200" stroke-width="2"/>
+      <polygon points="30,100 22,116 30,108" fill="#cc2200" opacity="0.35"/>
+      <text x="10" y="132" font-size="9" fill="#cc2200" font-weight="700" font-family="Inter,sans-serif">START</text>
+      <!-- Checkpoints -->
+      <polygon points="90,95 82,111 98,111" fill="white" stroke="#e07000" stroke-width="2"/>
+      <polygon points="90,95 82,111 90,103" fill="#e07000"/>
+      <text x="100" y="109" font-size="9" fill="#e07000" font-weight="700" font-family="Inter,sans-serif">A</text>
+      <polygon points="200,100 192,116 208,116" fill="white" stroke="#e07000" stroke-width="2"/>
+      <polygon points="200,100 192,116 200,108" fill="#e07000"/>
+      <text x="210" y="114" font-size="9" fill="#e07000" font-weight="700" font-family="Inter,sans-serif">B</text>
+      <polygon points="295,88 287,104 303,104" fill="white" stroke="#e07000" stroke-width="2"/>
+      <polygon points="295,88 287,104 295,96" fill="#e07000"/>
+      <text x="305" y="102" font-size="9" fill="#e07000" font-weight="700" font-family="Inter,sans-serif">C</text>
+      <!-- Finish -->
+      <polygon points="470,110 462,126 478,126" fill="white" stroke="#cc2200" stroke-width="2"/>
+      <polygon points="470,110 462,126 470,118" fill="#cc2200" opacity="0.4"/>
+      <circle cx="470" cy="118" r="9" fill="none" stroke="#cc2200" stroke-width="2"/>
+      <text x="453" y="140" font-size="9" fill="#cc2200" font-weight="700" font-family="Inter,sans-serif">FIN</text>
+    </svg>
+  </div>
+
+  <div class="scenario-block">
+    <div class="scenario-text">📍 Situation 1 : Le participant est au départ. La balise A est devant, dans la forêt à gauche.</div>
+    <label class="radio-opt"><input type="radio" name="q1" value="a"> a) Continue tout droit sur la route.</label>
+    <label class="radio-opt"><input type="radio" name="q1" value="b"> b) Tourne à gauche et cherche la balise A dans la forêt.</label>
+    <label class="radio-opt"><input type="radio" name="q1" value="c"> c) Traverse la rivière.</label>
+  </div>
+
+  <div class="scenario-block">
+    <div class="scenario-text">📍 Situation 2 : Le participant est à la balise A. La balise B est tout droit, après la route.</div>
+    <label class="radio-opt"><input type="radio" name="q2" value="a"> a) Tourne à droite vers la rivière.</label>
+    <label class="radio-opt"><input type="radio" name="q2" value="b"> b) Continue tout droit et traverse la route.</label>
+    <label class="radio-opt"><input type="radio" name="q2" value="c"> c) Cherche dans la forêt à droite.</label>
+  </div>
+
+  <div class="scenario-block">
+    <div class="scenario-text">📍 Situation 3 : Le participant est à la balise B. La balise C est au nord, mais il y a une rivière en bas.</div>
+    <label class="radio-opt"><input type="radio" name="q3" value="a"> a) Traverse la rivière, puis continue tout droit vers le nord.</label>
+    <label class="radio-opt"><input type="radio" name="q3" value="b"> b) Tourne à gauche et suis la route.</label>
+    <label class="radio-opt"><input type="radio" name="q3" value="c"> c) Retourne au départ.</label>
+  </div>
+
+  <div class="scenario-block">
+    <div class="scenario-text">📍 Situation 4 : Arrivée. Le participant est à la balise C. La fin est dans la forêt à droite.</div>
+    <label class="radio-opt"><input type="radio" name="q4" value="a"> a) Continue tout droit sur le chemin.</label>
+    <label class="radio-opt"><input type="radio" name="q4" value="b"> b) Cherche dans la forêt à gauche.</label>
+    <label class="radio-opt"><input type="radio" name="q4" value="c"> c) Tourne à droite et cherche l'arrivée dans la forêt.</label>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+     SECTION 6 — PRODUCTION
+══════════════════════════════════════ -->
+<div class="section" id="s5">
+  <div class="section-header">
+    <div class="section-eyebrow">Production · 15 min</div>
+    <div class="section-title">Mission : Guide ton partenaire !</div>
+    <div class="section-subtitle">Activité de production orale.</div>
+  </div>
+
+  <div class="mission-header">
+    <h3>🏆 Situation</h3>
+    <p>Tu participes à une course d'orientation dans un parc. Ton partenaire ne voit pas la carte. Tu dois le guider pour trouver toutes les balises.</p>
+  </div>
+  <div class="mission-body">
+    <div class="mission-step">
+      <span class="step-dot">1</span>
+      <span>Décris le matériel que tu as : <em>« J'ai… »</em></span>
+    </div>
+    <div class="mission-step">
+      <span class="step-dot">2</span>
+      <span>Explique le point de départ : <em>« Le parcours commence… »</em></span>
+    </div>
+    <div class="mission-step">
+      <span class="step-dot">3</span>
+      <span>Donne <strong>au moins 6 instructions</strong> à l'impératif pour guider.</span>
+    </div>
+    <div class="mission-step">
+      <span class="step-dot">4</span>
+      <span>Dis comment se termine le parcours : <em>« À la fin… »</em></span>
+    </div>
+  </div>
+
+  <div class="speak-box">
+    <span class="speak-icon">🎙️</span>
+    Parle pendant 2–3 minutes.<br>
+    <span style="font-size:12px; font-weight:400; opacity:0.75;">Utilise les mots du vocabulaire et les formes de l'impératif.</span>
+  </div>
+
+  <div class="card">
+    <div class="card-title">💬 Questions de suivi — discussion avec ton professeur</div>
+    <ul class="pre-questions">
+      <li>Tu aimerais essayer la course d'orientation ? Pourquoi ?</li>
+      <li>C'est facile ou difficile de s'orienter avec une carte ?</li>
+      <li>Tu préfères faire ce sport seul(e) ou en équipe ?</li>
+      <li>Où peut-on pratiquer ce sport près de chez toi ?</li>
+    </ul>
+  </div>
+
+  <div class="card green-bg">
+    <div class="card-title">📝 Phrases utiles pour la production</div>
+    <div class="examples-row" style="flex-direction:column; gap:6px;">
+      <span style="font-size:14px;">🗺️ <em>« J'ai une carte et une boussole. »</em></span>
+      <span style="font-size:14px;">🏁 <em>« Le parcours commence près du lac / de la forêt / du parc. »</em></span>
+      <span style="font-size:14px;">🧭 <em>« D'abord… Ensuite… Après ça… Finalement… »</em></span>
+      <span style="font-size:14px;">⬆️ <em>« Tourne à gauche. Continue tout droit. Traverse le pont. Cherche la balise. »</em></span>
+      <span style="font-size:14px;">🏆 <em>« À la fin, retourne au départ / à l'arrivée. »</em></span>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+     SECTION 7 — DEVOIRS
+══════════════════════════════════════ -->
+<div class="section" id="s6">
+  <div class="section-header">
+    <div class="section-eyebrow">Devoirs</div>
+    <div class="section-title">À faire pour le prochain cours</div>
+  </div>
+
+  <div class="miro-banner">
+    <span class="miro-icon">📸</span>
+    <div>
+      <h4>Instructions Miro</h4>
+      <p>Quand tu as terminé tes exercices, <strong>fais une capture d'écran</strong> de tes réponses et <strong>dépose-la sur notre tableau Miro</strong> avant le prochain cours. Ton professeur regardera tes réponses là-bas.</p>
+    </div>
+  </div>
+
+  <!-- Partie 1 -->
+  <div class="hw-part">
+    <div class="hw-part-header">📚 Partie 1 — Vocabulaire : Associe les mots</div>
+    <div class="hw-part-body">
+      <p style="font-size:14px; color:var(--muted); margin-bottom:16px;">Relie chaque mot à sa définition. Écris la lettre dans la case.</p>
+      <div class="match-cols">
+        <div class="match-col">
+          <h5>Les mots</h5>
+          <div class="match-item">1. une carte &nbsp; → &nbsp; <input type="text" placeholder="?" style="width:36px; border:1px solid #cdd5e0; border-radius:5px; padding:3px 6px; font-size:14px;"></div>
+          <div class="match-item">2. une boussole &nbsp; → &nbsp; <input type="text" placeholder="?" style="width:36px; border:1px solid #cdd5e0; border-radius:5px; padding:3px 6px; font-size:14px;"></div>
+          <div class="match-item">3. un parcours &nbsp; → &nbsp; <input type="text" placeholder="?" style="width:36px; border:1px solid #cdd5e0; border-radius:5px; padding:3px 6px; font-size:14px;"></div>
+          <div class="match-item">4. une balise &nbsp; → &nbsp; <input type="text" placeholder="?" style="width:36px; border:1px solid #cdd5e0; border-radius:5px; padding:3px 6px; font-size:14px;"></div>
+          <div class="match-item">5. une équipe &nbsp; → &nbsp; <input type="text" placeholder="?" style="width:36px; border:1px solid #cdd5e0; border-radius:5px; padding:3px 6px; font-size:14px;"></div>
+        </div>
+        <div class="match-col">
+          <h5>Les définitions</h5>
+          <div class="match-item">a. groupe de personnes qui jouent ensemble</div>
+          <div class="match-item">b. chemin du départ à l'arrivée</div>
+          <div class="match-item">c. objet qui indique le nord</div>
+          <div class="match-item">d. marqueur orange et blanc à trouver</div>
+          <div class="match-item">e. plan détaillé du terrain</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Partie 2 -->
+  <div class="hw-part">
+    <div class="hw-part-header">✏️ Partie 2 — L'impératif : Transforme les phrases</div>
+    <div class="hw-part-body">
+      <p style="font-size:14px; color:var(--muted); margin-bottom:16px;"><em>Exemple : Tu tournes à droite. → Tourne à droite !</em></p>
+
+      <div class="transform-item">
+        <div class="transform-from"><strong>1.</strong> Tu continues tout droit.</div>
+        <div class="transform-arrow">→</div>
+        <input class="transform-input" type="text" placeholder="Écris la forme impérative…">
+      </div>
+      <div class="transform-item">
+        <div class="transform-from"><strong>2.</strong> Tu traverses le parc.</div>
+        <div class="transform-arrow">→</div>
+        <input class="transform-input" type="text" placeholder="Écris la forme impérative…">
+      </div>
+      <div class="transform-item">
+        <div class="transform-from"><strong>3.</strong> Tu cherches la balise numéro 2.</div>
+        <div class="transform-arrow">→</div>
+        <input class="transform-input" type="text" placeholder="Écris la forme impérative…">
+      </div>
+      <div class="transform-item">
+        <div class="transform-from"><strong>4.</strong> Tu prends la carte.</div>
+        <div class="transform-arrow">→</div>
+        <input class="transform-input" type="text" placeholder="Écris la forme impérative…">
+      </div>
+      <div class="transform-item">
+        <div class="transform-from"><strong>5.</strong> Vous regardez la boussole.</div>
+        <div class="transform-arrow">→</div>
+        <input class="transform-input" type="text" placeholder="Écris la forme impérative (vous)…">
+      </div>
+    </div>
+  </div>
+
+  <!-- Partie 3 -->
+  <div class="hw-part">
+    <div class="hw-part-header">✍️ Partie 3 — Production écrite</div>
+    <div class="hw-part-body">
+      <div class="info-box">
+        <span class="info-icon">📝</span>
+        <span><strong>Consigne :</strong> Imagine une course d'orientation dans ton parc ou ta forêt préféré(e). Décris le parcours.</span>
+      </div>
+      <ul class="hw-checklist">
+        <li>Où se passe la course ?</li>
+        <li>Ce qu'il faut apporter (matériel)</li>
+        <li>Au moins 6 consignes à l'impératif</li>
+        <li>Au moins 6 mots du vocabulaire du cours</li>
+      </ul>
+      <textarea class="hw-text" placeholder="Écris ton texte ici (60–80 mots)…" oninput="updateCount(this)"></textarea>
+      <div class="word-count" id="word-count">0 / 80 mots</div>
+    </div>
+  </div>
+
+  <div class="card orange-bg" style="text-align:center; padding:20px;">
+    <div style="font-size:28px; margin-bottom:8px;">🎉</div>
+    <div style="font-family:'Sora',sans-serif; font-weight:800; font-size:16px; margin-bottom:6px;">Cours terminé !</div>
+    <div style="font-size:13px; color:var(--muted);">N'oublie pas de faire une capture d'écran de tes devoirs et de la déposer sur Miro.</div>
+  </div>
+
+</div>
+
+</div><!-- .page -->
+
+<!-- ══ BOTTOM NAVIGATION ══ -->
+<div class="bottom-nav">
+  <div class="bottom-nav-inner">
+    <button class="nav-btn" id="prev-btn" disabled>← Précédent</button>
+    <span class="section-name-nav" id="section-name-nav"></span>
+    <span class="section-counter" id="section-counter">1 / 7</span>
+    <button class="nav-btn" id="next-btn">Suivant →</button>
+  </div>
+</div>
+
+<script>
+const sections = [
+  { el: document.getElementById('s0'), label: '🎬 Vidéo',       eyebrow: 'Introduction' },
+  { el: document.getElementById('s1'), label: '📖 Vocabulaire', eyebrow: 'Présentation' },
+  { el: document.getElementById('s2'), label: '📐 Grammaire',   eyebrow: 'Présentation' },
+  { el: document.getElementById('s3'), label: '✏️ Exercice 1',  eyebrow: 'Practice' },
+  { el: document.getElementById('s4'), label: '🗺️ Exercice 2',  eyebrow: 'Practice' },
+  { el: document.getElementById('s5'), label: '🗣 Production',   eyebrow: 'Production' },
+  { el: document.getElementById('s6'), label: '📝 Devoirs',     eyebrow: 'Devoirs' },
+];
+
+let current = 0;
+
+// Build tabs
+const tabsContainer = document.getElementById('tabs-container');
+sections.forEach((s, i) => {
+  const btn = document.createElement('button');
+  btn.className = 'tab-btn' + (i === 0 ? ' active' : '');
+  btn.textContent = s.label;
+  btn.addEventListener('click', () => goTo(i));
+  s.tabBtn = btn;
+  tabsContainer.appendChild(btn);
+});
+
+function goTo(n) {
+  sections[current].el.classList.remove('active');
+  sections[current].tabBtn.classList.remove('active');
+  current = n;
+  sections[current].el.classList.add('active');
+  sections[current].tabBtn.classList.add('active');
+  sections[current].tabBtn.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+  updateUI();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function updateUI() {
+  const pct = ((current + 1) / sections.length) * 100;
+  document.getElementById('progress-fill').style.width = pct + '%';
+  document.getElementById('section-counter').textContent = (current + 1) + ' / ' + sections.length;
+  document.getElementById('section-name-nav').textContent = sections[current].label;
+  document.getElementById('prev-btn').disabled = current === 0;
+  document.getElementById('next-btn').disabled = current === sections.length - 1;
+  if (current === sections.length - 1) {
+    document.getElementById('next-btn').textContent = '✅ Terminé';
+  } else {
+    document.getElementById('next-btn').textContent = 'Suivant →';
+  }
+}
+
+document.getElementById('prev-btn').addEventListener('click', () => { if (current > 0) goTo(current - 1); });
+document.getElementById('next-btn').addEventListener('click', () => { if (current < sections.length - 1) goTo(current + 1); });
+
+// Quiz logic
+function checkQuiz(optionEl, result) {
+  const parentQuestion = optionEl.closest('[style], .card > div');
+  // Find all quiz-option siblings
+  const container = optionEl.parentElement;
+  const allOpts = container.querySelectorAll('.quiz-option');
+  // Only act if not already answered
+  if ([...allOpts].some(o => o.classList.contains('selected-right') || o.classList.contains('selected-wrong'))) return;
+
+  if (result === 'right') {
+    optionEl.classList.add('selected-right');
+  } else {
+    optionEl.classList.add('selected-wrong');
+  }
+  // Show feedbacks
+  const feedbacks = container.querySelectorAll('.quiz-feedback');
+  feedbacks.forEach(f => {
+    if ((result === 'right' && f.classList.contains('right')) ||
+        (result === 'wrong' && f.classList.contains('wrong'))) {
+      f.classList.add('show');
+    }
+  });
+}
+
+// Word count
+function updateCount(textarea) {
+  const words = textarea.value.trim().split(/\s+/).filter(w => w.length > 0).length;
+  document.getElementById('word-count').textContent = words + ' / 80 mots';
+}
+
+// Init
+updateUI();
+</script>
+</body>
+</html>
