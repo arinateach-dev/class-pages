@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Fêter un événement – A2 | arinateach</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy:   #1B3A6B;
+      --gold:   #C9A84C;
+      --red:    #C0392B;
+      --cream:  #FAF7F2;
+      --light:  #EDE9E1;
+      --text:   #2C2C2C;
+      --muted:  #6B6B6B;
+      --white:  #FFFFFF;
+      --correct: #2E7D32;
+      --wrong:   #C0392B;
+    }
+
+    body {
+      background: var(--cream);
+      color: var(--text);
+      font-family: 'Inter', sans-serif;
+      font-size: 15px;
+      line-height: 1.65;
+    }
+
+    /* ─── TRICOLORE STRIPE ─── */
+    .tricolore {
+      height: 6px;
+      background: linear-gradient(to right, var(--navy) 33.3%, var(--white) 33.3% 66.6%, var(--red) 66.6%);
+    }
+
+    /* ─── HEADER ─── */
+    header {
+      background: var(--navy);
+      color: var(--white);
+      padding: 36px 24px 28px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    header::before {
+      content: "✦";
+      position: absolute; top: 16px; left: 28px;
+      font-size: 11px; color: var(--gold); opacity: .6;
+    }
+    header::after {
+      content: "✦";
+      position: absolute; top: 16px; right: 28px;
+      font-size: 11px; color: var(--gold); opacity: .6;
+    }
+    .brand {
+      font-family: 'Inter', sans-serif;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 10px;
+    }
+    header h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(22px, 5vw, 34px);
+      font-weight: 700;
+      letter-spacing: -0.3px;
+      line-height: 1.2;
+    }
+    header h1 em {
+      font-style: italic;
+      color: var(--gold);
+    }
+    .header-meta {
+      margin-top: 10px;
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: rgba(255,255,255,.55);
+    }
+    .header-sep {
+      display: inline-block;
+      width: 32px; height: 1px;
+      background: var(--gold);
+      vertical-align: middle;
+      margin: 0 10px;
+    }
+
+    /* ─── MAIN ─── */
+    main {
+      max-width: 780px;
+      margin: 0 auto;
+      padding: 40px 20px 80px;
+    }
+
+    /* ─── SECTION LABEL ─── */
+    .section-label {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 18px;
+    }
+    .section-num {
+      width: 30px; height: 30px;
+      background: var(--navy);
+      color: var(--white);
+      font-family: 'Playfair Display', serif;
+      font-size: 14px;
+      font-weight: 700;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 17px;
+      font-weight: 600;
+      color: var(--navy);
+    }
+
+    /* ─── CARD ─── */
+    .card {
+      background: var(--white);
+      border-radius: 12px;
+      border: 1px solid var(--light);
+      padding: 28px 24px;
+      margin-bottom: 32px;
+      box-shadow: 0 2px 12px rgba(27,58,107,.06);
+    }
+
+    /* ─── AUDIO PLAYER ─── */
+    .audio-wrap {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 14px;
+    }
+    .audio-icon {
+      font-size: 36px;
+    }
+    .audio-label {
+      font-size: 13px;
+      color: var(--muted);
+      font-weight: 500;
+      letter-spacing: .5px;
+    }
+    audio {
+      width: 100%;
+      max-width: 460px;
+      accent-color: var(--navy);
+    }
+    audio::-webkit-media-controls-panel { background: var(--light); }
+
+    /* ─── GIFT IMAGES GRID ─── */
+    .gift-instruction {
+      font-size: 13.5px;
+      color: var(--muted);
+      margin-bottom: 18px;
+      padding: 10px 14px;
+      background: var(--cream);
+      border-left: 3px solid var(--gold);
+      border-radius: 0 6px 6px 0;
+    }
+    .gifts-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+    .gift-card {
+      background: var(--cream);
+      border: 2px solid var(--light);
+      border-radius: 10px;
+      padding: 14px 10px 10px;
+      text-align: center;
+      cursor: grab;
+      user-select: none;
+      transition: border-color .2s, transform .15s, box-shadow .15s;
+    }
+    .gift-card:hover {
+      border-color: var(--navy);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 18px rgba(27,58,107,.13);
+    }
+    .gift-card.dragging {
+      opacity: .45;
+      cursor: grabbing;
+    }
+    .gift-emoji { font-size: 38px; display: block; margin-bottom: 7px; }
+    .gift-name  { font-size: 11.5px; font-weight: 600; color: var(--navy); }
+
+    /* ─── DROP ZONES ─── */
+    .drop-zones {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+    .drop-zone {
+      min-height: 110px;
+      border-radius: 10px;
+      border: 2px dashed var(--light);
+      padding: 12px;
+      transition: border-color .2s, background .2s;
+    }
+    .drop-zone.over {
+      border-color: var(--gold);
+      background: rgba(201,168,76,.07);
+    }
+    .drop-zone-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--light);
+    }
+    .zone-choisi .drop-zone-label  { color: var(--navy); }
+    .zone-nonch  .drop-zone-label  { color: var(--red); }
+    .zone-items {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .zone-chip {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--navy);
+      color: var(--white);
+      font-size: 11.5px;
+      font-weight: 600;
+      border-radius: 6px;
+      padding: 4px 10px 4px 6px;
+      cursor: grab;
+    }
+    .zone-chip .chip-emoji { font-size: 16px; }
+
+    /* ─── CHECK BUTTON ─── */
+    .btn-check {
+      display: block;
+      margin: 20px auto 0;
+      background: var(--navy);
+      color: var(--white);
+      border: none;
+      border-radius: 8px;
+      font-family: 'Inter', sans-serif;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: .8px;
+      text-transform: uppercase;
+      padding: 11px 32px;
+      cursor: pointer;
+      transition: background .2s, transform .15s;
+    }
+    .btn-check:hover { background: #142f5a; transform: translateY(-1px); }
+
+    .feedback-box {
+      margin-top: 16px;
+      padding: 13px 16px;
+      border-radius: 8px;
+      font-size: 13.5px;
+      font-weight: 500;
+      display: none;
+    }
+    .feedback-box.correct { background: #E8F5E9; color: var(--correct); border: 1px solid #A5D6A7; }
+    .feedback-box.wrong   { background: #FDE8E8; color: var(--wrong);   border: 1px solid #F5A5A5; }
+
+    /* ─── COMPREHENSION QUESTIONS ─── */
+    .questions-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+    .q-item { display: flex; flex-direction: column; gap: 6px; }
+    .q-letter {
+      display: inline-flex;
+      width: 22px; height: 22px;
+      background: var(--gold);
+      color: var(--white);
+      font-family: 'Playfair Display', serif;
+      font-size: 12px;
+      font-weight: 700;
+      border-radius: 50%;
+      align-items: center; justify-content: center;
+      flex-shrink: 0;
+      margin-right: 8px;
+    }
+    .q-row {
+      display: flex;
+      align-items: center;
+      gap: 0;
+      flex-wrap: wrap;
+    }
+    .q-text { font-size: 14.5px; color: var(--text); font-weight: 500; }
+    .q-input {
+      border: none;
+      border-bottom: 2px solid var(--light);
+      background: transparent;
+      font-family: 'Inter', sans-serif;
+      font-size: 14px;
+      color: var(--navy);
+      padding: 2px 6px;
+      outline: none;
+      min-width: 140px;
+      flex: 1;
+      transition: border-color .2s;
+    }
+    .q-input:focus { border-color: var(--navy); }
+    .q-input.ok    { border-color: var(--correct); background: #E8F5E9; }
+    .q-input.err   { border-color: var(--wrong);   background: #FDE8E8; }
+    .q-hint { font-size: 12px; color: var(--correct); display: none; padding-left: 30px; }
+
+    /* ─── RESET ─── */
+    .btn-reset {
+      background: none;
+      border: 1px solid var(--light);
+      border-radius: 8px;
+      font-family: 'Inter', sans-serif;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--muted);
+      padding: 8px 20px;
+      cursor: pointer;
+      letter-spacing: .5px;
+      transition: border-color .2s, color .2s;
+    }
+    .btn-reset:hover { border-color: var(--navy); color: var(--navy); }
+    .btn-row { display: flex; gap: 10px; justify-content: center; margin-top: 20px; }
+
+    /* ─── FOOTER ─── */
+    footer {
+      text-align: center;
+      padding: 24px 16px;
+      background: var(--navy);
+      color: rgba(255,255,255,.4);
+      font-size: 11.5px;
+      letter-spacing: .8px;
+    }
+    footer strong { color: var(--gold); }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 520px) {
+      .drop-zones { grid-template-columns: 1fr; }
+      .gifts-grid { grid-template-columns: repeat(3, 1fr); }
+    }
+  </style>
+</head>
+<body>
+
+<div class="tricolore"></div>
+
+<header>
+  <div class="brand">arinateach</div>
+  <h1>Fêter un <em>événement</em></h1>
+  <p class="header-meta">
+    Compréhension orale
+    <span class="header-sep"></span>
+    Niveau A2
+    <span class="header-sep"></span>
+    Français
+  </p>
+</header>
+
+<main>
+
+  <!-- AUDIO SECTION -->
+  <div class="section-label">
+    <div class="section-num">♪</div>
+    <span class="section-title">Écoutez le dialogue</span>
+  </div>
+
+  <div class="card">
+    <div class="audio-wrap">
+      <span class="audio-icon">🎧</span>
+      <p class="audio-label">Julien &amp; Élisa — L'anniversaire de papa</p>
+      <audio controls>
+        <source src="10467_atelier_plus_a1_livre_memo-grammaire.mp3" type="audio/mpeg" />
+        Votre navigateur ne supporte pas la lecture audio.
+      </audio>
+    </div>
+  </div>
+
+  <!-- EXERCISE 1 -->
+  <div class="section-label">
+    <div class="section-num" style="font-family:Inter;font-size:13px;font-weight:700;">1</div>
+    <span class="section-title">Glissez les cadeaux dans la bonne colonne</span>
+  </div>
+
+  <div class="card">
+    <p class="gift-instruction">
+      📌 Faites glisser chaque cadeau dans la colonne correcte : <strong>Cadeau choisi</strong> ou <strong>Cadeaux non choisis</strong>.
+    </p>
+
+    <!-- DRAGGABLE ITEMS -->
+    <div class="gifts-grid" id="giftsBank">
+      <div class="gift-card" draggable="true" data-id="parfum">
+        <span class="gift-emoji">🌸</span>
+        <span class="gift-name">Le parfum</span>
+      </div>
+      <div class="gift-card" draggable="true" data-id="chemise">
+        <span class="gift-emoji">👔</span>
+        <span class="gift-name">La chemise</span>
+      </div>
+      <div class="gift-card" draggable="true" data-id="bijou">
+        <span class="gift-emoji">📿</span>
+        <span class="gift-name">Le bijou</span>
+      </div>
+      <div class="gift-card" draggable="true" data-id="restaurant">
+        <span class="gift-emoji">🍽️</span>
+        <span class="gift-name">Le restaurant</span>
+      </div>
+      <div class="gift-card" draggable="true" data-id="livre">
+        <span class="gift-emoji">📖</span>
+        <span class="gift-name">Le livre de cuisine</span>
+      </div>
+    </div>
+
+    <!-- DROP ZONES -->
+    <div class="drop-zones">
+      <div class="drop-zone zone-choisi" data-zone="choisi">
+        <div class="drop-zone-label">✅ Cadeau choisi</div>
+        <div class="zone-items" id="zone-choisi"></div>
+      </div>
+      <div class="drop-zone zone-nonch" data-zone="nonch">
+        <div class="drop-zone-label">❌ Cadeaux non choisis</div>
+        <div class="zone-items" id="zone-nonch"></div>
+      </div>
+    </div>
+
+    <button class="btn-check" id="checkEx1">Vérifier ✓</button>
+
+    <div class="feedback-box" id="feedbackEx1"></div>
+  </div>
+
+  <!-- EXERCISE 2 -->
+  <div class="section-label">
+    <div class="section-num" style="font-family:Inter;font-size:13px;font-weight:700;">2</div>
+    <span class="section-title">Choisissez la bonne réponse</span>
+  </div>
+
+  <div class="card">
+    <ul class="questions-list" id="questionsList">
+
+      <li class="q-item">
+        <div class="q-row">
+          <span class="q-letter">a</span>
+          <span class="q-text">Comment s'appellent les personnes qui parlent ?&nbsp;</span>
+          <input class="q-input" type="text" data-answers="julien et élisa|élisa et julien|julien & élisa|élisa & julien" placeholder="…" />
+        </div>
+        <span class="q-hint">💡 Julien et Élisa</span>
+      </li>
+
+      <li class="q-item">
+        <div class="q-row">
+          <span class="q-letter">b</span>
+          <span class="q-text">De quoi parlent-elles ?&nbsp;</span>
+          <input class="q-input" type="text" data-answers="d'un cadeau|d'un anniversaire|de l'anniversaire|de l'anniversaire de leur père|d'un cadeau pour leur père|d'un cadeau pour papa" placeholder="…" />
+        </div>
+        <span class="q-hint">💡 D'un cadeau pour l'anniversaire de leur père</span>
+      </li>
+
+      <li class="q-item">
+        <div class="q-row">
+          <span class="q-letter">c</span>
+          <span class="q-text">Le cadeau est pour qui ?&nbsp;</span>
+          <input class="q-input" type="text" data-answers="pour leur père|pour papa|pour son père|leur père|papa" placeholder="…" />
+        </div>
+        <span class="q-hint">💡 Pour leur père (papa)</span>
+      </li>
+
+      <li class="q-item">
+        <div class="q-row">
+          <span class="q-letter">d</span>
+          <span class="q-text">Quel âge a la personne ?&nbsp;</span>
+          <input class="q-input" type="text" data-answers="70|70 ans|soixante-dix|soixante-dix ans" placeholder="…" />
+        </div>
+        <span class="q-hint">💡 70 ans</span>
+      </li>
+
+      <li class="q-item">
+        <div class="q-row">
+          <span class="q-letter">e</span>
+          <span class="q-text">Qui paye le cadeau ?&nbsp;</span>
+          <input class="q-input" type="text" data-answers="julien et élisa|élisa et julien|tous les deux|ils payent ensemble|ils l'invitent ensemble|julien & élisa" placeholder="…" />
+        </div>
+        <span class="q-hint">💡 Julien et Élisa (tous les deux)</span>
+      </li>
+
+    </ul>
+
+    <div class="btn-row">
+      <button class="btn-check" id="checkEx2">Vérifier ✓</button>
+      <button class="btn-reset" id="resetEx2">Réinitialiser</button>
+    </div>
+
+    <div class="feedback-box" id="feedbackEx2"></div>
+  </div>
+
+</main>
+
+<div class="tricolore"></div>
+
+<footer>
+  Créé avec ♡ par <strong>arinateach</strong> &nbsp;·&nbsp; Français A2 &nbsp;·&nbsp; Fêter un événement
+</footer>
+
+<script>
+/* ════════════════════════════════
+   DRAG & DROP — EXERCISE 1
+════════════════════════════════ */
+const CORRECT_ZONE = {
+  parfum:     'nonch',
+  chemise:    'nonch',
+  bijou:      'nonch',
+  restaurant: 'choisi',
+  livre:      'nonch'
+};
+
+const EMOJI_MAP = {
+  parfum: '🌸', chemise: '👔', bijou: '📿', restaurant: '🍽️', livre: '📖'
+};
+const NAME_MAP = {
+  parfum: 'Le parfum', chemise: 'La chemise', bijou: 'Le bijou',
+  restaurant: 'Le restaurant', livre: 'Le livre de cuisine'
+};
+
+let draggedId    = null;
+let draggedFrom  = null; // 'bank' | 'zone'
+
+function initDragDrop() {
+  // Cards in bank
+  document.querySelectorAll('.gift-card').forEach(card => {
+    card.addEventListener('dragstart', e => {
+      draggedId   = card.dataset.id;
+      draggedFrom = 'bank';
+      setTimeout(() => card.classList.add('dragging'), 0);
+    });
+    card.addEventListener('dragend', () => card.classList.remove('dragging'));
+  });
+
+  // Drop zones
+  document.querySelectorAll('.drop-zone').forEach(zone => {
+    zone.addEventListener('dragover', e => { e.preventDefault(); zone.classList.add('over'); });
+    zone.addEventListener('dragleave', () => zone.classList.remove('over'));
+    zone.addEventListener('drop', e => {
+      e.preventDefault();
+      zone.classList.remove('over');
+      const zoneId = zone.dataset.zone;
+
+      if (draggedFrom === 'bank') {
+        const bankCard = document.querySelector(`.gift-card[data-id="${draggedId}"]`);
+        if (bankCard) bankCard.style.display = 'none';
+      } else if (draggedFrom === 'zone') {
+        const existing = document.querySelector(`.zone-chip[data-id="${draggedId}"]`);
+        if (existing) existing.remove();
+      }
+
+      addChip(draggedId, zone.querySelector('.zone-items'));
+      draggedId = draggedFrom = null;
+    });
+  });
+}
+
+function addChip(id, container) {
+  const chip = document.createElement('div');
+  chip.className = 'zone-chip';
+  chip.dataset.id = id;
+  chip.draggable = true;
+  chip.innerHTML = `<span class="chip-emoji">${EMOJI_MAP[id]}</span>${NAME_MAP[id]}`;
+
+  chip.addEventListener('dragstart', e => {
+    draggedId   = id;
+    draggedFrom = 'zone';
+    setTimeout(() => chip.classList.add('dragging'), 0);
+  });
+  chip.addEventListener('dragend', () => chip.classList.remove('dragging'));
+
+  container.appendChild(chip);
+}
+
+function checkEx1() {
+  const chips = document.querySelectorAll('.zone-chip');
+  if (chips.length === 0) {
+    showFeedback('feedbackEx1', 'wrong', '⚠️ Faites glisser au moins un cadeau dans une colonne !');
+    return;
+  }
+
+  let correct = 0;
+  chips.forEach(chip => {
+    const id       = chip.dataset.id;
+    const parentZone = chip.closest('.drop-zone').dataset.zone;
+    if (CORRECT_ZONE[id] === parentZone) correct++;
+  });
+
+  if (correct === 5) {
+    showFeedback('feedbackEx1', 'correct',
+      '🎉 Bravo ! Vous avez tout trouvé ! Julien et Élisa ont décidé d\'inviter leur père au restaurant.');
+  } else {
+    showFeedback('feedbackEx1', 'wrong',
+      `❌ ${correct}/5 bonne(s) réponse(s). Écoutez encore une fois et réessayez !`);
+  }
+}
+
+/* ════════════════════════════════
+   COMPREHENSION — EXERCISE 2
+════════════════════════════════ */
+function normalise(str) {
+  return str.toLowerCase()
+    .normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+    .replace(/['']/g, "'")
+    .trim();
+}
+
+function checkEx2() {
+  const inputs = document.querySelectorAll('.q-input');
+  let correct = 0;
+
+  inputs.forEach((input, i) => {
+    const raw      = input.value.trim();
+    const answers  = input.dataset.answers.split('|');
+    const hint     = input.closest('.q-item').querySelector('.q-hint');
+    const isOk     = answers.some(a => normalise(a) === normalise(raw));
+
+    input.classList.toggle('ok',  isOk);
+    input.classList.toggle('err', !isOk && raw !== '');
+
+    if (isOk) {
+      correct++;
+      if (hint) { hint.style.display = 'none'; }
+    } else if (raw !== '') {
+      if (hint) { hint.style.display = 'block'; }
+    } else {
+      if (hint) { hint.style.display = 'none'; }
+    }
+  });
+
+  const filled = [...inputs].filter(i => i.value.trim()).length;
+
+  if (filled === 0) {
+    showFeedback('feedbackEx2', 'wrong', '⚠️ Répondez aux questions d\'abord !');
+    return;
+  }
+
+  if (correct === 5) {
+    showFeedback('feedbackEx2', 'correct', '🌟 Excellent ! Toutes les réponses sont correctes !');
+  } else {
+    showFeedback('feedbackEx2', 'wrong',
+      `💪 ${correct}/5 correcte(s). Les indices en vert vous aideront.`);
+  }
+}
+
+function resetEx2() {
+  document.querySelectorAll('.q-input').forEach(input => {
+    input.value = '';
+    input.classList.remove('ok', 'err');
+    const hint = input.closest('.q-item').querySelector('.q-hint');
+    if (hint) hint.style.display = 'none';
+  });
+  hideFeedback('feedbackEx2');
+}
+
+/* ════════════════════════════════
+   HELPERS
+════════════════════════════════ */
+function showFeedback(id, type, msg) {
+  const el = document.getElementById(id);
+  el.className = `feedback-box ${type}`;
+  el.textContent = msg;
+  el.style.display = 'block';
+}
+function hideFeedback(id) {
+  const el = document.getElementById(id);
+  el.style.display = 'none';
+}
+
+/* ════════════════════════════════
+   INIT
+════════════════════════════════ */
+document.addEventListener('DOMContentLoaded', () => {
+  initDragDrop();
+  document.getElementById('checkEx1').addEventListener('click', checkEx1);
+  document.getElementById('checkEx2').addEventListener('click', checkEx2);
+  document.getElementById('resetEx2').addEventListener('click', resetEx2);
+});
+</script>
+</body>
+</html>
