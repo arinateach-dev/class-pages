@@ -1,0 +1,967 @@
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;900&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<title>La Cause et la Conséquence — Leçon A2</title>
+<style>
+  :root{
+    --ink:#2a2118;
+    --parchment:#f3e9d3;
+    --parchment2:#ece0c4;
+    --green:#1f3a2e;
+    --green2:#2f5443;
+    --burgundy:#6b1f2a;
+    --burgundy2:#8a2c3a;
+    --gold:#b8892b;
+    --gold2:#e2c375;
+    --card:#fffbf1;
+    --shadow: rgba(30,20,10,.28);
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:'EB Garamond', Georgia, 'Times New Roman', serif;
+    color:var(--ink);
+    background:
+      radial-gradient(ellipse at 20% 0%, rgba(184,137,43,.10), transparent 55%),
+      radial-gradient(ellipse at 90% 30%, rgba(107,31,42,.08), transparent 50%),
+      var(--parchment);
+    line-height:1.6;
+    font-size:19px;
+  }
+  h1,h2,h3{font-family:'Playfair Display', Georgia, serif; margin:0 0 .4em;}
+  a{color:var(--burgundy);}
+
+  /* ---------- Header ---------- */
+  header.hero{
+    position:relative;
+    background:
+      linear-gradient(180deg, rgba(0,0,0,.08), rgba(0,0,0,.25)),
+      repeating-linear-gradient(90deg, #1a2e24 0 3px, #21402f 3px 60px);
+    color:#f3e9d3;
+    padding:60px 24px 34px;
+    text-align:center;
+    border-bottom:10px solid var(--gold);
+    box-shadow:0 6px 20px var(--shadow);
+  }
+  header.hero .ornament{font-size:1.4rem; color:var(--gold2); letter-spacing:.5em;}
+  header.hero h1{font-size:clamp(2rem,5vw,3.2rem); color:#f6ecd6; text-shadow:0 2px 10px rgba(0,0,0,.4); margin-top:8px;}
+  header.hero p.sub{font-size:1.25rem; font-style:italic; color:var(--gold2); margin-top:6px;}
+  header.hero .badge{
+    display:inline-block; margin-top:20px; padding:6px 22px;
+    border:1px solid var(--gold2); border-radius:30px; font-size:.95rem; letter-spacing:.12em;
+    text-transform:uppercase; color:#f3e9d3;
+  }
+  .hero-objectifs{
+    max-width:640px; margin:26px auto 0; background:rgba(0,0,0,.22);
+    border:1px solid rgba(226,195,117,.4); border-radius:8px; padding:18px 26px;
+    text-align:left;
+  }
+  .hero-objectifs summary{
+    cursor:pointer; list-style:none; font-family:'Playfair Display',serif; color:var(--gold2);
+    font-size:1.1rem; text-align:center;
+  }
+  .hero-objectifs summary::-webkit-details-marker{display:none;}
+  .hero-objectifs summary:before{content:"🎯 "; }
+  .hero-objectifs[open] summary{margin-bottom:10px;}
+  .hero-objectifs p.lead-in{color:var(--gold2); font-style:italic; font-size:.95rem; margin:0 0 10px;}
+  .hero-objectifs ul{margin:0; padding-left:20px; color:#f3e9d3; font-size:.98rem;}
+  .hero-objectifs li{margin:6px 0;}
+
+  /* ---------- Nav ---------- */
+  nav.shelf{
+    position:sticky; top:0; z-index:50;
+    display:flex; flex-wrap:wrap; justify-content:center; gap:6px;
+    background:linear-gradient(180deg,#2a4536,#1f3a2e);
+    padding:10px 14px; box-shadow:0 4px 10px var(--shadow);
+  }
+  nav.shelf a{
+    color:var(--gold2); text-decoration:none; font-size:.95rem; letter-spacing:.04em;
+    padding:8px 14px; border:1px solid rgba(226,195,117,.35); border-radius:4px;
+    transition:.2s; font-family:'EB Garamond',serif;
+  }
+  nav.shelf a:hover{background:rgba(226,195,117,.15); color:#fff;}
+  nav.shelf a.hw{
+    background:var(--burgundy); border-color:var(--burgundy2); color:#fff; font-weight:600;
+  }
+  nav.shelf a.hw:hover{background:var(--burgundy2);}
+
+  /* ---------- Layout ---------- */
+  main{max-width:880px; margin:0 auto; padding:0 20px;}
+  section.block{margin:46px 0; scroll-margin-top:76px;}
+  .card{
+    background:var(--card);
+    border:1px solid var(--parchment2);
+    border-left:6px solid var(--burgundy);
+    border-radius:6px;
+    padding:28px 30px;
+    box-shadow:0 8px 22px var(--shadow);
+    position:relative;
+  }
+  .card + .card{margin-top:18px;}
+  .card h3{color:var(--green); font-size:1.5rem; border-bottom:1px dashed var(--gold); padding-bottom:8px;}
+  .tag{
+    display:inline-block; background:var(--burgundy); color:#fff; font-family:'Playfair Display',serif;
+    font-size:.72rem; letter-spacing:.12em; text-transform:uppercase; padding:4px 12px; border-radius:3px;
+    margin-bottom:10px;
+  }
+  .tag.gold{background:var(--gold);}
+  .tag.green{background:var(--green2);}
+  .tag.blue{background:#3a5a78;}
+  .example{
+    background:var(--parchment2); border-left:4px solid var(--gold); padding:10px 16px;
+    margin:12px 0; font-style:italic; border-radius:0 4px 4px 0;
+  }
+  .remember{
+    background:#eef3ec; border:1px solid #b7cdb9; border-radius:6px; padding:12px 16px; margin-top:14px;
+  }
+  .remember b{color:var(--green);}
+  .grid2{display:grid; grid-template-columns:1fr 1fr; gap:18px;}
+  @media(max-width:640px){.grid2{grid-template-columns:1fr;}}
+
+  h2.section-title{
+    text-align:center; color:var(--green); font-size:1.9rem; position:relative; margin-bottom:6px;
+  }
+  h2.section-title:after{
+    content:"❧"; display:block; color:var(--gold); font-size:1.1rem; margin-top:6px;
+  }
+  p.section-lead{text-align:center; font-style:italic; color:#5a4a2f; margin:0 0 24px;}
+
+  .intro-note{
+    background:#f7f0de; border:1px dashed var(--gold); padding:16px 20px; border-radius:6px;
+    font-size:1.02rem; font-style:italic;
+    display:flex; align-items:center; gap:22px;
+  }
+  .intro-note .illus{flex:0 0 150px; width:150px;}
+  .intro-note p{margin:0; flex:1;}
+  @media(max-width:600px){
+    .intro-note{flex-direction:column;}
+    .intro-note .illus{flex:0 0 auto; width:130px;}
+  }
+
+  /* ---------- Interactive elements ---------- */
+  select, input[type=text], textarea{
+    font-family:'EB Garamond', Georgia, serif; font-size:1rem; padding:8px 10px;
+    border:1px solid #b8a97e; border-radius:4px; background:#fffdf7;
+    transition:border-color .3s ease, box-shadow .3s ease;
+  }
+  textarea{width:100%; resize:vertical; min-height:70px;}
+  .btn{
+    display:inline-block; cursor:pointer; border:none; font-family:'Playfair Display',serif;
+    background:linear-gradient(180deg, var(--gold2), var(--gold));
+    color:#2a2118; padding:10px 22px; border-radius:30px; font-size:.95rem;
+    letter-spacing:.05em; box-shadow:0 3px 8px var(--shadow);
+    transition:transform .15s ease, box-shadow .15s ease, filter .15s ease;
+  }
+  .btn:hover{transform:translateY(-1px); box-shadow:0 5px 12px var(--shadow);}
+  .btn:active{transform:translateY(0) scale(.95); filter:brightness(.96); box-shadow:0 2px 5px var(--shadow);}
+  .btn.burgundy{background:linear-gradient(180deg, var(--burgundy2), var(--burgundy)); color:#fff;}
+  .fb{margin-left:10px; font-weight:600; display:inline-block;}
+
+  @keyframes popIn{ from{opacity:0; transform:translateY(-5px);} to{opacity:1; transform:translateY(0);} }
+  .pulse{animation:popIn .3s ease;}
+  .match-row{display:flex; align-items:center; gap:14px; margin:10px 0; flex-wrap:wrap;}
+  .match-row .label{min-width:150px; font-weight:600; color:var(--green);}
+  .defs{background:var(--parchment2); border-radius:6px; padding:14px 18px; margin:14px 0; font-size:.96rem;}
+  .defs div{margin:4px 0;}
+  .score-box{margin-top:14px; font-weight:600; color:var(--green);}
+
+  #devoirs > .btn{display:inline-block; margin:28px 0;}
+  #devoirs > .score-box{margin:0 0 30px;}
+
+  audio{width:100%; margin:10px 0 4px;}
+  .q-block{margin:16px 0;}
+  .q-block label{display:block; font-weight:600; margin-bottom:6px;}
+
+  .quiz-option{display:block; margin:8px 0; padding:8px 12px; border:1px solid var(--parchment2); border-radius:6px; cursor:pointer; transition:background-color .3s ease, border-color .3s ease;}
+  .quiz-option:hover{background:var(--parchment2);}
+  .quiz-option.correct{background:#dcedc8; border-color:#7cb342;}
+  .quiz-option.wrong{background:#f8d7da; border-color:#c62828;}
+  .ccq-explain{
+    font-size:.9rem; color:#6b1f2a; margin:0 0 0 4px; max-height:0; opacity:0; overflow:hidden;
+    transition:max-height .35s ease, opacity .3s ease, margin .35s ease;
+  }
+  .ccq-explain.show{max-height:120px; opacity:1; margin:4px 0 10px 4px;}
+
+  #warmup_answers{
+    max-height:0; opacity:0; overflow:hidden; padding-top:0; padding-bottom:0;
+    transition:max-height .4s ease, opacity .35s ease, padding .4s ease, margin .4s ease;
+  }
+  #warmup_answers.show{max-height:220px; opacity:1; margin-top:14px;}
+
+  details.reveal{margin-top:12px;}
+  details.reveal summary{cursor:pointer; color:var(--burgundy); font-weight:600;}
+  details.reveal .content{margin-top:8px; background:var(--parchment2); padding:12px 16px; border-radius:6px;}
+  .hero-objectifs .content{margin-top:8px; background:transparent; padding:0;}
+  @keyframes detailsFadeIn{ from{opacity:0; transform:translateY(-6px);} to{opacity:1; transform:translateY(0);} }
+  details .content.fade-in{animation:detailsFadeIn .35s ease;}
+
+  /* ---------- Bilan / recap ---------- */
+  .recap-table{width:100%; border-collapse:collapse; margin:14px 0; font-size:.95rem;}
+  .recap-table th, .recap-table td{border:1px solid var(--parchment2); padding:8px 12px; text-align:left;}
+  .recap-table th{background:var(--green); color:#f3e9d3; font-family:'Playfair Display',serif; font-weight:600;}
+  .recap-table tr:nth-child(even){background:#faf3e2;}
+  .can-list{list-style:none; padding:0; margin:0;}
+  .can-list li{padding:8px 0; border-bottom:1px dotted var(--parchment2); display:flex; align-items:center; gap:10px;}
+  .can-list input{width:20px; height:20px; accent-color:var(--green2);}
+  #bilan_msg{margin-top:14px; font-weight:600; color:var(--green); display:none;}
+
+  /* ---------- Small popup modal (audio answers) ---------- */
+  .modal-overlay{
+    position:fixed; inset:0; background:rgba(20,14,8,.65); z-index:100;
+    display:flex; align-items:center; justify-content:center; overflow-y:auto; padding:40px 16px;
+    opacity:0; visibility:hidden; pointer-events:none;
+    transition:opacity .3s ease, visibility 0s linear .3s;
+  }
+  .modal-overlay.open{
+    opacity:1; visibility:visible; pointer-events:auto;
+    transition:opacity .3s ease, visibility 0s linear 0s;
+  }
+  .modal{
+    background:var(--parchment); max-width:480px; width:100%; border-radius:8px;
+    border:3px solid var(--gold); box-shadow:0 20px 50px rgba(0,0,0,.5); padding:0 0 20px;
+    transform:translateY(-16px) scale(.97); transition:transform .3s ease;
+  }
+  .modal-overlay.open .modal{transform:translateY(0) scale(1);}
+  .modal-head{
+    background:linear-gradient(180deg,#2a4536,#1f3a2e); color:var(--gold2); padding:16px 24px;
+    border-radius:5px 5px 0 0; display:flex; justify-content:space-between; align-items:center;
+  }
+  .modal-head h2{color:#f6ecd6; margin:0; font-size:1.25rem;}
+  .modal-body{padding:14px 24px 4px;}
+  .modal-body ol{padding-left:20px;}
+  .modal-body li{margin:8px 0;}
+  .modal-close{cursor:pointer; font-size:1.5rem; color:var(--gold2); background:none; border:none;}
+
+  /* ---------- Footer marquee (end of page, not fixed) ---------- */
+  .marquee-footer{
+    margin-top:60px;
+    background:linear-gradient(180deg,#1f3a2e,#16281f);
+    border-top:3px solid var(--gold); overflow:hidden; white-space:nowrap; padding:14px 0;
+  }
+  .marquee-footer .track{
+    display:inline-block; padding-left:100%;
+    animation:scroll-left 22s linear infinite;
+    color:var(--gold2); font-family:'Playfair Display', serif; font-size:1.05rem; letter-spacing:.08em;
+  }
+  @keyframes scroll-left{
+    0%{transform:translateX(0);}
+    100%{transform:translateX(-100%);}
+  }
+
+  @media print{
+    header.hero, nav.shelf, .marquee-footer{display:none !important;}
+  }
+
+  /* ---------- Confetti ---------- */
+  #confettiContainer{position:fixed; inset:0; pointer-events:none; overflow:hidden; z-index:200;}
+  .confetti-piece{
+    position:absolute; top:-24px; border-radius:2px; opacity:.95;
+    animation-name:confettiFall; animation-timing-function:cubic-bezier(.35,0,.65,1); animation-fill-mode:forwards;
+  }
+  @keyframes confettiFall{
+    0%{transform:translateY(0) rotate(0deg); opacity:1;}
+    100%{transform:translateY(112vh) rotate(600deg); opacity:.85;}
+  }
+</style>
+
+<header class="hero">
+  <div class="ornament">✦ ✦ ✦</div>
+  <h1>La Cause et la Conséquence</h1>
+  <p class="sub">Connecter vos idées en français — niveau A2</p>
+  <div class="badge">Bibliothèque de arinateach</div>
+
+  <details class="hero-objectifs">
+    <summary>Objectifs de la leçon</summary>
+    <div class="content">
+      <p class="lead-in">À la fin de cette leçon, tu sauras :</p>
+      <ul>
+        <li>Expliquer pourquoi tu es en retard, pourquoi tu as réussi ou raté quelque chose — à l'oral comme à l'écrit.</li>
+        <li>Raconter la conséquence logique d'un événement (« à cause de ça » / « grâce à ça »).</li>
+        <li>Choisir le bon ton selon la situation : parler simplement avec un ami (comme, parce que, donc) ou écrire un message plus soigné (car, par conséquent).</li>
+        <li>Construire une petite histoire personnelle en une phrase fluide, avec une cause <b>et</b> une conséquence — par exemple, pourquoi tu apprends le français et ce que ça va changer pour toi.</li>
+      </ul>
+    </div>
+  </details>
+</header>
+
+<nav class="shelf">
+  <a href="#warmup">🕯 Mise en route</a>
+  <a href="#grammaire">📖 Grammaire</a>
+  <a href="#ccq">✅ Compréhension</a>
+  <a href="#exo-match">🔗 Associez</a>
+  <a href="#exo-dialogue">🎧 Écoute</a>
+  <a href="#exo-pratique">✍️ Pratique</a>
+  <a href="#exo-quiz">🏛 Vérification</a>
+  <a href="#discussion">🗣 Discussion</a>
+  <a href="#bilan">📜 Bilan</a>
+  <a href="#devoirs" class="hw">📝 Devoirs</a>
+</nav>
+
+<main>
+
+  <!-- WARM-UP -->
+  <section class="block" id="warmup">
+    <h2 class="section-title">Mise en route</h2>
+    <p class="section-lead">Avant la règle, l'intuition — tu en sais déjà plus que tu ne le penses.</p>
+    <div class="intro-note">
+      <svg class="illus" viewBox="0 0 220 200" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Illustration : une personne en retard, et des pièces de puzzle non reliées">
+        <circle cx="55" cy="55" r="36" fill="#fffbf1" stroke="#b8892b" stroke-width="5"/>
+        <circle cx="55" cy="24" r="2.4" fill="#b8892b"/>
+        <circle cx="86" cy="55" r="2.4" fill="#b8892b"/>
+        <circle cx="55" cy="86" r="2.4" fill="#b8892b"/>
+        <circle cx="24" cy="55" r="2.4" fill="#b8892b"/>
+        <line x1="55" y1="55" x2="55" y2="34" stroke="#2a2118" stroke-width="4" stroke-linecap="round"/>
+        <line x1="55" y1="55" x2="70" y2="64" stroke="#2a2118" stroke-width="4" stroke-linecap="round"/>
+        <circle cx="55" cy="55" r="3.2" fill="#2a2118"/>
+
+        <g stroke="#2f5443" stroke-width="5" fill="none" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="172" cy="38" r="9" fill="#2f5443" stroke="none"/>
+          <path d="M172 47 L167 74"/>
+          <path d="M167 74 L154 95"/>
+          <path d="M167 74 L182 91"/>
+          <path d="M170 55 L188 46"/>
+          <path d="M168 60 L152 71"/>
+        </g>
+        <g stroke="#8a2c3a" stroke-width="3" stroke-linecap="round">
+          <line x1="135" y1="42" x2="118" y2="40"/>
+          <line x1="133" y1="52" x2="115" y2="52"/>
+          <line x1="135" y1="62" x2="118" y2="64"/>
+        </g>
+
+        <path d="M25 140 h48 v46 h-48 z" fill="#fffbf1" stroke="#6b1f2a" stroke-width="4" stroke-linejoin="round"/>
+        <circle cx="73" cy="163" r="9" fill="#fffbf1" stroke="#6b1f2a" stroke-width="4"/>
+        <path d="M104 140 h48 v46 h-48 z" fill="#fffbf1" stroke="#6b1f2a" stroke-width="4" stroke-linejoin="round"/>
+        <circle cx="104" cy="163" r="9" fill="#f7f0de" stroke="#6b1f2a" stroke-width="4"/>
+        <line x1="86" y1="163" x2="93" y2="163" stroke="#b8892b" stroke-width="3" stroke-dasharray="3 4" stroke-linecap="round"/>
+        <text x="89.5" y="130" font-size="20" fill="#b8892b" text-anchor="middle" font-family="Georgia, serif">?</text>
+      </svg>
+      <p>Imagine que tu dois expliquer pourquoi tu es arrivé(e) en retard, ou ce qui s'est passé après avoir beaucoup étudié toute la nuit. Sans connecteurs, nos phrases sont comme des pièces de puzzle qui ne s'assemblent pas — aujourd'hui, on va apprendre à les relier.</p>
+    </div>
+    <div class="card" style="border-left-color:var(--green2); margin-top:18px;">
+      <span class="tag green">Devine avant d'apprendre</span>
+      <h3>Tu connais déjà ces mots… en russe !</h3>
+      <p>En russe, tu utilises déjà <i>потому что, так как, благодаря, из-за, поэтому</i> sans même y penser. Le français a exactement les mêmes outils. Essaie de deviner l'équivalent français avant de voir la leçon — il n'y a pas de mauvaise réponse ici, c'est juste pour éveiller ton intuition.</p>
+      <div class="q-block"><label>1. «Потому что» (пример: я опоздал, потому что была пробка) → по-французски я скажу…</label>
+        <input type="text" id="w1" placeholder="ta réponse"></div>
+      <div class="q-block"><label>2. «Благодаря» (пример: я сдала экзамен благодаря своей преподавательнице) → по-французски я скажу…</label>
+        <input type="text" id="w2" placeholder="ta réponse"></div>
+      <div class="q-block"><label>3. «Поэтому / из-за этого» (пример: шёл дождь, поэтому мы не пошли гулять) → по-французски я скажу…</label>
+        <input type="text" id="w3" placeholder="ta réponse"></div>
+      <button class="btn" onclick="revealWarmup()">Voir les réponses</button>
+      <div id="warmup_answers" style="display:none; margin-top:14px;" class="defs">
+        <div><b>1.</b> потому что → <b>parce que</b> / <b>car</b></div>
+        <div><b>2.</b> благодаря → <b>grâce à</b></div>
+        <div><b>3.</b> поэтому / из-за этого → <b>c'est pourquoi</b> / <b>donc</b></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- GRAMMAIRE -->
+  <section class="block" id="grammaire">
+    <h2 class="section-title">Grammaire — La Cause et la Conséquence</h2>
+    <p class="section-lead">Les outils, un par un.</p>
+
+    <div class="card">
+      <span class="tag">Grammaire</span>
+      <h3>Parce que / Car</h3>
+      <p>Ils répondent tous les deux à la question <b>Pourquoi ?</b></p>
+      <ul>
+        <li><b>Parce que</b> — utilisé à l'oral <i>et</i> à l'écrit.</li>
+        <li><b>Car</b> — plus formel, surtout à l'écrit.</li>
+      </ul>
+      <div class="example">Exemple : Je suis fatigué <b>parce que</b> j'ai trop travaillé.</div>
+      <div class="remember"><b>À retenir :</b> devant une voyelle, « parce que » devient « parce qu' ». Exemple : <i>parce qu'il pleut.</i></div>
+    </div>
+
+    <div class="card">
+      <span class="tag">Grammaire</span>
+      <h3>Comme / Puisque</h3>
+      <div class="grid2">
+        <div>
+          <p><b>Comme</b> — souligne la cause. Se place <b>toujours au début</b> de la phrase.</p>
+          <div class="example">Comme il pleut, je reste à la maison.</div>
+        </div>
+        <div>
+          <p><b>Puisque</b> — la cause est évidente ou déjà connue de l'interlocuteur.</p>
+          <div class="example">Puisque tu es là, aide-moi !</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <span class="tag">Grammaire</span>
+      <h3>Grâce à / À cause de <span style="font-size:.9rem; font-weight:400;">(+ nom)</span></h3>
+      <div class="grid2">
+        <div>
+          <p><b>Grâce à</b> — cause <span style="color:#2e7d32;">positive</span>.</p>
+          <div class="example">J'ai réussi grâce à mon professeur.</div>
+        </div>
+        <div>
+          <p><b>À cause de</b> — cause <span style="color:#c62828;">négative</span>.</p>
+          <div class="example">Je suis en retard à cause du trafic.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <span class="tag gold">Grammaire</span>
+      <h3>La Conséquence</h3>
+      <p>La conséquence est le <b>résultat</b> d'une action.</p>
+      <ul>
+        <li><b>C'est pourquoi / C'est pour ça que</b> — la raison logique d'une action. <i>Il a neigé, c'est pourquoi les routes sont fermées.</i></li>
+        <li><b>Donc</b> — très courant à l'oral. <i>Je pense, donc je suis.</i> (Descartes)</li>
+        <li><b>Par conséquent</b> — plus formel, à l'écrit / au travail. <i>Vous n'avez pas payé, par conséquent nous coupons le service.</i></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- CCQ -->
+  <section class="block" id="ccq">
+    <h2 class="section-title">Vérifie ta compréhension</h2>
+    <p class="section-lead">Avant de pratiquer — es-tu sûr(e) d'avoir bien saisi la règle ?</p>
+    <div class="card" style="border-left-color:var(--gold);">
+      <span class="tag gold">CCQ</span>
+
+      <div class="q-block">
+        <label>1. « Car » s'utilise surtout à l'oral, entre amis.</label>
+        <label class="quiz-option"><input type="radio" name="ccq1" value="vrai"> Vrai</label>
+        <label class="quiz-option"><input type="radio" name="ccq1" value="faux"> Faux</label>
+        <div class="ccq-explain" id="ccq1_ex">Faux — c'est <b>« parce que »</b> qui s'utilise à l'oral. « Car » est plus formel, surtout à l'écrit.</div>
+      </div>
+
+      <div class="q-block">
+        <label>2. Je peux commencer une phrase avec « Comme » pour donner une cause.</label>
+        <label class="quiz-option"><input type="radio" name="ccq2" value="vrai"> Vrai</label>
+        <label class="quiz-option"><input type="radio" name="ccq2" value="faux"> Faux</label>
+        <div class="ccq-explain" id="ccq2_ex">Vrai ! « Comme » se place toujours en tête de phrase.</div>
+      </div>
+
+      <div class="q-block">
+        <label>3. « Grâce à mon prof, j'ai réussi » — la cause exprimée est…</label>
+        <label class="quiz-option"><input type="radio" name="ccq3" value="positive"> positive</label>
+        <label class="quiz-option"><input type="radio" name="ccq3" value="negative"> négative</label>
+        <div class="ccq-explain" id="ccq3_ex">« Grâce à » introduit toujours une cause positive. Pour une cause négative, on utilise « à cause de ».</div>
+      </div>
+
+      <div class="q-block">
+        <label>4. « Il a neigé, ___ les routes sont fermées. » Ce blanc exprime…</label>
+        <label class="quiz-option"><input type="radio" name="ccq4" value="cause"> une cause</label>
+        <label class="quiz-option"><input type="radio" name="ccq4" value="consequence"> une conséquence</label>
+        <div class="ccq-explain" id="ccq4_ex">C'est une conséquence : les routes fermées sont le résultat de la neige (« c'est pourquoi »).</div>
+      </div>
+
+      <button class="btn" onclick="checkCCQ()">Vérifier</button>
+      <div class="score-box" id="ccq_score"></div>
+    </div>
+  </section>
+
+  <!-- EXERCICE 1 : ASSOCIEZ -->
+  <section class="block" id="exo-match">
+    <h2 class="section-title">Pratique guidée — Associez les connecteurs</h2>
+    <div class="card" style="border-left-color:var(--gold);">
+      <span class="tag gold">Activité</span>
+      <h3>Comme · Grâce à · Puisque · À cause de</h3>
+      <p>Choisis la bonne définition (A, B, C ou D) pour chaque connecteur.</p>
+      <div class="defs">
+        <div><b>A</b> — Cause négative (+ nom)</div>
+        <div><b>B</b> — Cause évidente ou déjà connue</div>
+        <div><b>C</b> — Toujours au début de la phrase</div>
+        <div><b>D</b> — Cause positive (+ nom)</div>
+      </div>
+
+      <div class="match-row"><span class="label">Comme</span>
+        <select id="m1"><option value="">— choisir —</option><option>A</option><option>B</option><option>C</option><option>D</option></select>
+        <span class="fb" id="m1_fb"></span></div>
+      <div class="match-row"><span class="label">Grâce à</span>
+        <select id="m2"><option value="">— choisir —</option><option>A</option><option>B</option><option>C</option><option>D</option></select>
+        <span class="fb" id="m2_fb"></span></div>
+      <div class="match-row"><span class="label">Puisque</span>
+        <select id="m3"><option value="">— choisir —</option><option>A</option><option>B</option><option>C</option><option>D</option></select>
+        <span class="fb" id="m3_fb"></span></div>
+      <div class="match-row"><span class="label">À cause de</span>
+        <select id="m4"><option value="">— choisir —</option><option>A</option><option>B</option><option>C</option><option>D</option></select>
+        <span class="fb" id="m4_fb"></span></div>
+
+      <button class="btn" onclick="checkMatch()">Vérifier</button>
+      <div class="score-box" id="match_score"></div>
+    </div>
+  </section>
+
+  <!-- EXERCICE 2 : AUDIO -->
+  <section class="block" id="exo-dialogue">
+    <h2 class="section-title">Pratique guidée — Problèmes de transport</h2>
+    <div class="card">
+      <span class="tag">Compréhension orale</span>
+      <h3>Écoute l'audio et réponds aux questions</h3>
+      <p>Écoute une ou deux fois si besoin, puis réponds avec tes propres mots.</p>
+      <audio controls>
+        <source src="audio%20la%20cause%20et%20la%20consequence.wav" type="audio/wav">
+        Ton navigateur ne supporte pas la lecture audio. Le fichier « audio la cause et la consequence.wav » doit se trouver dans le même dossier que cette page.
+      </audio>
+
+      <div class="q-block">
+        <label>1. Pourquoi Sophie est-elle en retard ?</label>
+        <input type="text" id="d1" placeholder="Écris ta réponse en français">
+        <button class="btn" onclick="checkText('d1',['grev'],'d1_fb')">Vérifier</button>
+        <span class="fb" id="d1_fb"></span>
+      </div>
+      <div class="q-block">
+        <label>2. Comment Sophie va-t-elle comprendre le projet ?</label>
+        <input type="text" id="d2" placeholder="Écris ta réponse en français">
+        <button class="btn" onclick="checkText('d2',['note'],'d2_fb')">Vérifier</button>
+        <span class="fb" id="d2_fb"></span>
+      </div>
+      <div class="q-block">
+        <label>3. Quelle est la conséquence de manquer le début de la réunion ?</label>
+        <input type="text" id="d3" placeholder="Écris ta réponse en français">
+        <button class="btn" onclick="checkText('d3',['partag'],'d3_fb')">Vérifier</button>
+        <span class="fb" id="d3_fb"></span>
+      </div>
+      <div class="q-block">
+        <label>4. Pourquoi doivent-ils travailler vite ?</label>
+        <input type="text" id="d4" placeholder="Écris ta réponse en français">
+        <button class="btn" onclick="checkText('d4',['urgent','patron','attend'],'d4_fb')">Vérifier</button>
+        <span class="fb" id="d4_fb"></span>
+      </div>
+
+      <button class="btn burgundy" onclick="document.getElementById('audioAnswersOverlay').classList.add('open')">🔎 Voir les réponses</button>
+    </div>
+  </section>
+
+  <!-- EXERCICE 3 : PRATIQUE -->
+  <section class="block" id="exo-pratique">
+    <h2 class="section-title">Pratique semi-guidée — Complétez les phrases</h2>
+    <div class="card" style="border-left-color:var(--gold);">
+      <span class="tag gold">Activité</span>
+      <p>Choisis le bon connecteur pour chaque phrase.</p>
+
+      <div class="q-block">
+        <label>1. Il fait beau, <select id="p1">
+          <option value="">…</option><option>parce que</option><option>car</option><option>comme</option>
+          <option>puisque</option><option>donc</option><option>par conséquent</option><option>grâce à</option>
+          <option>à cause de</option><option>c'est pourquoi</option>
+        </select> nous allons à la plage.</label>
+      </div>
+      <div class="q-block">
+        <label>2. <select id="p2">
+          <option value="">…</option><option>parce que</option><option>car</option><option>comme</option>
+          <option>puisque</option><option>donc</option><option>par conséquent</option><option>grâce à</option>
+          <option>à cause de</option><option>c'est pourquoi</option>
+        </select> il est tard, nous devons partir.</label>
+      </div>
+      <div class="q-block">
+        <label>3. Elle a réussi <select id="p3">
+          <option value="">…</option><option>parce que</option><option>car</option><option>comme</option>
+          <option>puisque</option><option>donc</option><option>par conséquent</option><option>grâce à</option>
+          <option>à cause de</option><option>c'est pourquoi</option>
+        </select> son travail.</label>
+      </div>
+      <div class="q-block">
+        <label>4. Je ne mange pas de viande <select id="p4">
+          <option value="">…</option><option>parce que</option><option>car</option><option>comme</option>
+          <option>puisque</option><option>donc</option><option>par conséquent</option><option>grâce à</option>
+          <option>à cause de</option><option>c'est pourquoi</option>
+        </select> je suis végétarien.</label>
+      </div>
+
+      <button class="btn" onclick="checkPratique()">Vérifier</button>
+      <div class="score-box" id="pratique_score"></div>
+    </div>
+  </section>
+
+  <!-- EXERCICE 4 : VERIFICATION -->
+  <section class="block" id="exo-quiz">
+    <h2 class="section-title">Vérification finale</h2>
+    <div class="card">
+      <span class="tag">Quiz</span>
+      <h3>Lequel de ces connecteurs s'utilise TOUJOURS au début de la phrase pour introduire une cause ?</h3>
+      <div id="quizOptions">
+        <label class="quiz-option"><input type="radio" name="finalq" value="comme"> Comme</label>
+        <label class="quiz-option"><input type="radio" name="finalq" value="donc"> Donc</label>
+        <label class="quiz-option"><input type="radio" name="finalq" value="parceque"> Parce que</label>
+        <label class="quiz-option"><input type="radio" name="finalq" value="grace"> Grâce à</label>
+      </div>
+      <button class="btn" onclick="checkQuiz()">Vérifier</button>
+      <div class="score-box" id="quiz_fb"></div>
+    </div>
+  </section>
+
+  <!-- DISCUSSION -->
+  <section class="block" id="discussion">
+    <h2 class="section-title">Production libre — À l'oral</h2>
+    <p class="section-lead">Maintenant, c'est à ton tour de créer, sans filet.</p>
+    <div class="card" style="border-left-color:var(--green2);">
+      <span class="tag green">Production</span>
+      <h3>Cause et Conséquence, et vous ?</h3>
+      <div class="q-block">
+        <label>1. Pourquoi apprenez-vous le français ?</label>
+        <textarea placeholder="J'apprends le français parce que / puisque / comme…"></textarea>
+      </div>
+      <div class="q-block">
+        <label>2. Quelle conséquence pour votre futur ?</label>
+        <textarea placeholder="Grâce au français, je… / C'est pourquoi je…"></textarea>
+      </div>
+      <details class="reveal">
+        <summary>💡 Tu aurais pu dire…</summary>
+        <div class="content">
+          <p>J'apprends le français <b>parce que</b> j'aime la culture.</p>
+          <p>J'apprends le français pour mon travail, <b>c'est pourquoi</b> j'étudie beaucoup.</p>
+          <p><b>Grâce au</b> français, je peux voyager en France.</p>
+          <p><b>Comme</b> je veux habiter à Paris, j'étudie tous les jours.</p>
+        </div>
+      </details>
+    </div>
+  </section>
+
+  <!-- BILAN / WRAP-UP -->
+  <section class="block" id="bilan">
+    <h2 class="section-title">Bilan de la leçon</h2>
+    <p class="section-lead">Un dernier coup d'œil avant de refermer le livre.</p>
+
+    <div class="card" style="border-left-color:var(--gold);">
+      <span class="tag gold">Récap</span>
+      <h3>Tous les connecteurs, en un tableau</h3>
+      <table class="recap-table">
+        <tr><th>Cause</th><th>Registre</th><th>Conséquence</th><th>Registre</th></tr>
+        <tr><td>parce que</td><td>oral + écrit</td><td>donc</td><td>surtout oral</td></tr>
+        <tr><td>car</td><td>écrit / formel</td><td>par conséquent</td><td>écrit / formel</td></tr>
+        <tr><td>comme <i>(début de phrase)</i></td><td>oral + écrit</td><td>c'est pourquoi</td><td>oral + écrit</td></tr>
+        <tr><td>puisque <i>(cause connue)</i></td><td>oral + écrit</td><td>—</td><td>—</td></tr>
+        <tr><td>grâce à <i>(+ nom, positif)</i></td><td>oral + écrit</td><td>—</td><td>—</td></tr>
+        <tr><td>à cause de <i>(+ nom, négatif)</i></td><td>oral + écrit</td><td>—</td><td>—</td></tr>
+      </table>
+    </div>
+
+    <div class="card" style="border-left-color:var(--green2);">
+      <span class="tag green">Auto-évaluation</span>
+      <h3>Je peux…</h3>
+      <ul class="can-list" id="canList">
+        <li><input type="checkbox"> Expliquer pourquoi je suis en retard, pourquoi j'ai réussi ou raté quelque chose.</li>
+        <li><input type="checkbox"> Raconter la conséquence logique d'un événement.</li>
+        <li><input type="checkbox"> Choisir le bon ton selon la situation (ami vs message formel).</li>
+        <li><input type="checkbox"> Construire une phrase fluide avec une cause ET une conséquence.</li>
+        <li><input type="checkbox"> Parler de mes propres raisons d'apprendre le français à l'oral.</li>
+      </ul>
+      <p id="bilan_msg">🎉 Bravo — tu as atteint tous les objectifs de la leçon ! N'oublie pas les devoirs pour consolider.</p>
+    </div>
+  </section>
+
+  <!-- DEVOIRS (section inline, pas de fenêtre séparée) -->
+  <section class="block" id="devoirs">
+    <h2 class="section-title">📝 Devoirs — Pratique</h2>
+    <p class="section-lead">Le même exercice qu'en classe, pour consolider à la maison.</p>
+
+    <div class="card">
+      <span class="tag">Section 1</span>
+      <h3>Rappel des règles</h3>
+      <p>Associez chaque connecteur à sa règle (A, B, C ou D).</p>
+      <div class="defs">
+        <div><b>A</b> — Cause négative (+ nom)</div>
+        <div><b>B</b> — Cause évidente ou déjà connue</div>
+        <div><b>C</b> — Toujours au début de la phrase</div>
+        <div><b>D</b> — Cause positive (+ nom)</div>
+      </div>
+      <div class="match-row"><span class="label">1. Comme</span>
+        <select id="h1"><option value="">—</option><option>A</option><option>B</option><option>C</option><option>D</option></select>
+        <span class="fb" id="h1_fb"></span></div>
+      <div class="match-row"><span class="label">2. Grâce à</span>
+        <select id="h2"><option value="">—</option><option>A</option><option>B</option><option>C</option><option>D</option></select>
+        <span class="fb" id="h2_fb"></span></div>
+      <div class="match-row"><span class="label">3. Puisque</span>
+        <select id="h3"><option value="">—</option><option>A</option><option>B</option><option>C</option><option>D</option></select>
+        <span class="fb" id="h3_fb"></span></div>
+      <div class="match-row"><span class="label">4. À cause de</span>
+        <select id="h4"><option value="">—</option><option>A</option><option>B</option><option>C</option><option>D</option></select>
+        <span class="fb" id="h4_fb"></span></div>
+    </div>
+
+    <div class="card">
+      <span class="tag">Section 2</span>
+      <h3>Cause ou Conséquence ?</h3>
+      <p>Le mot en gras exprime-t-il une cause ou une conséquence ?</p>
+
+      <div class="q-block"><label>5. C'est <b>grâce à</b> mon grand-père.</label>
+        <label class="quiz-option"><input type="radio" name="h5" value="cause"> Cause</label>
+        <label class="quiz-option"><input type="radio" name="h5" value="consequence"> Conséquence</label>
+      </div>
+      <div class="q-block"><label>6. Je voulais <b>donc</b> lui permettre de créer un arbre généalogique.</label>
+        <label class="quiz-option"><input type="radio" name="h6" value="cause"> Cause</label>
+        <label class="quiz-option"><input type="radio" name="h6" value="consequence"> Conséquence</label>
+      </div>
+      <div class="q-block"><label>7. <b>Puisque</b> tu es là, aide-moi avec cet exercice !</label>
+        <label class="quiz-option"><input type="radio" name="h7" value="cause"> Cause</label>
+        <label class="quiz-option"><input type="radio" name="h7" value="consequence"> Conséquence</label>
+      </div>
+      <div class="q-block"><label>8. Il a neigé, <b>c'est pourquoi</b> les routes sont fermées.</label>
+        <label class="quiz-option"><input type="radio" name="h8" value="cause"> Cause</label>
+        <label class="quiz-option"><input type="radio" name="h8" value="consequence"> Conséquence</label>
+      </div>
+    </div>
+
+    <div class="card">
+      <span class="tag">Section 3</span>
+      <h3>Le bon choix</h3>
+      <div class="q-block"><label>9. ___ il est tard, nous devons partir.</label>
+        <label class="quiz-option"><input type="radio" name="h9" value="comme"> Comme</label>
+        <label class="quiz-option"><input type="radio" name="h9" value="donc"> Donc</label>
+      </div>
+      <div class="q-block"><label>10. Elle a réussi son examen ___ ses efforts.</label>
+        <label class="quiz-option"><input type="radio" name="h10" value="cause de"> à cause de</label>
+        <label class="quiz-option"><input type="radio" name="h10" value="grace"> grâce à</label>
+      </div>
+      <div class="q-block"><label>11. Il fait très beau aujourd'hui, ___ nous allons à la plage.</label>
+        <label class="quiz-option"><input type="radio" name="h11" value="car"> car</label>
+        <label class="quiz-option"><input type="radio" name="h11" value="consequent"> par conséquent</label>
+      </div>
+      <div class="q-block"><label>12. Je suis en retard ce matin ___ trafic dans le centre-ville.</label>
+        <label class="quiz-option"><input type="radio" name="h12" value="cause du"> à cause du</label>
+        <label class="quiz-option"><input type="radio" name="h12" value="grace au"> grâce au</label>
+      </div>
+      <div class="q-block"><label>13. Vous n'avez pas payé votre facture, ___ nous coupons le service.</label>
+        <label class="quiz-option"><input type="radio" name="h13" value="parceque"> parce que</label>
+        <label class="quiz-option"><input type="radio" name="h13" value="pourquoi"> c'est pourquoi</label>
+      </div>
+    </div>
+
+    <button class="btn burgundy" onclick="checkHomework()">✅ Vérifier mes réponses</button>
+    <div class="score-box" id="hw_score" style="font-size:1.1rem;"></div>
+
+    <div class="card">
+      <span class="tag gold">Section 4</span>
+      <h3>À vous d'écrire !</h3>
+      <p>Terminez ces phrases avec vos propres idées. Attention à la logique cause / conséquence !</p>
+      <div class="q-block">
+        <label>14. Je garde le contact avec ma famille grâce à…</label>
+        <textarea></textarea>
+        <details class="reveal"><summary>Voir un exemple</summary><div class="content">…mon téléphone / WhatsApp / Internet. (Doit être un nom positif.)</div></details>
+      </div>
+      <div class="q-block">
+        <label>15. J'aime beaucoup la culture française, donc…</label>
+        <textarea></textarea>
+        <details class="reveal"><summary>Voir un exemple</summary><div class="content">…j'étudie la langue tous les jours / je veux voyager à Paris. (Un résultat logique.)</div></details>
+      </div>
+      <div class="q-block">
+        <label>16. Je suis très fatigué(e) aujourd'hui parce que…</label>
+        <textarea></textarea>
+        <details class="reveal"><summary>Voir un exemple</summary><div class="content">…j'ai trop travaillé / j'ai mal dormi. (Une raison/cause.)</div></details>
+      </div>
+    </div>
+
+    <button class="btn" onclick="window.print()">🖨 Imprimer le devoir</button>
+  </section>
+
+</main>
+
+<!-- Small popup: audio comprehension answers -->
+<div class="modal-overlay" id="audioAnswersOverlay">
+  <div class="modal">
+    <div class="modal-head">
+      <h2>🎧 Réponses — Problèmes de transport</h2>
+      <button class="modal-close" onclick="document.getElementById('audioAnswersOverlay').classList.remove('open')">×</button>
+    </div>
+    <div class="modal-body">
+      <ol>
+        <li>À cause d'une grève dans le métro.</li>
+        <li>Grâce aux notes de Marc.</li>
+        <li>Marc doit partager ses notes avec Sophie.</li>
+        <li>Parce que c'est urgent et le patron attend.</li>
+      </ol>
+    </div>
+  </div>
+</div>
+
+<!-- Footer marquee -->
+<div class="marquee-footer">
+  <span class="track">✦&nbsp; crée par arinateach 🤍 &nbsp;✦&nbsp; crée par arinateach 🤍 &nbsp;✦&nbsp; crée par arinateach 🤍 &nbsp;✦&nbsp; crée par arinateach 🤍 &nbsp;✦&nbsp; crée par arinateach 🤍 &nbsp;</span>
+</div>
+
+<div id="confettiContainer"></div>
+
+<script>
+function norm(s){
+  return (s||'').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'').trim();
+}
+
+function pulse(el){
+  if(!el) return;
+  el.classList.remove('pulse');
+  void el.offsetWidth;
+  el.classList.add('pulse');
+}
+
+function revealWarmup(){
+  document.getElementById('warmup_answers').classList.add('show');
+}
+
+document.querySelectorAll('details').forEach(function(d){
+  d.addEventListener('toggle', function(){
+    const inner = this.querySelector('.content');
+    if(this.open && inner){
+      inner.classList.remove('fade-in');
+      void inner.offsetWidth;
+      inner.classList.add('fade-in');
+    }
+  });
+});
+
+function launchConfetti(){
+  const container = document.getElementById('confettiContainer');
+  const colors = ['#b8892b','#6b1f2a','#2f5443','#e2c375','#8a2c3a','#fffbf1'];
+  const count = 140;
+  for(let i=0; i<count; i++){
+    const el = document.createElement('div');
+    el.className = 'confetti-piece';
+    el.style.left = (Math.random()*100)+'vw';
+    el.style.background = colors[Math.floor(Math.random()*colors.length)];
+    el.style.width = (6+Math.random()*6)+'px';
+    el.style.height = (10+Math.random()*8)+'px';
+    const duration = 2.6 + Math.random()*2.2;
+    el.style.animationDuration = duration+'s';
+    el.style.animationDelay = (Math.random()*0.7)+'s';
+    container.appendChild(el);
+    setTimeout(()=>el.remove(), (duration+1)*1000);
+  }
+}
+
+const footerEl = document.querySelector('.marquee-footer');
+if(footerEl){
+  const footerObserver = new IntersectionObserver(function(entries){
+    entries.forEach(function(entry){
+      if(entry.isIntersecting){
+        launchConfetti();
+        footerObserver.unobserve(entry.target);
+      }
+    });
+  }, {threshold:0.4});
+  footerObserver.observe(footerEl);
+}
+
+function checkCCQ(){
+  const key = {ccq1:'faux', ccq2:'vrai', ccq3:'positive', ccq4:'consequence'};
+  let correct = 0;
+  Object.keys(key).forEach(name=>{
+    const radios = document.getElementsByName(name);
+    const explain = document.getElementById(name+'_ex');
+    radios.forEach(r=>{ r.parentElement.classList.remove('correct','wrong'); });
+    let checked = null;
+    radios.forEach(r=>{ if(r.checked) checked = r.value; });
+    radios.forEach(r=>{
+      if(r.value === key[name]) r.parentElement.classList.add('correct');
+      else if(r.checked) r.parentElement.classList.add('wrong');
+    });
+    if(checked === key[name]){ correct++; explain.classList.remove('show'); }
+    else { explain.classList.add('show'); }
+  });
+  const ccqScore = document.getElementById('ccq_score');
+  ccqScore.textContent = correct+' / 4 correct(s)';
+  pulse(ccqScore);
+}
+
+function checkMatch(){
+  const key = {m1:'C', m2:'D', m3:'B', m4:'A'};
+  let correct = 0;
+  Object.keys(key).forEach(id=>{
+    const el = document.getElementById(id);
+    const fb = document.getElementById(id+'_fb');
+    if(el.value === key[id]){ el.style.borderColor='#2e7d32'; fb.textContent='✓'; fb.style.color='#2e7d32'; correct++; }
+    else { el.style.borderColor='#c62828'; fb.textContent='✗ (réponse : '+key[id]+')'; fb.style.color='#c62828'; }
+    pulse(fb);
+  });
+  const matchScore = document.getElementById('match_score');
+  matchScore.textContent = correct+' / 4 correct(s)';
+  pulse(matchScore);
+}
+
+function checkText(id, keywords, fbId){
+  const val = norm(document.getElementById(id).value);
+  const fb = document.getElementById(fbId);
+  const ok = keywords.some(k=>val.includes(norm(k)));
+  if(ok){ fb.textContent='✓ Très bien !'; fb.style.color='#2e7d32'; }
+  else { fb.textContent='✗ Réécoute et réessaie (indice : '+keywords[0]+'…)'; fb.style.color='#c62828'; }
+  pulse(fb);
+}
+
+function checkPratique(){
+  const accepted = {
+    p1:['donc','par conséquent'],
+    p2:['comme','puisque'],
+    p3:['grâce à'],
+    p4:['parce que','car']
+  };
+  let correct = 0;
+  Object.keys(accepted).forEach(id=>{
+    const el = document.getElementById(id);
+    const val = norm(el.value);
+    const ok = accepted[id].some(a=>norm(a)===val);
+    el.style.borderColor = ok ? '#2e7d32' : '#c62828';
+    if(ok) correct++;
+  });
+  const pratiqueScore = document.getElementById('pratique_score');
+  pratiqueScore.textContent = correct+' / 4 correct(s)';
+  pulse(pratiqueScore);
+}
+
+function checkQuiz(){
+  const radios = document.getElementsByName('finalq');
+  let chosen = null;
+  radios.forEach(r=>{ if(r.checked) chosen = r.value; r.parentElement.classList.remove('correct','wrong'); });
+  radios.forEach(r=>{
+    if(r.value==='comme') r.parentElement.classList.add('correct');
+    else if(r.checked) r.parentElement.classList.add('wrong');
+  });
+  const fb = document.getElementById('quiz_fb');
+  if(chosen==='comme'){ fb.textContent='✓ Exact ! « Comme » se place toujours au début.'; fb.style.color='#2e7d32'; }
+  else if(chosen){ fb.textContent='✗ La bonne réponse est « Comme ».'; fb.style.color='#c62828'; }
+  else { fb.textContent='Choisis une réponse d\'abord.'; fb.style.color='#6b1f2a'; }
+  pulse(fb);
+}
+
+function checkHomework(){
+  let correct = 0, total = 13;
+
+  const matchKey = {h1:'C', h2:'D', h3:'B', h4:'A'};
+  Object.keys(matchKey).forEach(id=>{
+    const el = document.getElementById(id);
+    const fb = document.getElementById(id+'_fb');
+    if(el.value === matchKey[id]){ el.style.borderColor='#2e7d32'; fb.textContent='✓'; fb.style.color='#2e7d32'; correct++; }
+    else { el.style.borderColor='#c62828'; fb.textContent='✗ ('+matchKey[id]+')'; fb.style.color='#c62828'; }
+    pulse(fb);
+  });
+
+  const csKey = {h5:'cause', h6:'consequence', h7:'cause', h8:'consequence'};
+  Object.keys(csKey).forEach(name=>{
+    const radios = document.getElementsByName(name);
+    radios.forEach(r=>{ r.parentElement.classList.remove('correct','wrong'); });
+    let checked = null;
+    radios.forEach(r=>{ if(r.checked) checked = r.value; });
+    radios.forEach(r=>{
+      if(r.value === csKey[name]) r.parentElement.classList.add('correct');
+      else if(r.checked) r.parentElement.classList.add('wrong');
+    });
+    if(checked === csKey[name]) correct++;
+  });
+
+  const choiceKey = {h9:'comme', h10:'grace', h11:'consequent', h12:'cause du', h13:'pourquoi'};
+  Object.keys(choiceKey).forEach(name=>{
+    const radios = document.getElementsByName(name);
+    radios.forEach(r=>{ r.parentElement.classList.remove('correct','wrong'); });
+    let checked = null;
+    radios.forEach(r=>{ if(r.checked) checked = r.value; });
+    radios.forEach(r=>{
+      if(r.value === choiceKey[name]) r.parentElement.classList.add('correct');
+      else if(r.checked) r.parentElement.classList.add('wrong');
+    });
+    if(checked === choiceKey[name]) correct++;
+  });
+
+  const hwScore = document.getElementById('hw_score');
+  hwScore.textContent = 'Score : '+correct+' / '+total+' — pense aussi à compléter et à relire la Section 4 !';
+  pulse(hwScore);
+}
+
+document.getElementById('canList').addEventListener('change', function(){
+  const boxes = this.querySelectorAll('input[type=checkbox]');
+  const allChecked = Array.from(boxes).every(b=>b.checked);
+  document.getElementById('bilan_msg').style.display = allChecked ? 'block' : 'none';
+});
+</script>
