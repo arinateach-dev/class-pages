@@ -1,0 +1,907 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Unité 6 — Rédiger son profil professionnel sur LinkedIn</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500&family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cream:#FAF5EC;
+    --paper:#FFFFFF;
+    --ink:#2B2A27;
+    --ink-soft:#6B665D;
+    --steel:#3C5B71;
+    --steel-dark:#233F4F;
+    --steel-light:#7E9CAF;
+    --beige:#EFE3D0;
+    --beige-line:#E2D3B8;
+    --amber:#C68A46;
+    --amber-soft:#F3E2C6;
+    --linkedin:#0A66C2;
+    --linkedin-dark:#004182;
+    --linkedin-bg:#EEF3F8;
+    --good:#3E7B4F;
+    --good-bg:#E7F1E9;
+    --bad:#B14A3B;
+    --bad-bg:#FBEBE7;
+    --radius:14px;
+    --shadow:0 6px 20px rgba(35,63,79,0.08);
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--cream);
+    color:var(--ink);
+    font-family:'Work Sans',sans-serif;
+    font-size:16px;
+    line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3,.font-display{font-family:'Fraunces',serif;}
+  .wrap{max-width:840px;margin:0 auto;padding:0 22px 90px;}
+
+  /* ---------- NAV ---------- */
+  nav.tabs{
+    position:sticky; top:0; z-index:50;
+    background:rgba(250,245,236,0.94);
+    backdrop-filter:blur(6px);
+    border-bottom:1px solid var(--beige-line);
+  }
+  nav.tabs .inner{
+    max-width:840px;margin:0 auto;padding:0 22px;
+    display:flex; gap:4px; overflow-x:auto;
+    scrollbar-width:none;
+  }
+  nav.tabs .inner::-webkit-scrollbar{display:none;}
+  nav.tabs a{
+    flex:none;
+    font-family:'Work Sans',sans-serif;
+    font-size:13px; font-weight:600; letter-spacing:.02em;
+    color:var(--ink-soft);
+    text-decoration:none;
+    padding:14px 12px 12px;
+    border-bottom:3px solid transparent;
+    white-space:nowrap;
+  }
+  nav.tabs a:hover{color:var(--steel-dark);}
+  nav.tabs a.active{color:var(--steel-dark); border-bottom-color:var(--amber);}
+
+  /* ---------- HEADER ---------- */
+  header.hero{padding:52px 22px 30px; max-width:840px; margin:0 auto;}
+  .eyebrow{
+    display:inline-flex; align-items:center; gap:8px;
+    font-size:12.5px; font-weight:700; letter-spacing:.12em; text-transform:uppercase;
+    color:var(--steel-dark); background:var(--beige);
+    padding:6px 14px; border-radius:99px; margin-bottom:18px;
+  }
+  .eyebrow .dot{width:6px;height:6px;border-radius:50%;background:var(--amber);}
+  header.hero h1{
+    font-size:clamp(30px,4.4vw,44px);
+    font-weight:600; line-height:1.12; margin:0 0 14px; color:var(--steel-dark);
+    max-width:14ch;
+  }
+  header.hero p.lede{font-size:16.5px; color:var(--ink-soft); max-width:52ch; margin:0;}
+  header.hero .meta{
+    display:flex; flex-wrap:wrap; gap:10px 22px; margin-top:22px;
+    font-size:13px; color:var(--ink-soft);
+  }
+  header.hero .meta span{display:flex; align-items:center; gap:6px;}
+  header.hero .meta b{color:var(--steel-dark); font-weight:600;}
+
+  /* ---------- SECTION shell ---------- */
+  section.block{padding-top:64px; scroll-margin-top:64px;}
+  .section-head{margin-bottom:22px;}
+  .section-num{
+    font-family:'Fraunces',serif; font-style:italic; font-weight:500;
+    color:var(--amber); font-size:14px; display:block; margin-bottom:6px;
+  }
+  .section-head h2{font-size:26px; font-weight:600; color:var(--steel-dark); margin:0 0 8px;}
+  .section-head p{color:var(--ink-soft); margin:0; font-size:15px; max-width:56ch;}
+
+  .card{
+    background:var(--paper); border-radius:var(--radius);
+    box-shadow:var(--shadow); border:1px solid rgba(35,63,79,0.06);
+  }
+
+  /* ---------- DOCUMENT 1 mockup ---------- */
+  .browser-card{overflow:hidden; margin-bottom:18px;}
+  .browser-topbar{
+    background:var(--steel-dark); color:#fff; padding:14px 20px;
+    font-family:'Fraunces',serif; font-weight:600; font-size:18px;
+    display:flex; align-items:center; justify-content:space-between;
+  }
+  .browser-topbar .dots{display:flex; gap:6px;}
+  .browser-topbar .dots span{width:8px;height:8px;border-radius:50%; background:rgba(255,255,255,0.35);}
+  .browser-navbar{
+    background:var(--amber-soft); border-bottom:1px solid var(--beige-line);
+    padding:10px 20px; display:flex; gap:20px; flex-wrap:wrap;
+    font-size:12.5px; font-weight:600; letter-spacing:.03em; color:#7A5220;
+    text-transform:uppercase;
+  }
+  .doc-body{padding:26px 24px 28px;}
+  .doc-body h3{font-size:20px; margin:0 0 12px; color:var(--steel-dark); font-weight:600;}
+  .doc-body p{margin:0 0 12px; font-size:15px;}
+  .doc-elements{
+    display:grid; grid-template-columns:1fr 1fr; gap:6px 24px;
+    list-style:none; padding:0; margin:14px 0 22px;
+  }
+  .doc-elements li{
+    font-size:14.5px; padding-left:18px; position:relative; color:var(--ink);
+  }
+  .doc-elements li::before{
+    content:"•"; position:absolute; left:0; color:var(--amber); font-weight:700;
+  }
+  .example-card{
+    background:var(--cream); border:1px solid var(--beige-line);
+    border-radius:12px; padding:20px; margin-top:6px;
+  }
+  .example-head{display:flex; align-items:center; gap:14px; margin-bottom:14px;}
+  .avatar{
+    width:46px;height:46px;border-radius:50%;
+    background:linear-gradient(135deg,var(--steel-light),var(--steel-dark));
+    color:#fff; display:flex; align-items:center; justify-content:center;
+    font-family:'Fraunces',serif; font-weight:600; font-size:16px; flex:none;
+  }
+  .example-name{font-weight:700; font-size:15px; color:var(--steel-dark);}
+  .example-title{font-size:13.5px; color:var(--ink-soft);}
+  .badge-in{
+    margin-left:auto; width:26px;height:26px;border-radius:6px;
+    background:var(--linkedin); color:#fff; font-weight:700; font-size:13px;
+    display:flex; align-items:center; justify-content:center; flex:none;
+  }
+  .example-quote{
+    font-style:italic; font-size:14.5px; color:var(--ink); line-height:1.6;
+    border-left:3px solid var(--amber); padding-left:14px; margin:0;
+  }
+  .doc-tag{
+    display:inline-block; background:var(--steel-dark); color:#fff;
+    font-size:11.5px; font-weight:700; letter-spacing:.08em; text-transform:uppercase;
+    padding:6px 12px; border-radius:6px; margin-bottom:12px;
+  }
+
+  /* ---------- COMPREHENSION: ex1 checkboxes ---------- */
+  .exo{padding:24px; margin-bottom:18px;}
+  .exo-label{
+    display:flex; align-items:center; justify-content:center;
+    width:26px;height:26px;border-radius:50%; background:var(--steel-dark); color:#fff;
+    font-size:13px; font-weight:700; flex:none;
+  }
+  .exo-title{display:flex; align-items:center; gap:12px; margin-bottom:6px;}
+  .exo-title h3{margin:0; font-size:16px; font-weight:600; color:var(--steel-dark);}
+  .exo-instruction{font-size:14.5px; color:var(--ink-soft); margin:0 0 18px 38px;}
+  .check-list{list-style:none; margin:0 0 16px 38px; padding:0; display:flex; flex-direction:column; gap:10px;}
+  .check-list li{
+    display:flex; align-items:flex-start; gap:11px;
+    padding:11px 14px; border:1.5px solid var(--beige-line); border-radius:10px;
+    font-size:14.5px; cursor:pointer; transition:border-color .15s, background .15s;
+    background:var(--cream);
+  }
+  .check-list li:hover{border-color:var(--steel-light);}
+  .check-list input{margin-top:2px; accent-color:var(--steel);}
+  .check-list li.correct{background:var(--good-bg); border-color:var(--good);}
+  .check-list li.incorrect{background:var(--bad-bg); border-color:var(--bad);}
+  .check-list li .flag{margin-left:auto; font-size:12px; font-weight:700; flex:none;}
+  .check-list li.correct .flag{color:var(--good);}
+  .check-list li.incorrect .flag{color:var(--bad);}
+
+  .btn{
+    font-family:'Work Sans',sans-serif; font-size:13.5px; font-weight:600;
+    border:none; border-radius:99px; padding:11px 20px; cursor:pointer;
+    background:var(--steel-dark); color:#fff; transition:background .15s, transform .1s;
+    margin-left:38px;
+  }
+  .btn:hover{background:var(--steel);}
+  .btn:active{transform:scale(.97);}
+  .btn.ghost{background:transparent; color:var(--steel-dark); border:1.5px solid var(--steel-dark);}
+  .btn.ghost:hover{background:var(--beige);}
+  .btn.amber{background:var(--amber);}
+  .btn.amber:hover{background:#B77B39;}
+  .feedback-msg{
+    margin:14px 0 0 38px; font-size:14px; font-weight:600; display:none;
+  }
+  .feedback-msg.show{display:block;}
+  .feedback-msg.good{color:var(--good);}
+  .feedback-msg.bad{color:var(--bad);}
+
+  /* ---------- ex2 table ---------- */
+  .match-table{margin:0 0 16px 38px; display:flex; flex-direction:column; gap:10px;}
+  .match-row{
+    display:grid; grid-template-columns:180px 1fr; gap:14px;
+    border:1.5px solid var(--beige-line); border-radius:10px; padding:12px 14px;
+    background:var(--cream); align-items:start;
+  }
+  .match-row.example{background:var(--amber-soft); border-color:var(--amber);}
+  .match-label{font-weight:700; font-size:13.5px; color:var(--steel-dark); padding-top:8px;}
+  .match-row.example .match-value{font-size:14px; font-style:italic; padding-top:8px; color:var(--ink);}
+  .match-row input{
+    width:100%; border:1.5px solid var(--beige-line); border-radius:8px;
+    padding:9px 11px; font-family:'Work Sans',sans-serif; font-size:14px; color:var(--ink);
+    background:#fff;
+  }
+  .match-row input:focus{outline:none; border-color:var(--steel);}
+  .correction{
+    display:none; margin-top:8px; font-size:13px; color:var(--good); font-style:italic;
+    background:var(--good-bg); border-radius:6px; padding:8px 10px;
+  }
+  .correction.show{display:block;}
+
+  /* ---------- GRAMMAIRE ---------- */
+  .tool-grid{display:grid; grid-template-columns:1fr; gap:16px;}
+  .tool-card{padding:22px;}
+  .tool-card h3{margin:0 0 4px; font-size:15.5px; color:var(--steel-dark); font-weight:700;}
+  .tool-card .sub{font-size:12.5px; color:var(--ink-soft); margin:0 0 14px;}
+  table.gram{width:100%; border-collapse:collapse; font-size:14px;}
+  table.gram th{
+    text-align:left; font-size:11.5px; text-transform:uppercase; letter-spacing:.06em;
+    color:var(--ink-soft); padding:6px 8px; border-bottom:1.5px solid var(--beige-line);
+  }
+  table.gram td{padding:9px 8px; border-bottom:1px solid var(--beige-line); vertical-align:top;}
+  table.gram tr:last-child td{border-bottom:none;}
+  .rule-tag{font-size:11.5px; color:var(--amber); font-weight:700;}
+  .expr-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:18px;}
+  .expr-col h4{
+    font-size:13px; color:var(--steel-dark); margin:0 0 10px; font-weight:700;
+    padding-bottom:8px; border-bottom:2px solid var(--beige);
+  }
+  .expr-col ul{margin:0; padding:0; list-style:none; display:flex; flex-direction:column; gap:8px;}
+  .expr-col li{font-size:13.5px; color:var(--ink); line-height:1.4;}
+  .expr-col li i{color:var(--ink-soft); font-style:italic;}
+
+  /* ---------- 3a form ---------- */
+  .form-card{padding:26px;}
+  .form-grid{display:grid; grid-template-columns:1fr 1fr; gap:16px;}
+  .field{display:flex; flex-direction:column; gap:6px;}
+  .field.full{grid-column:1/-1;}
+  .field label{font-size:12.5px; font-weight:700; color:var(--steel-dark); letter-spacing:.02em;}
+  .field input{
+    border:1.5px solid var(--beige-line); border-radius:9px; padding:11px 13px;
+    font-family:'Work Sans',sans-serif; font-size:14.5px; background:var(--cream); color:var(--ink);
+  }
+  .field input:focus{outline:none; border-color:var(--steel); background:#fff;}
+  .field input::placeholder{color:#B7AF9E;}
+  .gen-row{display:flex; justify-content:flex-end; margin-top:20px;}
+  .gen-row .btn{margin-left:0;}
+
+  /* ---------- LINKEDIN TEMPLATE (3b) ---------- */
+  .li-wrap{border-radius:var(--radius); overflow:hidden; box-shadow:var(--shadow); background:#fff;}
+  .li-cover{
+    height:100px; width:100%;
+    background:linear-gradient(120deg,var(--linkedin) 0%, var(--steel-dark) 100%);
+    position:relative;
+  }
+  .li-cover span{
+    position:absolute; right:16px; bottom:12px; font-size:11.5px; color:rgba(255,255,255,0.75);
+    font-weight:600; letter-spacing:.02em;
+  }
+  .li-photo{
+    width:88px;height:88px;border-radius:50%; background:var(--linkedin-bg);
+    border:4px solid #fff; margin:-46px 0 0 24px; position:relative;
+    display:flex; align-items:center; justify-content:center;
+    color:var(--linkedin); font-size:11px; font-weight:700; text-align:center; line-height:1.3;
+  }
+  .li-body{padding:14px 24px 26px;}
+  .li-field{margin-bottom:12px;}
+  .li-field label{
+    display:block; font-size:10.5px; font-weight:700; letter-spacing:.08em; text-transform:uppercase;
+    color:var(--ink-soft); margin-bottom:4px;
+  }
+  .li-field input{
+    width:100%; border:none; border-bottom:1.5px solid var(--beige-line);
+    padding:6px 2px; font-family:'Fraunces',serif; font-size:20px; font-weight:600;
+    color:var(--steel-dark); background:transparent;
+  }
+  .li-field.headline input{font-family:'Work Sans',sans-serif; font-size:14.5px; font-weight:500; color:var(--ink);}
+  .li-field.loc input{font-family:'Work Sans',sans-serif; font-size:13px; color:var(--ink-soft); font-weight:400;}
+  .li-field input:focus{outline:none; border-bottom-color:var(--linkedin);}
+  .li-divider{height:1px; background:var(--beige-line); margin:18px 0;}
+  .li-about-head{display:flex; align-items:baseline; justify-content:space-between; margin-bottom:8px;}
+  .li-about-head h4{margin:0; font-size:13.5px; color:var(--steel-dark); font-weight:700;}
+  .sentence-count{font-size:12px; color:var(--ink-soft);}
+  .sentence-count.ok{color:var(--good); font-weight:600;}
+  textarea#about{
+    width:100%; min-height:140px; resize:vertical;
+    border:1.5px solid var(--beige-line); border-radius:9px; padding:13px;
+    font-family:'Work Sans',sans-serif; font-size:14.5px; line-height:1.6; color:var(--ink);
+    background:var(--cream);
+  }
+  textarea#about:focus{outline:none; border-color:var(--linkedin); background:#fff;}
+  .li-actions{display:flex; gap:10px; margin-top:16px; flex-wrap:wrap;}
+  .li-actions .btn{margin-left:0;}
+
+  /* sticky note */
+  .sticky-note{
+    background:#FEF6D8; border-radius:4px; padding:18px 20px;
+    max-width:420px; margin:26px auto 0; transform:rotate(-1.4deg);
+    box-shadow:0 8px 18px rgba(0,0,0,0.10); position:relative; font-size:14px; color:#5c5433;
+  }
+  .sticky-note::before{
+    content:""; position:absolute; top:-10px; left:50%; transform:translateX(-50%) rotate(-3deg);
+    width:60px; height:20px; background:rgba(198,138,70,0.55);
+  }
+  .sticky-note b{display:block; font-family:'Fraunces',serif; font-style:italic; font-size:15.5px; margin-bottom:4px; color:#4a441f;}
+
+  /* ---------- ECHAUFFEMENT ---------- */
+  .colleague-grid{
+    display:grid; grid-template-columns:1fr 1fr; gap:16px;
+    margin:0 0 4px 38px;
+  }
+  .colleague-card{
+    text-align:center; padding:20px 16px; border:1.5px solid var(--beige-line);
+    border-radius:12px; background:var(--cream);
+  }
+  .colleague-card .avatar{width:44px;height:44px;font-size:15px;}
+  .colleague-name{font-family:'Fraunces',serif; font-weight:600; font-size:16px; color:var(--steel-dark); margin:4px 0 10px;}
+  .colleague-adjs{display:flex; justify-content:center; gap:8px; flex-wrap:wrap;}
+  .colleague-adjs span{
+    background:var(--beige); color:var(--steel-dark); font-size:12.5px; font-weight:600;
+    padding:5px 11px; border-radius:99px;
+  }
+  .logo-row{display:flex; gap:10px; flex-wrap:wrap; margin:0 0 16px 38px;}
+  .logo-chip{
+    font-size:13px; font-weight:700; padding:8px 16px; border-radius:8px;
+  }
+  .logo-chip.chip-linkedin{background:var(--linkedin-bg); color:var(--linkedin-dark);}
+  .logo-chip.chip-cv{background:var(--amber-soft); color:#7A5220;}
+  .logo-chip.chip-email{background:var(--beige); color:var(--steel-dark);}
+  .prompt-list{list-style:none; margin:0 0 4px 38px; padding:0; display:flex; flex-direction:column; gap:8px;}
+  .prompt-list li{
+    font-size:14.5px; font-style:italic; color:var(--ink); padding:10px 14px;
+    background:var(--cream); border-left:3px solid var(--amber); border-radius:6px;
+  }
+
+  /* ---------- generic row states (grammar exercises) ---------- */
+  .row-ok{background:var(--good-bg) !important; border-color:var(--good) !important;}
+  .row-bad{background:var(--bad-bg) !important; border-color:var(--bad) !important;}
+
+  .fillblank-list{margin:0 0 16px 38px; display:flex; flex-direction:column; gap:10px;}
+  .fillblank-row{
+    padding:12px 14px; border:1.5px solid var(--beige-line); border-radius:10px;
+    background:var(--cream); font-size:14.5px;
+  }
+  .fillblank-row .blank-input{
+    width:130px; border:1.5px solid var(--beige-line); border-radius:6px;
+    padding:6px 8px; font-family:'Work Sans',sans-serif; font-size:14px;
+    margin:0 6px; text-align:center; background:#fff; color:var(--ink);
+  }
+  .fillblank-row .blank-input:focus{outline:none; border-color:var(--steel);}
+  .fillblank-row i{color:var(--ink-soft); font-size:13px;}
+
+  .classify-list{margin:0 0 16px 38px; display:flex; flex-direction:column; gap:10px;}
+  .classify-row{
+    display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap;
+    padding:11px 14px; border:1.5px solid var(--beige-line); border-radius:10px;
+    background:var(--cream); font-size:14px;
+  }
+  .classify-row select{
+    border:1.5px solid var(--beige-line); border-radius:8px; padding:7px 10px;
+    font-family:'Work Sans',sans-serif; font-size:13.5px; background:#fff; color:var(--ink);
+  }
+  .classify-row select:focus{outline:none; border-color:var(--steel);}
+
+  /* ---------- FOOTER MARQUEE ---------- */
+  footer.marquee-footer{
+    overflow:hidden; padding:26px 0 30px; margin-top:34px;
+    border-top:1px solid var(--beige-line);
+  }
+  .marquee-track{
+    display:flex; align-items:center; width:max-content;
+    animation:marquee 16s linear infinite;
+  }
+  .marquee-track span{
+    font-family:'Fraunces',serif; font-style:italic; font-size:13px;
+    color:var(--ink-soft); letter-spacing:.03em; white-space:nowrap;
+    padding:0 28px; display:inline-flex; align-items:center; gap:28px;
+  }
+  .marquee-track span::after{content:"✦"; color:var(--amber); font-style:normal; font-size:10px;}
+  @keyframes marquee{ from{transform:translateX(0);} to{transform:translateX(-50%);} }
+  @media (prefers-reduced-motion: reduce){ .marquee-track{animation:none;} }
+
+  footer{text-align:center; padding:40px 22px 10px; color:var(--ink-soft); font-size:12.5px;}
+
+  @media (max-width:600px){
+    .form-grid{grid-template-columns:1fr;}
+    .expr-grid{grid-template-columns:1fr;}
+    .match-row{grid-template-columns:1fr;}
+    .match-label{padding-top:0;}
+    .doc-elements{grid-template-columns:1fr;}
+    .colleague-grid{grid-template-columns:1fr; margin-left:0;}
+    .logo-row, .prompt-list, .fillblank-list, .classify-list{margin-left:0;}
+    .classify-row{flex-direction:column; align-items:flex-start;}
+    header.hero{padding-top:36px;}
+  }
+
+  @media print{
+    nav.tabs, header.hero, #echauffement, #doc1, #comprehension, #grammaire, .form-card, .section-head, .sticky-note, footer, .li-actions{display:none !important;}
+    body{background:#fff;}
+    #profil{padding-top:0;}
+    .li-wrap{box-shadow:none; border:1px solid #ccc;}
+  }
+</style>
+</head>
+<body>
+
+<nav class="tabs">
+  <div class="inner">
+    <a href="#echauffement" class="active">Échauffement</a>
+    <a href="#doc1">Document 1</a>
+    <a href="#comprehension">Compréhension</a>
+    <a href="#grammaire">Grammaire &amp; lexique</a>
+    <a href="#profil">Mon profil LinkedIn</a>
+  </div>
+</nav>
+
+<header class="hero">
+  <span class="eyebrow"><span class="dot"></span>Unité 6 · Français A1.2</span>
+  <h1>Rédiger son profil professionnel sur LinkedIn</h1>
+  <p class="lede">Vous allez lire un article sur les profils LinkedIn, repérer les éléments clés d'un bon résumé professionnel, puis rédiger — et remplir — votre propre profil.</p>
+</header>
+
+<div class="wrap">
+
+  <!-- ============ ÉCHAUFFEMENT ============ -->
+  <section class="block" id="echauffement" style="padding-top:36px;">
+    <div class="section-head">
+      <span class="section-num">Mise en route</span>
+      <h2>Échauffement &amp; connexion avec la leçon précédente</h2>
+      <p>Avant de commencer, un petit rappel et une mise en contexte avec votre professeur.</p>
+    </div>
+
+    <div class="card exo">
+      <div class="exo-title"><span class="exo-label">💬</span><h3>Flash review (5 min) — « Le collègue idéal »</h3></div>
+      <p class="exo-instruction">Observez ces deux collègues. Qu'est-ce qui change entre le masculin et le féminin ?</p>
+      <div class="colleague-grid">
+        <div class="colleague-card">
+          <div class="avatar">M</div>
+          <div class="colleague-name">Marc</div>
+          <div class="colleague-adjs"><span>créatif</span><span>rigoureux</span></div>
+        </div>
+        <div class="colleague-card">
+          <div class="avatar">S</div>
+          <div class="colleague-name">Sophie</div>
+          <div class="colleague-adjs"><span>créative</span><span>rigoureuse</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card exo">
+      <div class="exo-title"><span class="exo-label">🧭</span><h3>Mise en situation &amp; contextualisation (5 min)</h3></div>
+      <p class="exo-instruction">Présentation des logos LinkedIn, CV et e-mail — puis discussion à l'oral :</p>
+      <div class="logo-row">
+        <span class="logo-chip chip-linkedin">in LinkedIn</span>
+        <span class="logo-chip chip-cv">📄 CV</span>
+        <span class="logo-chip chip-email">✉️ E-mail</span>
+      </div>
+      <ul class="prompt-list">
+        <li>Tu as un compte LinkedIn ? À quoi sert LinkedIn ?</li>
+        <li>Quelle est la différence entre un CV complet et un résumé sur un profil en ligne ?</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ============ DOCUMENT 1 ============ -->
+  <section class="block" id="doc1">
+    <div class="section-head">
+      <span class="section-num">Lecture</span>
+      <h2>Document 1 — RechercheEmploi.fr</h2>
+      <p>Lisez l'article et l'exemple du profil de Jérôme Patras.</p>
+    </div>
+
+    <div class="card browser-card">
+      <div class="browser-topbar">
+        <span>RechercheEmploi.fr</span>
+        <span class="dots"><span></span><span></span><span></span></span>
+      </div>
+      <div class="browser-navbar">
+        <span>Accueil</span><span>Trouver un emploi</span><span>Réussir</span><span>Manager</span><span>Entreprendre</span>
+      </div>
+      <div class="doc-body">
+        <span class="doc-tag">Document 1</span>
+        <h3>Comment réussir son profil LinkedIn ?</h3>
+        <p>Le profil LinkedIn a un titre et un résumé. La rubrique « résumé » est votre carte de visite ! Elle doit faire apparaître :</p>
+        <ul class="doc-elements">
+          <li>votre situation actuelle</li>
+          <li>votre disponibilité</li>
+          <li>le poste recherché</li>
+          <li>votre mobilité</li>
+        </ul>
+
+        <div class="example-card">
+          <div class="example-head">
+            <div class="avatar">JP</div>
+            <div>
+              <div class="example-name">Jérôme Patras</div>
+              <div class="example-title">Responsable marketing · Sorbonne Université</div>
+            </div>
+            <div class="badge-in">in</div>
+          </div>
+          <p class="example-quote">« Actuellement en recherche d'emploi, je suis diplômé d'un master en marketing et communication avec une expérience de 7 ans dans la relation clients. Rigoureux, créatif et ouvert d'esprit, je suis très motivé pour intégrer une entreprise internationale. Je parle anglais couramment et maîtrise les bases en espagnol. Disponible dès maintenant, je peux me déplacer dans une autre ville. »</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ COMPREHENSION ============ -->
+  <section class="block" id="comprehension">
+    <div class="section-head">
+      <span class="section-num">Compréhension</span>
+      <h2>Repérez les informations</h2>
+      <p>Deux exercices à partir du Document 1.</p>
+    </div>
+
+    <!-- Exercice 1 -->
+    <div class="card exo">
+      <div class="exo-title"><span class="exo-label">1</span><h3>Les 4 éléments clés du résumé</h3></div>
+      <p class="exo-instruction">D'après le document, quels sont les 4 éléments clés qui doivent figurer dans le « résumé » ? Cochez les 4 bonnes réponses.</p>
+      <ul class="check-list" id="ex1-list">
+        <li data-correct="true"><input type="checkbox"><span>L'emploi occupé ou la formation en cours</span></li>
+        <li data-correct="true"><input type="checkbox"><span>Les compétences et les langues</span></li>
+        <li data-correct="true"><input type="checkbox"><span>Le métier / poste souhaité</span></li>
+        <li data-correct="false"><input type="checkbox"><span>Les jours de travail hebdomadaires</span></li>
+        <li data-correct="true"><input type="checkbox"><span>Les qualités personnelles</span></li>
+      </ul>
+      <button class="btn" onclick="checkEx1()">Vérifier mes réponses</button>
+      <p class="feedback-msg" id="ex1-feedback"></p>
+    </div>
+
+    <!-- Exercice 2 -->
+    <div class="card exo">
+      <div class="exo-title"><span class="exo-label">2</span><h3>Retrouvez ces éléments chez Jérôme Patras</h3></div>
+      <p class="exo-instruction">Pour chaque catégorie, recopiez le passage du texte qui correspond. Le premier est fait pour vous.</p>
+      <div class="match-table">
+        <div class="match-row example">
+          <div class="match-label">Situation / Formation</div>
+          <div class="match-value">Exemple : « diplômé d'un master en marketing et communication »</div>
+        </div>
+        <div class="match-row">
+          <div class="match-label">Métier / Projet</div>
+          <div>
+            <input type="text" placeholder="Recopiez la phrase du texte…" data-answer="intégrer une entreprise internationale">
+            <div class="correction">Corrigé : « intégrer une entreprise internationale » (Responsable marketing)</div>
+          </div>
+        </div>
+        <div class="match-row">
+          <div class="match-label">Qualités</div>
+          <div>
+            <input type="text" placeholder="Recopiez la phrase du texte…" data-answer="rigoureux, créatif et ouvert d'esprit, très motivé">
+            <div class="correction">Corrigé : « Rigoureux, créatif et ouvert d'esprit », « très motivé »</div>
+          </div>
+        </div>
+        <div class="match-row">
+          <div class="match-label">Compétences / Langues</div>
+          <div>
+            <input type="text" placeholder="Recopiez la phrase du texte…" data-answer="expérience de 7 ans, parle anglais couramment, maîtrise les bases en espagnol">
+            <div class="correction">Corrigé : « expérience de 7 ans dans la relation clients », « parle anglais couramment et maîtrise les bases en espagnol »</div>
+          </div>
+        </div>
+        <div class="match-row">
+          <div class="match-label">Disponibilité / Mobilité</div>
+          <div>
+            <input type="text" placeholder="Recopiez la phrase du texte…" data-answer="disponible dès maintenant, peux me déplacer dans une autre ville">
+            <div class="correction">Corrigé : « Disponible dès maintenant », « peux me déplacer dans une autre ville »</div>
+          </div>
+        </div>
+      </div>
+      <button class="btn ghost" onclick="toggleCorrections(this)">Voir la correction</button>
+    </div>
+  </section>
+
+  <!-- ============ GRAMMAIRE & LEXIQUE ============ -->
+  <section class="block" id="grammaire">
+    <div class="section-head">
+      <span class="section-num">Boîte à outils</span>
+      <h2>Grammaire &amp; lexique</h2>
+      <p>De quoi construire vos phrases pour l'écriture de votre profil.</p>
+    </div>
+
+    <div class="tool-grid">
+      <div class="card tool-card">
+        <h3>L'accord des adjectifs de qualité</h3>
+        <p class="sub">Utile pour décrire vos qualités professionnelles</p>
+        <table class="gram">
+          <tr><th>Masculin</th><th>Féminin</th><th>Règle</th></tr>
+          <tr><td>Rigoureux, Ambitieux, Curieux</td><td>Rigoureuse, Ambitieuse, Curieuse</td><td class="rule-tag">-eux → -euse</td></tr>
+          <tr><td>Créatif, Actif, Réactif</td><td>Créative, Active, Réactive</td><td class="rule-tag">-if → -ive</td></tr>
+          <tr><td>Motivé, Organisé, Ouvert d'esprit</td><td>Motivée, Organisée, Ouverte d'esprit</td><td class="rule-tag">+ e</td></tr>
+          <tr><td>Dynamique, Sociable, Autonome</td><td>Dynamique, Sociable, Autonome</td><td class="rule-tag">invariable</td></tr>
+        </table>
+      </div>
+
+      <div class="card tool-card">
+        <h3>Structures clés pour votre résumé</h3>
+        <p class="sub">Une expression pour chaque élément du profil</p>
+        <div class="expr-grid">
+          <div class="expr-col">
+            <h4>Situation</h4>
+            <ul>
+              <li>Je suis diplômé(e) de… <i>[diplôme]</i></li>
+              <li>Actuellement étudiant(e) / en recherche d'emploi / en poste.</li>
+            </ul>
+          </div>
+          <div class="expr-col">
+            <h4>Compétences</h4>
+            <ul>
+              <li>J'ai <i>X</i> ans d'expérience.</li>
+              <li>Je parle <i>[langue]</i> couramment.</li>
+              <li>Je maîtrise les bases en <i>[langue]</i>.</li>
+            </ul>
+          </div>
+          <div class="expr-col">
+            <h4>Disponibilité / Mobilité</h4>
+            <ul>
+              <li>Disponible dès maintenant / en <i>[mois]</i>.</li>
+              <li>Je peux me déplacer (à… / en…).</li>
+              <li>Télétravail possible.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card exo">
+      <div class="exo-title"><span class="exo-label">A</span><h3>Entraînez-vous : l'accord de l'adjectif</h3></div>
+      <p class="exo-instruction">Complétez avec la bonne forme de l'adjectif entre parenthèses.</p>
+      <div class="fillblank-list">
+        <div class="fillblank-row" data-answer="organisée">1. Léa est très <input type="text" class="blank-input"> <i>(organisé)</i></div>
+        <div class="fillblank-row" data-answer="dynamique">2. Marc est <input type="text" class="blank-input"> <i>(dynamique)</i></div>
+        <div class="fillblank-row" data-answer="créative">3. Sophie est <input type="text" class="blank-input"> <i>(créatif)</i></div>
+        <div class="fillblank-row" data-answer="rigoureux">4. Thomas est <input type="text" class="blank-input"> <i>(rigoureux)</i></div>
+        <div class="fillblank-row" data-answer="ambitieuse">5. Ana est très <input type="text" class="blank-input"> <i>(ambitieux)</i></div>
+      </div>
+      <button class="btn" onclick="checkFillBlanks()">Vérifier</button>
+      <p class="feedback-msg" id="exoA-feedback"></p>
+    </div>
+
+    <div class="card exo">
+      <div class="exo-title"><span class="exo-label">B</span><h3>Classez les expressions</h3></div>
+      <p class="exo-instruction">Pour chaque expression, choisissez la bonne catégorie.</p>
+      <div class="classify-list">
+        <div class="classify-row" data-answer="situation">
+          <span>« Je suis diplômé(e) de... »</span>
+          <select><option value="">Choisissez…</option><option value="situation">Situation</option><option value="competences">Compétences</option><option value="disponibilite">Disponibilité</option></select>
+        </div>
+        <div class="classify-row" data-answer="competences">
+          <span>« Je parle anglais couramment. »</span>
+          <select><option value="">Choisissez…</option><option value="situation">Situation</option><option value="competences">Compétences</option><option value="disponibilite">Disponibilité</option></select>
+        </div>
+        <div class="classify-row" data-answer="disponibilite">
+          <span>« Disponible dès maintenant. »</span>
+          <select><option value="">Choisissez…</option><option value="situation">Situation</option><option value="competences">Compétences</option><option value="disponibilite">Disponibilité</option></select>
+        </div>
+        <div class="classify-row" data-answer="competences">
+          <span>« J'ai 5 ans d'expérience. »</span>
+          <select><option value="">Choisissez…</option><option value="situation">Situation</option><option value="competences">Compétences</option><option value="disponibilite">Disponibilité</option></select>
+        </div>
+        <div class="classify-row" data-answer="situation">
+          <span>« Actuellement en recherche d'emploi. »</span>
+          <select><option value="">Choisissez…</option><option value="situation">Situation</option><option value="competences">Compétences</option><option value="disponibilite">Disponibilité</option></select>
+        </div>
+        <div class="classify-row" data-answer="disponibilite">
+          <span>« Je peux me déplacer dans une autre ville. »</span>
+          <select><option value="">Choisissez…</option><option value="situation">Situation</option><option value="competences">Compétences</option><option value="disponibilite">Disponibilité</option></select>
+        </div>
+      </div>
+      <button class="btn" onclick="checkClassify()">Vérifier</button>
+      <p class="feedback-msg" id="exoB-feedback"></p>
+    </div>
+  </section>
+
+  <!-- ============ EXPRESSION ECRITE ============ -->
+  <section class="block" id="profil">
+    <div class="section-head">
+      <span class="section-num">Expression écrite</span>
+      <h2>Création de votre profil LinkedIn</h2>
+      <p>3a. Complétez d'abord la fiche avec vos informations (réelles ou un profil fictif). 3b. Utilisez-les pour remplir votre profil LinkedIn ci-dessous — c'est votre devoir.</p>
+    </div>
+
+    <div class="card form-card">
+      <div class="form-grid">
+        <div class="field"><label>Situation actuelle</label><input id="f-situation" type="text" placeholder="ex : actuellement en recherche d'emploi"></div>
+        <div class="field"><label>Poste recherché</label><input id="f-poste" type="text" placeholder="ex : assistant(e) marketing"></div>
+        <div class="field"><label>3 qualités clés</label><input id="f-qualites" type="text" placeholder="ex : rigoureux, créatif, motivé"></div>
+        <div class="field"><label>Langues parlées</label><input id="f-langues" type="text" placeholder="ex : anglais courant, espagnol débutant"></div>
+        <div class="field"><label>Disponibilité</label><input id="f-dispo" type="text" placeholder="ex : dès maintenant / à partir de juin"></div>
+        <div class="field"><label>Mobilité</label><input id="f-mobilite" type="text" placeholder="ex : je peux me déplacer à Buenos Aires"></div>
+      </div>
+      <div class="gen-row">
+        <button class="btn amber" onclick="genererBrouillon()">Générer un brouillon pour mon profil ➜</button>
+      </div>
+    </div>
+
+    <div class="section-head" style="margin-top:40px;">
+      <span class="section-num">Devoir</span>
+      <h2>Votre profil LinkedIn</h2>
+      <p>Un brouillon de 4 à 6 phrases sur le modèle : <i>Actuellement [situation], je suis [poste] avec une expérience de… Je suis [qualité 1], [qualité 2] et [qualité 3]. Je parle… Disponible…, je peux…</i></p>
+    </div>
+
+    <div class="li-wrap" id="linkedin-template">
+      <div class="li-cover"><span>+ Photo de couverture</span></div>
+      <div class="li-photo">Ajouter<br>une photo</div>
+      <div class="li-body">
+        <div class="li-field">
+          <label>Prénom NOM</label>
+          <input type="text" placeholder="Prénom NOM">
+        </div>
+        <div class="li-field headline">
+          <label>Titre professionnel</label>
+          <input type="text" placeholder="ex : Assistant(e) marketing | Recherche d'emploi">
+        </div>
+        <div class="li-field loc">
+          <label>Localisation</label>
+          <input type="text" placeholder="ex : Buenos Aires, Argentine">
+        </div>
+
+        <div class="li-divider"></div>
+
+        <div class="li-about-head">
+          <h4>À propos</h4>
+          <span class="sentence-count" id="sentence-count">0 phrase</span>
+        </div>
+        <textarea id="about" placeholder="Rédigez ici votre résumé professionnel (4 à 6 phrases) : votre situation, le poste recherché, vos qualités, vos langues, votre disponibilité et votre mobilité…" oninput="countSentences()"></textarea>
+
+        <div class="li-actions">
+          <button class="btn ghost" onclick="window.print()">🖨 Imprimer mon profil</button>
+          <button class="btn ghost" onclick="copierTexte()">📋 Copier le texte</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="sticky-note">
+      <b>À faire pour la prochaine fois</b>
+      Complétez votre profil LinkedIn ci-dessus (nom, titre, photo à décrire, résumé de 4 à 6 phrases). Apportez-le au prochain cours pour le jeu de rôle « Entretien LinkedIn ».
+    </div>
+  </section>
+
+</div>
+
+<footer class="marquee-footer">
+  <div class="marquee-track">
+    <span>créé par arinateach</span><span>créé par arinateach</span><span>créé par arinateach</span><span>créé par arinateach</span><span>créé par arinateach</span><span>créé par arinateach</span>
+    <span>créé par arinateach</span><span>créé par arinateach</span><span>créé par arinateach</span><span>créé par arinateach</span><span>créé par arinateach</span><span>créé par arinateach</span>
+  </div>
+</footer>
+
+<script>
+  // ---- nav active state ----
+  const sections = document.querySelectorAll('section.block');
+  const navLinks = document.querySelectorAll('nav.tabs a');
+  window.addEventListener('scroll', () => {
+    let current = sections[0].id;
+    sections.forEach(s => { if (window.scrollY >= s.offsetTop - 90) current = s.id; });
+    navLinks.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + current));
+  });
+
+  // ---- Exercice 1 ----
+  function checkEx1(){
+    const items = document.querySelectorAll('#ex1-list li');
+    let correctCount = 0;
+    items.forEach(li => {
+      const isCorrect = li.dataset.correct === 'true';
+      const checked = li.querySelector('input').checked;
+      li.classList.remove('correct','incorrect');
+      let flag = li.querySelector('.flag');
+      if (flag) flag.remove();
+      const span = document.createElement('span');
+      span.className = 'flag';
+      if (isCorrect && checked){ li.classList.add('correct'); span.textContent = '✓'; li.appendChild(span); correctCount++; }
+      else if (!isCorrect && checked){ li.classList.add('incorrect'); span.textContent = '✗ piège'; li.appendChild(span); }
+      else if (isCorrect && !checked){ li.classList.add('incorrect'); span.textContent = 'à cocher'; li.appendChild(span); }
+    });
+    const msg = document.getElementById('ex1-feedback');
+    msg.classList.add('show');
+    if (correctCount === 4 && document.querySelectorAll('#ex1-list li.incorrect').length === 0){
+      msg.textContent = '✓ Parfait ! Vous avez trouvé les 4 éléments.';
+      msg.className = 'feedback-msg show good';
+    } else {
+      msg.textContent = 'Presque ! Relisez le Document 1 et réessayez — attention au piège.';
+      msg.className = 'feedback-msg show bad';
+    }
+  }
+
+  // ---- Exercice 2 ----
+  function toggleCorrections(btn){
+    const corrections = document.querySelectorAll('.correction');
+    const showing = corrections[0].classList.contains('show');
+    corrections.forEach(c => c.classList.toggle('show', !showing));
+    btn.textContent = showing ? 'Voir la correction' : 'Masquer la correction';
+  }
+
+  // ---- Exercice grammaire A : accord des adjectifs ----
+  function checkFillBlanks(){
+    const rows = document.querySelectorAll('.fillblank-row');
+    let correctCount = 0;
+    rows.forEach(row => {
+      const input = row.querySelector('.blank-input');
+      const answer = row.dataset.answer.toLowerCase();
+      const value = input.value.trim().toLowerCase();
+      row.classList.remove('row-ok','row-bad');
+      if (value === answer){ row.classList.add('row-ok'); correctCount++; }
+      else { row.classList.add('row-bad'); }
+    });
+    const msg = document.getElementById('exoA-feedback');
+    msg.classList.add('show');
+    if (correctCount === rows.length){
+      msg.textContent = '✓ Excellent ! Tous les accords sont corrects.';
+      msg.className = 'feedback-msg show good';
+    } else {
+      msg.textContent = `${correctCount} / ${rows.length} corrects — revoyez le tableau ci-dessus et réessayez.`;
+      msg.className = 'feedback-msg show bad';
+    }
+  }
+
+  // ---- Exercice grammaire B : classer les expressions ----
+  function checkClassify(){
+    const rows = document.querySelectorAll('.classify-row');
+    let correctCount = 0;
+    rows.forEach(row => {
+      const select = row.querySelector('select');
+      row.classList.remove('row-ok','row-bad');
+      if (select.value === row.dataset.answer){ row.classList.add('row-ok'); correctCount++; }
+      else if (select.value !== ''){ row.classList.add('row-bad'); }
+    });
+    const msg = document.getElementById('exoB-feedback');
+    msg.classList.add('show');
+    if (correctCount === rows.length){
+      msg.textContent = '✓ Parfait ! Toutes les expressions sont bien classées.';
+      msg.className = 'feedback-msg show good';
+    } else {
+      msg.textContent = `${correctCount} / ${rows.length} corrects — réessayez.`;
+      msg.className = 'feedback-msg show bad';
+    }
+  }
+
+  // ---- Générer brouillon pour le profil LinkedIn ----
+  function genererBrouillon(){
+    const situation = document.getElementById('f-situation').value.trim() || '[votre situation]';
+    const poste = document.getElementById('f-poste').value.trim() || '[poste recherché]';
+    const qualitesRaw = document.getElementById('f-qualites').value.trim();
+    const langues = document.getElementById('f-langues').value.trim() || '[vos langues]';
+    const dispo = document.getElementById('f-dispo').value.trim() || '[votre disponibilité]';
+    const mobilite = document.getElementById('f-mobilite').value.trim() || '[votre mobilité]';
+
+    let qualitesPhrase = '[vos qualités]';
+    if (qualitesRaw){
+      const q = qualitesRaw.split(',').map(s => s.trim()).filter(Boolean);
+      if (q.length === 1) qualitesPhrase = q[0];
+      else if (q.length === 2) qualitesPhrase = q.join(' et ');
+      else qualitesPhrase = q.slice(0, -1).join(', ') + ' et ' + q[q.length - 1];
+    }
+
+    const phrases = [
+      `Actuellement ${situation}, je suis ${poste}.`,
+      `Je suis ${qualitesPhrase}.`,
+      `Je parle ${langues}.`,
+      `Disponible ${dispo}, je peux me déplacer : ${mobilite}.`
+    ];
+
+    document.getElementById('about').value = phrases.join(' ');
+    countSentences();
+    document.getElementById('linkedin-template').scrollIntoView({behavior:'smooth', block:'center'});
+  }
+
+  // ---- Compteur de phrases ----
+  function countSentences(){
+    const text = document.getElementById('about').value.trim();
+    const count = text ? (text.match(/[.!?]+/g) || []).length : 0;
+    const el = document.getElementById('sentence-count');
+    el.textContent = count + (count === 1 ? ' phrase' : ' phrases');
+    el.classList.toggle('ok', count >= 4 && count <= 6);
+  }
+
+  // ---- Copier le texte ----
+  function copierTexte(){
+    const text = document.getElementById('about').value;
+    if (!text){ alert('Rédigez d\'abord votre résumé.'); return; }
+    navigator.clipboard.writeText(text).then(() => {
+      alert('Texte copié ✓');
+    }).catch(() => {
+      alert('Impossible de copier automatiquement — sélectionnez et copiez le texte manuellement.');
+    });
+  }
+</script>
+
+</body>
+</html>
