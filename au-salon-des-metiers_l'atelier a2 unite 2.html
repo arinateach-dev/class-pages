@@ -1,0 +1,851 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Au Salon des métiers — arinateach</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#F2EAD8;
+    --surface:#FFFCF5;
+    --surface-alt:#E9DFC3;
+    --ink:#25313C;
+    --muted:#5C6874;
+    --steel:#35566F;
+    --steel-dark:#213747;
+    --steel-light:#B9CAD6;
+    --accent:#AE5A38;
+    --accent-light:#EFD9CB;
+    --success:#4C7A56;
+    --success-bg:#E3EEE4;
+    --error:#A6472F;
+    --error-bg:#F4E2DB;
+    --border:#DCCFA9;
+    --radius:10px;
+    --font-head:'Fraunces', serif;
+    --font-body:'Work Sans', sans-serif;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:var(--bg);
+    color:var(--ink);
+    font-family:var(--font-body);
+    line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3{font-family:var(--font-head); color:var(--steel-dark); margin:0 0 .4em 0; font-weight:600;}
+  h1{font-size:1.9rem;}
+  h2{font-size:1.45rem;}
+  h3{font-size:1.1rem; margin-bottom:.6em;}
+  p{margin:0 0 .8em 0;}
+  a{color:var(--steel);}
+  .app{max-width:820px; margin:0 auto; padding:0 20px 0 20px;}
+
+  .topbar{display:flex; align-items:center; justify-content:space-between; padding:22px 0 14px 0;}
+  .brand{font-family:var(--font-head); font-weight:600; font-size:1.15rem; color:var(--steel-dark); letter-spacing:.02em;}
+  .brand span{color:var(--accent);}
+  .hw-btn{
+    background:var(--steel-dark); color:var(--surface); border:none; border-radius:999px;
+    padding:10px 20px; font-family:var(--font-body); font-weight:600; font-size:.92rem;
+    cursor:pointer; display:flex; align-items:center; gap:8px; transition:background .15s ease;
+  }
+  .hw-btn:hover{background:var(--accent);}
+
+  .progress-rail{display:flex; align-items:center; gap:6px; padding:6px 0 20px 0; overflow-x:auto;}
+  .dot{
+    flex:0 0 auto; width:30px; height:30px; border-radius:50%; border:1.5px solid var(--border);
+    background:var(--surface); color:var(--muted); font-size:.8rem; font-weight:600;
+    display:flex; align-items:center; justify-content:center; cursor:pointer; transition:all .15s ease;
+  }
+  .dot:hover{border-color:var(--steel);}
+  .dot.active{background:var(--steel); border-color:var(--steel); color:#fff;}
+  .dot.done{border-color:var(--steel-light); color:var(--steel);}
+  .rail-line{flex:1; height:1px; background:var(--border); min-width:8px;}
+
+  .stage{min-height:340px; padding-bottom:20px;}
+  .step{display:none; animation:fadeIn .25s ease;}
+  .step.active{display:block;}
+  @keyframes fadeIn{ from{opacity:0; transform:translateY(6px);} to{opacity:1; transform:translateY(0);} }
+
+  .kicker{display:inline-block; font-size:.82rem; color:var(--muted); margin-bottom:6px;}
+  .duration{
+    display:inline-block; background:var(--surface-alt); color:var(--steel-dark);
+    border-radius:6px; padding:2px 9px; font-size:.78rem; font-weight:600; margin-left:8px;
+  }
+
+  .card{background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); padding:18px 20px; margin-bottom:16px;}
+  .card h3{color:var(--steel-dark);}
+  .instruction{font-style:italic; color:var(--muted); margin-bottom:10px;}
+
+  .chips{display:flex; flex-wrap:wrap; gap:8px; margin:8px 0 4px 0;}
+  .chip{background:var(--surface-alt); border-radius:999px; padding:5px 13px; font-size:.85rem; color:var(--steel-dark);}
+
+  .options label, .checks label{display:flex; align-items:flex-start; gap:9px; margin:7px 0; cursor:pointer; font-size:.98rem;}
+  input[type="radio"], input[type="checkbox"]{ accent-color:var(--steel); margin-top:3px; }
+
+  table.vocab{width:100%; border-collapse:collapse; margin-top:6px;}
+  table.vocab td{padding:8px 6px; border-bottom:1px solid var(--border); vertical-align:top; font-size:.95rem;}
+  table.vocab td:first-child{font-weight:600; color:var(--steel-dark); white-space:nowrap; width:38%;}
+
+  details.reveal{margin-top:10px; border-top:1px dashed var(--border); padding-top:10px;}
+  details.reveal summary{cursor:pointer; color:var(--steel); font-weight:600; font-size:.9rem; list-style:none; display:flex; align-items:center; gap:6px;}
+  details.reveal summary::-webkit-details-marker{display:none;}
+  details.reveal summary::before{content:"＋"; font-weight:700; color:var(--accent);}
+  details.reveal[open] summary::before{content:"－";}
+  details.reveal .reveal-body{margin-top:8px; background:var(--success-bg); border-radius:8px; padding:10px 14px; font-size:.93rem;}
+  details.reveal .reveal-body.neutral{background:var(--surface-alt);}
+  .quote{font-style:italic; color:var(--steel-dark);}
+
+  /* Auto-check quizzes */
+  .verify-btn{
+    background:var(--accent); color:#fff; border:none; border-radius:999px; padding:7px 16px;
+    font-family:var(--font-body); font-weight:600; font-size:.85rem; cursor:pointer; margin-top:10px;
+  }
+  .verify-btn:hover{background:var(--steel-dark);}
+  .verify-btn.small{padding:4px 12px; font-size:.78rem; margin-top:0;}
+  .feedback{margin-top:9px; font-size:.9rem;}
+  .feedback:empty{display:none; margin:0;}
+  .feedback.correct{background:var(--success-bg); color:var(--success); padding:10px 14px; border-radius:8px;}
+  .feedback.incorrect{background:var(--error-bg); color:var(--error); padding:10px 14px; border-radius:8px;}
+  .feedback.warn{background:var(--surface-alt); color:var(--steel-dark); padding:10px 14px; border-radius:8px;}
+  .mark{margin-left:6px; font-weight:700; font-size:.95rem;}
+  .mark.ok{color:var(--success);}
+  .mark.no{color:var(--error);}
+
+  .vf-item{padding:11px 0; border-bottom:1px solid var(--border);}
+  .vf-item:last-child{border-bottom:none;}
+  .vf-row{display:flex; align-items:center; justify-content:space-between; gap:14px;}
+  .vf-row p{margin:0; flex:1;}
+  .vf-toggle{display:flex; gap:6px; flex:0 0 auto; align-items:center; flex-wrap:wrap;}
+  .vf-toggle button{
+    border:1.5px solid var(--border); background:var(--surface); border-radius:6px;
+    padding:5px 12px; font-size:.85rem; font-family:var(--font-body); font-weight:600; color:var(--muted); cursor:pointer;
+  }
+  .vf-toggle button.picked{border-color:var(--steel); color:var(--steel); background:var(--steel-light);}
+
+  .match-item{display:flex; align-items:center; gap:10px; margin:8px 0;}
+  .match-item span{flex:1;}
+  .match-item select{
+    padding:5px 8px; border-radius:6px; border:1px solid var(--border); font-family:var(--font-body); font-size:.88rem; max-width:230px;
+  }
+
+  .role-cards{display:flex; flex-wrap:wrap; gap:14px; margin-top:8px;}
+  .role-card{flex:1 1 240px; background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); padding:16px;}
+  .role-card h4{margin:0 0 8px 0; font-family:var(--font-head); color:var(--accent); font-size:1.05rem;}
+  .role-card ul{margin:0; padding-left:20px; font-size:.93rem;}
+  .role-card li{margin-bottom:5px;}
+
+  textarea.write-box{
+    width:100%; min-height:90px; margin-top:8px; padding:10px 12px; border-radius:8px;
+    border:1px solid var(--border); background:var(--surface); font-family:var(--font-body); font-size:.95rem; color:var(--ink); resize:vertical;
+  }
+  .word-count{font-size:.78rem; color:var(--muted); text-align:right; margin-top:2px;}
+
+  audio{width:100%; margin:10px 0 4px 0;}
+
+  .support-chain{display:flex; flex-wrap:wrap; align-items:center; gap:6px; font-family:var(--font-head); font-size:1.05rem; color:var(--steel-dark); margin:10px 0;}
+  .support-chain span.arrow{color:var(--accent); font-family:var(--font-body);}
+
+  .objectifs-list{list-style:none; padding:0; margin:0;}
+  .objectifs-list li{padding:9px 0 9px 22px; border-bottom:1px solid var(--border); position:relative; font-size:1rem;}
+  .objectifs-list li:last-child{border-bottom:none;}
+  .objectifs-list li::before{content:"—"; position:absolute; left:0; color:var(--accent);}
+
+  .start-btn{
+    display:inline-block; background:var(--steel); color:#fff; border:none; border-radius:999px;
+    padding:12px 26px; font-family:var(--font-body); font-weight:600; font-size:1rem; cursor:pointer; margin-top:6px;
+  }
+  .start-btn:hover{background:var(--steel-dark);}
+
+  .finish-btn{
+    display:block; margin:22px auto 0 auto; background:var(--success); color:#fff; border:none;
+    border-radius:999px; padding:13px 30px; font-family:var(--font-body); font-weight:700; font-size:1.02rem; cursor:pointer;
+  }
+  .finish-btn:hover{opacity:.88;}
+  .completion-msg{display:none; text-align:center; margin-top:16px; font-family:var(--font-head); font-size:1.25rem; color:var(--steel-dark);}
+  .completion-msg.show{display:block;}
+
+  .stepnav{display:flex; align-items:center; justify-content:space-between; padding:14px 0 20px 0; border-top:1px solid var(--border);}
+  .stepnav button{
+    background:var(--surface); border:1.5px solid var(--steel); color:var(--steel-dark);
+    border-radius:999px; padding:9px 20px; font-family:var(--font-body); font-weight:600; font-size:.92rem; cursor:pointer; transition:all .15s ease;
+  }
+  .stepnav button:hover:not(:disabled){background:var(--steel); color:#fff;}
+  .stepnav button:disabled{opacity:.35; cursor:default;}
+  .stepLabel{font-size:.85rem; color:var(--muted); text-align:center;}
+
+  .marquee{overflow:hidden; white-space:nowrap; background:var(--steel-dark); padding:11px 0;}
+  .marquee-track{display:inline-block; padding-left:100%; animation:scroll 24s linear infinite; font-family:var(--font-head); font-size:.95rem; color:var(--accent-light); letter-spacing:.03em;}
+  .marquee-track span{margin:0 22px; color:var(--surface);}
+  @keyframes scroll{ 0%{transform:translateX(0);} 100%{transform:translateX(-100%);} }
+  @media (prefers-reduced-motion: reduce){ .marquee-track{animation:none; padding-left:16px;} }
+
+  .modal-overlay{display:none; position:fixed; inset:0; background:rgba(33,26,15,.55); align-items:flex-start; justify-content:center; padding:40px 16px; z-index:50; overflow-y:auto;}
+  .modal-overlay.open{display:flex;}
+  .modal{background:var(--surface); border-radius:14px; max-width:640px; width:100%; padding:26px 26px 22px 26px; position:relative;}
+  .modal-close{position:absolute; top:16px; right:16px; background:none; border:none; font-size:1.3rem; color:var(--muted); cursor:pointer; line-height:1;}
+  .modal-close:hover{color:var(--accent);}
+  .modal .kicker{color:var(--accent); font-weight:600;}
+
+  #confettiCanvas{position:fixed; inset:0; pointer-events:none; z-index:200; display:none;}
+
+  @media (max-width:560px){
+    h1{font-size:1.5rem;} h2{font-size:1.2rem;}
+    .card{padding:15px;}
+    .role-cards{flex-direction:column;}
+    .app{padding:0 14px;}
+    .vf-row{flex-direction:column; align-items:flex-start; gap:8px;}
+  }
+</style>
+</head>
+<body>
+
+<canvas id="confettiCanvas"></canvas>
+
+<div class="app">
+  <header class="topbar">
+    <div class="brand">arina<span>teach</span></div>
+    <button class="hw-btn" id="hwBtn">📝 Devoir</button>
+  </header>
+
+  <div class="progress-rail" id="progressRail"></div>
+
+  <main class="stage" id="stage">
+
+    <!-- Step 0 : Objectifs -->
+    <section class="step active" data-step="0">
+      <span class="kicker">Atelier FLE — Parler d'une rencontre</span>
+      <h1>Au Salon des métiers</h1>
+      <p>Nicolas raconte sa journée à un ami. Écoutez, comprenez, et parlez à votre tour de votre recherche d'emploi idéale.</p>
+      <div class="card">
+        <h3>Objectifs de la leçon</h3>
+        <ul class="objectifs-list">
+          <li>Comprendre un dialogue téléphonique authentique</li>
+          <li>Enrichir le vocabulaire de la recherche d'emploi</li>
+          <li>Utiliser le pronom relatif « qui »</li>
+          <li>Parler et écrire à propos de son emploi idéal</li>
+        </ul>
+      </div>
+      <button class="start-btn" onclick="goTo(1)">Commencer →</button>
+    </section>
+
+    <!-- Step 1 : Échauffement -->
+    <section class="step" data-step="1">
+      <span class="kicker">Échauffement<span class="duration">5 min</span></span>
+      <h2>Vous cherchez un emploi</h2>
+      <p class="instruction">Imaginez : vous cherchez un nouvel emploi. Répondez aux questions.</p>
+
+      <div class="card">
+        <p><strong>1. Où cherchez-vous un emploi ?</strong></p>
+        <div class="chips">
+          <span class="chip">Internet</span><span class="chip">un ami</span>
+          <span class="chip">une entreprise</span><span class="chip">un salon professionnel</span>
+        </div>
+        <details class="reveal"><summary>Voir un exemple de réponse</summary>
+          <div class="reveal-body neutral">Je cherche un emploi sur Internet et dans les salons professionnels.</div>
+        </details>
+      </div>
+
+      <div class="card">
+        <p><strong>2. Comment cherchez-vous un emploi ?</strong></p>
+        <details class="reveal"><summary>Voir un exemple de réponse</summary>
+          <div class="reveal-body neutral">J'envoie mon CV à plusieurs entreprises et je parle avec des amis.</div>
+        </details>
+      </div>
+
+      <div class="card">
+        <p><strong>3. Qu'est-ce qui est important pour vous dans un travail ?</strong></p>
+        <div class="chips">
+          <span class="chip">le salaire</span><span class="chip">les horaires</span>
+          <span class="chip">l'ambiance</span><span class="chip">le lieu</span><span class="chip">les collègues</span>
+        </div>
+        <details class="reveal"><summary>Voir un exemple de réponse</summary>
+          <div class="reveal-body neutral">Pour moi, l'ambiance et les collègues sont très importants.</div>
+        </details>
+      </div>
+    </section>
+
+    <!-- Step 2 : Découverte -->
+    <section class="step" data-step="2">
+      <span class="kicker">Découverte<span class="duration">5 min</span></span>
+      <h2>🏢 Le salon des métiers</h2>
+
+      <div class="card quiz-block" data-correct="a">
+        <p><strong>À votre avis, qu'est-ce qu'un salon des métiers ?</strong></p>
+        <div class="options">
+          <label><input type="radio" name="q2a" value="a"> C'est un événement pour chercher un emploi.</label>
+          <label><input type="radio" name="q2a" value="b"> C'est un événement pour vendre des vêtements.</label>
+          <label><input type="radio" name="q2a" value="c"> C'est un événement pour rencontrer des anciens étudiants.</label>
+        </div>
+        <button class="verify-btn" onclick="verifyRadio(this,'q2a')">Vérifier</button>
+        <div class="feedback"></div>
+        <div class="explain" hidden>Un salon des métiers met en relation des personnes qui cherchent un emploi et des entreprises.</div>
+      </div>
+
+      <div class="card">
+        <p><strong>Qui peut-on rencontrer dans un salon des métiers ?</strong></p>
+        <details class="reveal"><summary>Voir un exemple de réponse</summary>
+          <div class="reveal-body neutral">On peut rencontrer des employés, des patrons et des professionnels de différents métiers.</div>
+        </details>
+      </div>
+
+      <div class="card">
+        <h3>Vocabulaire</h3>
+        <table class="vocab">
+          <tr><td>un emploi</td><td>un travail</td></tr>
+          <tr><td>un patron</td><td>le chef d'une entreprise</td></tr>
+          <tr><td>un employé</td><td>une personne qui travaille dans une entreprise</td></tr>
+          <tr><td>un contrat</td><td>un document entre l'employé et l'entreprise</td></tr>
+          <tr><td>chercher un emploi</td><td>essayer de trouver un travail</td></tr>
+          <tr><td>signer un contrat</td><td>mettre sa signature sur un contrat</td></tr>
+        </table>
+      </div>
+    </section>
+
+    <!-- Step 3 : Avant l'écoute -->
+    <section class="step" data-step="3">
+      <span class="kicker">Avant l'écoute<span class="duration">5 min</span></span>
+      <h2>Que va faire Nicolas ?</h2>
+      <div class="card quiz-block" data-correct="chercher,decouvrir">
+        <p>Nicolas téléphone à un ami. Il veut raconter sa journée. Il est allé à un Salon des métiers.</p>
+        <p><strong>À votre avis, pourquoi Nicolas est-il allé au salon ?</strong> (choisissez 2 réponses)</p>
+        <div class="checks">
+          <label><input type="checkbox" value="chercher"> Pour chercher un emploi. <span class="mark"></span></label>
+          <label><input type="checkbox" value="decouvrir"> Pour découvrir différents métiers. <span class="mark"></span></label>
+          <label><input type="checkbox" value="amis"> Pour rencontrer des amis. <span class="mark"></span></label>
+          <label><input type="checkbox" value="entreprise"> Pour trouver une entreprise. <span class="mark"></span></label>
+          <label><input type="checkbox" value="acheter"> Pour acheter quelque chose. <span class="mark"></span></label>
+        </div>
+        <button class="verify-btn" onclick="verifyChecks(this)">Vérifier</button>
+        <div class="feedback"></div>
+      </div>
+    </section>
+
+    <!-- Step 4 : Écoute 1 -->
+    <section class="step" data-step="4">
+      <span class="kicker">Écoute 1 — compréhension globale<span class="duration">5 min</span></span>
+      <h2>🎧 Premier écoute</h2>
+      <audio controls preload="none" src="Parler%20dune%20rencontre%20-%20Site%20compagnon%20Atelier%20FLE.mp3">Votre navigateur ne prend pas en charge la lecture audio.</audio>
+
+      <div class="card quiz-block" data-correct="b">
+        <p><strong>Pourquoi Nicolas appelle-t-il son ami ?</strong></p>
+        <div class="options">
+          <label><input type="radio" name="q4a" value="a"> Il veut lui proposer un emploi.</label>
+          <label><input type="radio" name="q4a" value="b"> Il veut lui raconter sa journée au Salon des métiers.</label>
+          <label><input type="radio" name="q4a" value="c"> Il veut lui demander un conseil.</label>
+        </div>
+        <button class="verify-btn" onclick="verifyRadio(this,'q4a')">Vérifier</button>
+        <div class="feedback"></div>
+        <div class="explain" hidden>Nicolas appelle son ami pour lui raconter sa journée au Salon des métiers.</div>
+      </div>
+
+      <div class="card">
+        <p><strong>Est-ce que Nicolas a une bonne nouvelle ?</strong></p>
+        <details class="reveal"><summary>Voir la réponse</summary>
+          <div class="reveal-body">Oui, il a peut-être trouvé un emploi.</div>
+        </details>
+      </div>
+    </section>
+
+    <!-- Step 5 : Écoute 2 -->
+    <section class="step" data-step="5">
+      <span class="kicker">Écoute 2 — vrai ou faux<span class="duration">8 min</span></span>
+      <h2>🎧 Deuxième écoute</h2>
+      <audio controls preload="none" src="Parler%20dune%20rencontre%20-%20Site%20compagnon%20Atelier%20FLE.mp3">Votre navigateur ne prend pas en charge la lecture audio.</audio>
+
+      <div class="card">
+        <p class="instruction">Vrai ou faux ? Choisissez, puis cliquez sur Vérifier.</p>
+
+        <div class="vf-item" data-correct="vrai">
+          <div class="vf-row">
+            <p>1. Nicolas a visité un salon professionnel.</p>
+            <div class="vf-toggle">
+              <button onclick="pick(this)">Vrai</button><button onclick="pick(this)">Faux</button>
+              <button class="verify-btn small" onclick="verifyVF(this)">Vérifier</button>
+            </div>
+          </div>
+          <div class="feedback"></div>
+          <div class="explain" hidden>Nicolas dit : <span class="quote">« Je voulais te raconter ma journée au Salon des métiers. »</span></div>
+        </div>
+
+        <div class="vf-item" data-correct="faux">
+          <div class="vf-row">
+            <p>2. L'objectif du salon est de faire se rencontrer d'anciens étudiants.</p>
+            <div class="vf-toggle">
+              <button onclick="pick(this)">Vrai</button><button onclick="pick(this)">Faux</button>
+              <button class="verify-btn small" onclick="verifyVF(this)">Vérifier</button>
+            </div>
+          </div>
+          <div class="feedback"></div>
+          <div class="explain" hidden>Le salon <span class="quote">« met en relation des employés avec des patrons »</span>, pas d'anciens étudiants.</div>
+        </div>
+
+        <div class="vf-item" data-correct="faux">
+          <div class="vf-row">
+            <p>3. Pierre travaille dans une usine.</p>
+            <div class="vf-toggle">
+              <button onclick="pick(this)">Vrai</button><button onclick="pick(this)">Faux</button>
+              <button class="verify-btn small" onclick="verifyVF(this)">Vérifier</button>
+            </div>
+          </div>
+          <div class="feedback"></div>
+          <div class="explain" hidden>Pierre <span class="quote">« a retrouvé un emploi dans le cinéma »</span>.</div>
+        </div>
+
+        <div class="vf-item" data-correct="faux">
+          <div class="vf-row">
+            <p>4. Nicolas travaille dans un magasin de fleurs.</p>
+            <div class="vf-toggle">
+              <button onclick="pick(this)">Vrai</button><button onclick="pick(this)">Faux</button>
+              <button class="verify-btn small" onclick="verifyVF(this)">Vérifier</button>
+            </div>
+          </div>
+          <div class="feedback"></div>
+          <div class="explain" hidden>Nicolas est informaticien : <span class="quote">« j'ai fait la connaissance d'un directeur qui cherche un informaticien… comme moi ! »</span></div>
+        </div>
+
+        <div class="vf-item" data-correct="vrai">
+          <div class="vf-row">
+            <p>5. Nicolas a trouvé du travail.</p>
+            <div class="vf-toggle">
+              <button onclick="pick(this)">Vrai</button><button onclick="pick(this)">Faux</button>
+              <button class="verify-btn small" onclick="verifyVF(this)">Vérifier</button>
+            </div>
+          </div>
+          <div class="feedback"></div>
+          <div class="explain" hidden><span class="quote">« On va signer un contrat. »</span></div>
+        </div>
+
+        <div class="vf-item" data-correct="vrai">
+          <div class="vf-row">
+            <p>6. Le salon professionnel a lieu une fois par an.</p>
+            <div class="vf-toggle">
+              <button onclick="pick(this)">Vrai</button><button onclick="pick(this)">Faux</button>
+              <button class="verify-btn small" onclick="verifyVF(this)">Vérifier</button>
+            </div>
+          </div>
+          <div class="feedback"></div>
+          <div class="explain" hidden><span class="quote">« ce salon est organisé chaque année »</span>.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Step 6 : Grammaire -->
+    <section class="step" data-step="6">
+      <span class="kicker">Grammaire<span class="duration">7 min</span></span>
+      <h2>Le pronom relatif « qui »</h2>
+
+      <div class="card">
+        <p>« Qui » relie deux phrases et remplace le sujet de la deuxième phrase.</p>
+        <p>Le directeur cherche un informaticien. → <strong>C'est un directeur qui cherche un informaticien.</strong></p>
+        <p>Le salon met en relation des employés et des patrons. → <strong>C'est un salon qui met en relation des employés et des patrons.</strong></p>
+      </div>
+
+      <div class="card match-block">
+        <h3>À vous : reliez les phrases</h3>
+        <div class="match-item">
+          <span>1. Je cherche une entreprise…</span>
+          <select data-correct="d">
+            <option value="">— choisir —</option>
+            <option value="a">a. qui propose de bons horaires.</option>
+            <option value="b">b. qui cherche des employés.</option>
+            <option value="c">c. qui me plaît.</option>
+            <option value="d">d. qui est près de chez moi.</option>
+          </select>
+          <span class="mark"></span>
+        </div>
+        <div class="match-item">
+          <span>2. Je voudrais avoir un emploi…</span>
+          <select data-correct="a">
+            <option value="">— choisir —</option>
+            <option value="a">a. qui propose de bons horaires.</option>
+            <option value="b">b. qui cherche des employés.</option>
+            <option value="c">c. qui me plaît.</option>
+            <option value="d">d. qui est près de chez moi.</option>
+          </select>
+          <span class="mark"></span>
+        </div>
+        <div class="match-item">
+          <span>3. Je veux rencontrer un patron…</span>
+          <select data-correct="b">
+            <option value="">— choisir —</option>
+            <option value="a">a. qui propose de bons horaires.</option>
+            <option value="b">b. qui cherche des employés.</option>
+            <option value="c">c. qui me plaît.</option>
+            <option value="d">d. qui est près de chez moi.</option>
+          </select>
+          <span class="mark"></span>
+        </div>
+        <div class="match-item">
+          <span>4. Je cherche un travail…</span>
+          <select data-correct="c">
+            <option value="">— choisir —</option>
+            <option value="a">a. qui propose de bons horaires.</option>
+            <option value="b">b. qui cherche des employés.</option>
+            <option value="c">c. qui me plaît.</option>
+            <option value="d">d. qui est près de chez moi.</option>
+          </select>
+          <span class="mark"></span>
+        </div>
+        <button class="verify-btn" onclick="verifyMatch(this)">Vérifier</button>
+        <div class="feedback"></div>
+      </div>
+
+      <div class="card">
+        <p><strong>Faites deux phrases sur votre travail idéal avec « qui ».</strong></p>
+        <textarea class="write-box" placeholder="Écrivez ici…" oninput="countWords(this)"></textarea>
+        <div class="word-count">0 mot(s)</div>
+        <details class="reveal"><summary>Voir un exemple de réponse</summary>
+          <div class="reveal-body neutral">Je cherche un travail qui est intéressant. Je voudrais travailler dans une entreprise qui est internationale.</div>
+        </details>
+      </div>
+    </section>
+
+    <!-- Step 7 : Pratique -->
+    <section class="step" data-step="7">
+      <span class="kicker">Pratique — jeu de rôle<span class="duration">5 min</span></span>
+      <h2>Quel emploi cherchez-vous ?</h2>
+      <p class="instruction">Faites l'interview, puis changez de rôle.</p>
+      <div class="role-cards">
+        <div class="role-card">
+          <h4>A — le recruteur</h4>
+          <ul>
+            <li>Quel emploi cherchez-vous ?</li>
+            <li>Pourquoi ?</li>
+            <li>Où voulez-vous travailler ?</li>
+            <li>Qu'est-ce qui est important pour vous ?</li>
+          </ul>
+        </div>
+        <div class="role-card">
+          <h4>B — le candidat</h4>
+          <ul>
+            <li>Je cherche un emploi comme…</li>
+            <li>Je voudrais travailler dans…</li>
+            <li>Je cherche un travail qui…</li>
+            <li>Pour moi, il est important de…</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Step 8 : Production -->
+    <section class="step" data-step="8">
+      <span class="kicker">Production<span class="duration">10 min</span></span>
+      <h2>Au Salon des métiers</h2>
+      <div class="card">
+        <p>Vous êtes au Salon des métiers. Vous cherchez un emploi et vous rencontrez un professionnel.</p>
+        <p class="instruction">Utilisez au moins 2 phrases avec « qui ».</p>
+      </div>
+      <div class="role-cards">
+        <div class="role-card">
+          <h4>Carte A — vous cherchez un emploi</h4>
+          <p style="font-size:.9rem; margin-bottom:6px;">Parlez de :</p>
+          <ul>
+            <li>votre métier</li>
+            <li>l'entreprise où vous voulez travailler</li>
+            <li>le type d'emploi que vous cherchez</li>
+            <li>ce qui est important pour vous</li>
+          </ul>
+        </div>
+        <div class="role-card">
+          <h4>Carte B — vous êtes recruteur</h4>
+          <p style="font-size:.9rem; margin-bottom:6px;">Expliquez :</p>
+          <ul>
+            <li>quel poste vous proposez</li>
+            <li>où vous travaillez</li>
+            <li>ce que la personne doit faire</li>
+            <li>quel type de personne vous cherchez</li>
+          </ul>
+        </div>
+      </div>
+      <div class="card" style="margin-top:14px;">
+        <details class="reveal"><summary>Voir un exemple de dialogue</summary>
+          <div class="reveal-body neutral">
+            — Bonjour, vous cherchez un emploi ?<br>
+            — Oui, je cherche un emploi comme informaticien.<br>
+            — Nous cherchons justement un informaticien qui connaît bien les ordinateurs.<br>
+            — Ah, c'est intéressant ! Où est-ce que vous travaillez ?<br>
+            — Je travaille dans une entreprise qui développe des applications.
+          </div>
+        </details>
+      </div>
+    </section>
+
+    <!-- Step 9 : Conclusion -->
+    <section class="step" data-step="9">
+      <span class="kicker">Conclusion<span class="duration">3 min</span></span>
+      <h2>Retour à Nicolas</h2>
+      <div class="card">
+        <p><strong>Racontez l'histoire de Nicolas en 4 à 5 phrases.</strong></p>
+        <div class="support-chain">
+          Nicolas <span class="arrow">→</span> salon professionnel <span class="arrow">→</span> professions <span class="arrow">→</span> directeur <span class="arrow">→</span> informaticien <span class="arrow">→</span> contrat
+        </div>
+        <textarea class="write-box" placeholder="Écrivez ici…" oninput="countWords(this)"></textarea>
+        <div class="word-count">0 mot(s)</div>
+        <details class="reveal"><summary>Voir un exemple de réponse</summary>
+          <div class="reveal-body neutral">Nicolas est allé à un Salon des métiers. Il a vu différents métiers. Il a rencontré un directeur qui cherche un informaticien. Nicolas est informaticien. Il a trouvé un emploi et il va signer un contrat.</div>
+        </details>
+      </div>
+
+      <button class="finish-btn" onclick="finishLesson()">🎉 Terminer la leçon</button>
+      <p class="completion-msg" id="completionMsg">Bravo, vous avez terminé la leçon ! 🎉</p>
+    </section>
+
+  </main>
+
+  <nav class="stepnav">
+    <button id="prevBtn" onclick="prevStep()">← Précédent</button>
+    <span class="stepLabel" id="stepLabel"></span>
+    <button id="nextBtn" onclick="nextStep()">Suivant →</button>
+  </nav>
+</div>
+
+<div class="marquee">
+  <div class="marquee-track">
+    <span>✦ arinateach</span><span>✦ cours de français, anglais, espagnol et russe</span><span>✦ arinateach</span><span>✦ cours de français, anglais, espagnol et russe</span><span>✦ arinateach</span><span>✦ cours de français, anglais, espagnol et russe</span>
+  </div>
+</div>
+
+<!-- Homework modal -->
+<div class="modal-overlay" id="hwModal">
+  <div class="modal">
+    <button class="modal-close" id="hwClose" onclick="closeHw()">✕</button>
+    <span class="kicker">Devoir</span>
+    <h2>Mon emploi idéal</h2>
+    <p>Imaginez que vous cherchez un nouvel emploi. Écrivez 6 à 8 phrases.</p>
+    <div class="card">
+      <p style="margin-bottom:6px;"><strong>Utilisez :</strong></p>
+      <div class="chips">
+        <span class="chip">Je cherche un emploi comme…</span>
+        <span class="chip">Je voudrais travailler dans…</span>
+        <span class="chip">Je cherche un travail qui…</span>
+        <span class="chip">Je voudrais travailler avec…</span>
+        <span class="chip">Pour moi, il est important de…</span>
+        <span class="chip">Je ne veux pas…</span>
+        <span class="chip">J'aimerais trouver une entreprise qui…</span>
+      </div>
+      <p style="margin-top:8px; font-size:.9rem; color:var(--muted);">+ au moins 1 phrase avec « qui ».</p>
+    </div>
+    <textarea class="write-box" style="min-height:140px;" placeholder="Écrivez votre texte ici…" oninput="countWords(this)"></textarea>
+    <div class="word-count">0 mot(s)</div>
+    <details class="reveal"><summary>Voir un exemple de réponse</summary>
+      <div class="reveal-body neutral">Je cherche un emploi comme professeur. Je voudrais travailler dans une école de langues. Je cherche un travail qui est intéressant et créatif. Je voudrais travailler avec des adultes. Pour moi, il est important d'avoir de bons collègues. Je ne veux pas travailler seul. J'aimerais trouver une entreprise qui respecte ses employés.</div>
+    </details>
+  </div>
+</div>
+
+<script>
+  const stepNames = ["Objectifs","Échauffement","Découverte","Avant l'écoute","Écoute 1","Écoute 2","Grammaire","Pratique","Production","Conclusion"];
+  const steps = document.querySelectorAll('.step');
+  const rail = document.getElementById('progressRail');
+  let current = 0;
+
+  stepNames.forEach((name, i) => {
+    const dot = document.createElement('div');
+    dot.className = 'dot';
+    dot.textContent = i + 1;
+    dot.title = name;
+    dot.onclick = () => goTo(i);
+    rail.appendChild(dot);
+    if (i < stepNames.length - 1) {
+      const line = document.createElement('div');
+      line.className = 'rail-line';
+      rail.appendChild(line);
+    }
+  });
+
+  function render(){
+    steps.forEach((s, i) => s.classList.toggle('active', i === current));
+    const dots = rail.querySelectorAll('.dot');
+    dots.forEach((d, i) => {
+      d.classList.toggle('active', i === current);
+      d.classList.toggle('done', i < current);
+    });
+    document.getElementById('stepLabel').textContent = (current+1) + ' / ' + steps.length + ' — ' + stepNames[current];
+    document.getElementById('prevBtn').disabled = current === 0;
+    document.getElementById('nextBtn').disabled = current === steps.length - 1;
+    window.scrollTo({top:0, behavior:'smooth'});
+  }
+  function goTo(i){ current = i; render(); }
+  function nextStep(){ if(current < steps.length-1){ current++; render(); } }
+  function prevStep(){ if(current > 0){ current--; render(); } }
+  render();
+
+  // Vrai/Faux picker
+  function pick(btn){
+    const group = btn.parentElement.querySelectorAll('button:not(.verify-btn)');
+    group.forEach(b => b.classList.remove('picked'));
+    btn.classList.add('picked');
+  }
+
+  // Word counter
+  function countWords(el){
+    const text = el.value.trim();
+    const n = text.length ? text.split(/\s+/).length : 0;
+    el.parentElement.querySelector('.word-count').textContent = n + ' mot(s)';
+  }
+
+  // Auto-check: single-answer radio quiz
+  function verifyRadio(btn, groupName){
+    const block = btn.closest('.quiz-block');
+    const correct = block.dataset.correct;
+    const checked = block.querySelector('input[name="' + groupName + '"]:checked');
+    const feedback = block.querySelector('.feedback');
+    const explainEl = block.querySelector('.explain');
+    const explain = explainEl ? explainEl.innerHTML : '';
+    if(!checked){
+      feedback.className = 'feedback warn';
+      feedback.innerHTML = 'Choisissez une réponse d\u2019abord.';
+      return;
+    }
+    if(checked.value === correct){
+      feedback.className = 'feedback correct';
+      feedback.innerHTML = '✓ Correct ! ' + explain;
+    } else {
+      feedback.className = 'feedback incorrect';
+      feedback.innerHTML = '✗ Pas tout à fait. ' + explain;
+    }
+  }
+
+  // Auto-check: checkbox quiz (multi-answer)
+  function verifyChecks(btn){
+    const block = btn.closest('.quiz-block');
+    const correctSet = block.dataset.correct.split(',');
+    const boxes = block.querySelectorAll('input[type="checkbox"]');
+    let allGood = true;
+    boxes.forEach(box => {
+      const shouldBe = correctSet.includes(box.value);
+      const mark = box.parentElement.querySelector('.mark');
+      if(box.checked === shouldBe){
+        mark.textContent = box.checked ? '✓' : '';
+        mark.className = 'mark ok';
+      } else {
+        mark.textContent = box.checked ? '✗' : '(manquant)';
+        mark.className = 'mark no';
+        allGood = false;
+      }
+    });
+    const feedback = block.querySelector('.feedback');
+    feedback.className = allGood ? 'feedback correct' : 'feedback incorrect';
+    feedback.innerHTML = allGood ? '✓ Exactement !' : '✗ Regardez les cases marquées et réessayez.';
+  }
+
+  // Auto-check: Vrai/Faux item
+  function verifyVF(btn){
+    const item = btn.closest('.vf-item');
+    const correct = item.dataset.correct;
+    const pickedBtn = item.querySelector('.vf-toggle button.picked');
+    const feedback = item.querySelector('.feedback');
+    const explain = item.querySelector('.explain').innerHTML;
+    if(!pickedBtn){
+      feedback.className = 'feedback warn';
+      feedback.innerHTML = 'Choisissez Vrai ou Faux d\u2019abord.';
+      return;
+    }
+    const pickedVal = pickedBtn.textContent.trim().toLowerCase();
+    if(pickedVal === correct){
+      feedback.className = 'feedback correct';
+      feedback.innerHTML = '✓ Correct. ' + explain;
+    } else {
+      feedback.className = 'feedback incorrect';
+      feedback.innerHTML = '✗ La bonne réponse est ' + correct.toUpperCase() + '. ' + explain;
+    }
+  }
+
+  // Auto-check: qui-matching exercise
+  function verifyMatch(btn){
+    const block = btn.closest('.match-block');
+    const selects = block.querySelectorAll('select');
+    let correctCount = 0;
+    selects.forEach(sel => {
+      const mark = sel.parentElement.querySelector('.mark');
+      if(!sel.value){
+        mark.textContent = '';
+        mark.className = 'mark';
+        return;
+      }
+      if(sel.value === sel.dataset.correct){
+        mark.textContent = '✓';
+        mark.className = 'mark ok';
+        correctCount++;
+      } else {
+        mark.textContent = '✗';
+        mark.className = 'mark no';
+      }
+    });
+    const feedback = block.querySelector('.feedback');
+    if(correctCount === selects.length){
+      feedback.className = 'feedback correct';
+      feedback.innerHTML = '✓ Les 4 associations sont correctes !';
+    } else {
+      feedback.className = 'feedback incorrect';
+      feedback.innerHTML = correctCount + ' / ' + selects.length + ' correctes. Regardez les ✗ et réessayez.';
+    }
+  }
+
+  // Homework modal
+  const hwModal = document.getElementById('hwModal');
+  document.getElementById('hwBtn').onclick = () => hwModal.classList.add('open');
+  function closeHw(){ hwModal.classList.remove('open'); }
+  hwModal.addEventListener('click', (e) => { if(e.target === hwModal) closeHw(); });
+
+  // Confetti on lesson completion
+  function launchConfetti(){
+    const reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if(reduceMotion) return;
+    const canvas = document.getElementById('confettiCanvas');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    canvas.style.display = 'block';
+    const ctx = canvas.getContext('2d');
+    const colors = ['#35566F','#AE5A38','#4C7A56','#E9DFC3','#B9CAD6'];
+    const pieces = [];
+    for(let i=0;i<140;i++){
+      pieces.push({
+        x: Math.random()*canvas.width,
+        y: -20 - Math.random()*canvas.height*0.4,
+        w: 6+Math.random()*6,
+        h: 8+Math.random()*8,
+        color: colors[Math.floor(Math.random()*colors.length)],
+        vy: 2+Math.random()*3,
+        vx: -1.5+Math.random()*3,
+        rot: Math.random()*360,
+        vr: -6+Math.random()*12
+      });
+    }
+    let frame = 0;
+    const maxFrames = 220;
+    function draw(){
+      ctx.clearRect(0,0,canvas.width,canvas.height);
+      pieces.forEach(p => {
+        p.x += p.vx; p.y += p.vy; p.rot += p.vr;
+        ctx.save();
+        ctx.translate(p.x,p.y);
+        ctx.rotate(p.rot*Math.PI/180);
+        ctx.fillStyle = p.color;
+        ctx.fillRect(-p.w/2,-p.h/2,p.w,p.h);
+        ctx.restore();
+      });
+      frame++;
+      if(frame < maxFrames){
+        requestAnimationFrame(draw);
+      } else {
+        canvas.style.display = 'none';
+        ctx.clearRect(0,0,canvas.width,canvas.height);
+      }
+    }
+    draw();
+  }
+
+  function finishLesson(){
+    launchConfetti();
+    document.getElementById('completionMsg').classList.add('show');
+  }
+</script>
+
+</body>
+</html>
