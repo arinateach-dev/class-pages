@@ -1,0 +1,1068 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dois-tu te couper du web ? — Leçon A2 | arinateach</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600&family=Work+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#2b2a28;
+    --ink-soft:#5a5650;
+    --paper:#f4ecdf;
+    --paper-2:#ece0c9;
+    --steel:#3c5b6e;
+    --steel-dark:#2a4351;
+    --steel-tint:#cfdde1;
+    --steel-tint-2:#e3ecee;
+    --sage:#5d7a52;
+    --sage-dark:#42592f;
+    --sage-tint:#dbe6c9;
+    --sage-tint-2:#eaf0dd;
+    --rust:#a85940;
+    --rust-tint:#ecd9cf;
+    --line:rgba(43,42,40,.15);
+    --shadow: 0 1px 0 rgba(43,42,40,.06);
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Work Sans', sans-serif;
+    font-size:16px;
+    line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3{
+    font-family:'Fraunces', serif;
+    font-weight:500;
+    margin:0 0 .4em 0;
+    color:var(--ink);
+  }
+  p{margin:0 0 .9em 0;}
+  .wrap{max-width:760px; margin:0 auto; padding:0 24px;}
+  a{color:inherit;}
+
+  /* ---------- TOC ---------- */
+  nav.toc{
+    position:sticky; top:0; z-index:40;
+    background:rgba(244,236,223,.94);
+    backdrop-filter:blur(6px);
+    border-bottom:1px solid var(--line);
+  }
+  nav.toc .toc-inner{
+    max-width:760px; margin:0 auto; padding:10px 24px;
+    display:flex; gap:8px; overflow-x:auto;
+    scrollbar-width:none;
+  }
+  nav.toc .toc-inner::-webkit-scrollbar{display:none;}
+  nav.toc a{
+    flex:0 0 auto;
+    font-size:13.5px;
+    text-decoration:none;
+    color:var(--steel-dark);
+    background:var(--steel-tint-2);
+    border:1px solid var(--steel-tint);
+    padding:6px 13px;
+    border-radius:100px;
+    white-space:nowrap;
+    transition:background .15s ease, color .15s ease;
+  }
+  nav.toc a:hover{background:var(--steel-tint);}
+  .toc-btn{
+    font-family:'Work Sans', sans-serif;
+    flex:0 0 auto;
+    font-size:13.5px;
+    color:var(--paper);
+    background:var(--steel-dark);
+    border:1px solid var(--steel-dark);
+    padding:6px 13px;
+    border-radius:100px;
+    white-space:nowrap;
+    cursor:pointer;
+    transition:background .15s ease;
+  }
+  .toc-btn:hover{background:var(--ink);}
+
+  /* ---------- HERO ---------- */
+  header.hero{
+    padding:52px 0 38px 0;
+    border-bottom:1px solid var(--line);
+  }
+  header.hero .eyebrow{
+    font-size:14px; color:var(--ink-soft); margin-bottom:14px;
+  }
+  header.hero h1{
+    font-size:clamp(30px,5vw,42px);
+    line-height:1.12;
+    max-width:14ch;
+  }
+  header.hero .sub{
+    color:var(--ink-soft); font-size:15.5px; max-width:46ch; margin-top:10px;
+  }
+  .signal-leaf{
+    display:flex; align-items:flex-end; gap:7px; margin-top:32px; height:46px;
+  }
+  .signal-leaf .bar{
+    width:12px; border-radius:4px 4px 0 0;
+  }
+  .signal-leaf .leaf{
+    width:20px; height:20px; margin-left:4px;
+    background:var(--sage);
+    border-radius:0 100% 0 100%;
+    transform:rotate(45deg);
+    align-self:center;
+  }
+
+  /* ---------- SECTIONS ---------- */
+  main{padding-bottom:30px;}
+  section{padding:44px 0; border-bottom:1px solid var(--line);}
+  .sec-head{
+    display:flex; align-items:baseline; justify-content:space-between;
+    gap:16px; margin-bottom:6px;
+  }
+  .sec-head h2{font-size:23px;}
+  .sec-num{
+    font-family:'Fraunces', serif; font-weight:400; font-size:15px;
+    color:var(--ink-soft); margin-right:10px;
+  }
+  .duration{
+    font-size:13px; color:var(--ink-soft); white-space:nowrap;
+    border:1px solid var(--line); padding:3px 10px; border-radius:100px;
+  }
+  .sec-intro{color:var(--ink-soft); font-size:15px; margin-bottom:20px;}
+
+  /* ---------- WARM-UP ICONS ---------- */
+  .duo{
+    display:grid; grid-template-columns:1fr 1fr; gap:20px; margin:24px 0;
+  }
+  .duo-card{
+    padding:20px; border-radius:6px;
+  }
+  .duo-card.stress{background:var(--steel-tint-2); border:1px solid var(--steel-tint);}
+  .duo-card.calm{background:var(--sage-tint-2); border:1px solid var(--sage-tint);}
+  .duo-card svg{
+    display:block; width:100%; height:120px;
+    border-radius:5px; margin-bottom:14px;
+  }
+  .duo-card h3{font-size:16px; margin-bottom:6px;}
+  .duo-card p{font-size:14px; color:var(--ink-soft); margin:0;}
+  .prompt-box{
+    margin-top:18px; padding:14px 18px; background:var(--paper-2);
+    border-radius:6px; font-size:15px;
+  }
+  .prompt-box .q{font-family:'Fraunces',serif; font-style:italic;}
+
+  /* ---------- VOCAB / FLASHCARDS ---------- */
+  .deck-block{margin-bottom:34px;}
+  .deck-title{
+    display:flex; align-items:center; gap:9px; margin-bottom:14px;
+  }
+  .dot{width:10px; height:10px; border-radius:50%;}
+  .dot.steel{background:var(--steel);}
+  .dot.sage{background:var(--sage);}
+  .deck-title h3{font-size:16.5px; margin:0;}
+  .cards-grid{
+    display:grid; grid-template-columns:repeat(3,1fr); gap:12px;
+  }
+  .card{
+    perspective:1000px; height:168px; cursor:pointer;
+  }
+  .card:focus-visible .card-inner{outline:2px solid var(--steel-dark); outline-offset:2px;}
+  .card-inner{
+    position:relative; width:100%; height:100%;
+    transform-style:preserve-3d; transition:transform .5s cubic-bezier(.4,.2,.2,1);
+  }
+  .card.flipped .card-inner{transform:rotateY(180deg);}
+  .card-face{
+    position:absolute; inset:0; backface-visibility:hidden;
+    border-radius:7px; padding:14px; display:flex; align-items:center; justify-content:center;
+    text-align:center; overflow:hidden;
+  }
+  .card-front{
+    background:var(--paper); border:1.5px solid var(--line);
+    font-family:'Fraunces', serif; font-size:16px; font-weight:500;
+  }
+  .card-back{
+    transform:rotateY(180deg);
+    background:var(--steel-dark); color:var(--paper);
+    flex-direction:column; gap:7px; font-size:12.5px;
+  }
+  .deck-block.detente .card-back{background:var(--sage-dark);}
+  .card-back .def{margin:0; line-height:1.36;}
+  .card-back .ru{margin:0; color:var(--paper-2); font-style:italic; line-height:1.36; font-size:12px;}
+  .card-hint{font-size:11.5px; color:var(--ink-soft); margin-top:10px;}
+
+  .chipset{display:flex; flex-wrap:wrap; gap:8px; margin-top:16px;}
+  .chip{
+    font-size:13px; padding:5px 12px; border-radius:100px; cursor:default;
+    border:1px solid var(--line); background:var(--paper);
+  }
+  .chip.stress{border-color:var(--steel-tint); }
+  .chip.detox{border-color:var(--sage-tint);}
+  .chip.pickable{cursor:pointer;}
+  .chip.pickable:hover{background:var(--paper-2);}
+
+  .checkpoint{
+    margin-top:20px; padding:16px 18px; border-radius:6px; background:var(--paper-2);
+  }
+  .checkpoint-label{font-size:13.5px; color:var(--ink-soft); margin:0 0 12px 0;}
+  .cp-item{margin-bottom:14px;}
+  .cp-item:last-child{margin-bottom:0;}
+  .cp-prompt{font-size:14px; font-style:italic; margin:0 0 8px 0;}
+  .cp-opts{display:flex; gap:7px; flex-wrap:wrap;}
+  .cp-opts button{
+    font-family:'Work Sans', sans-serif; font-size:12.5px;
+    padding:6px 11px; border-radius:5px; border:1px solid var(--line);
+    background:#fff; cursor:pointer; color:var(--ink);
+  }
+  .cp-opts button.correct{background:var(--sage); color:#fff; border-color:var(--sage);}
+  .cp-opts button.incorrect{background:var(--rust); color:#fff; border-color:var(--rust);}
+  .cp-opts button:disabled{cursor:default;}
+
+  /* ---------- QUIZ ---------- */
+  .quiz-cols{display:grid; grid-template-columns:1fr 1fr; gap:26px;}
+  .quiz-item{padding:12px 0; border-bottom:1px solid var(--line);}
+  .quiz-item p{font-size:14.5px; margin:0 0 8px 0;}
+  .quiz-opts{display:flex; gap:6px; flex-wrap:wrap;}
+  .quiz-opts button{
+    font-family:'Work Sans', sans-serif; font-size:12.5px;
+    padding:5px 10px; border-radius:5px; border:1px solid var(--line);
+    background:var(--paper); cursor:pointer; color:var(--ink-soft);
+  }
+  .quiz-opts button.active{
+    background:var(--steel-dark); color:var(--paper); border-color:var(--steel-dark);
+  }
+  .discussion{
+    margin-top:26px; background:var(--sage-tint-2); border:1px solid var(--sage-tint);
+    border-radius:6px; padding:18px 22px;
+  }
+  .discussion h3{font-size:15.5px; margin-bottom:10px;}
+  .discussion ul{margin:0; padding-left:20px; font-size:14.5px;}
+  .discussion li{margin-bottom:6px;}
+
+  /* ---------- CONSEILS ---------- */
+  .friend-card{
+    background:var(--steel-tint-2); border:1px solid var(--steel-tint);
+    border-radius:6px; padding:20px 22px; margin-bottom:26px;
+    display:flex; gap:18px; align-items:flex-start;
+  }
+  .friend-card svg{
+    width:84px; height:84px; flex:0 0 auto; border-radius:50%;
+  }
+  .friend-card h3{font-size:16px; margin-bottom:6px;}
+  .friend-card p{font-size:14.5px; margin:0; color:var(--ink);}
+  .howto{
+    display:flex; gap:22px; flex-wrap:wrap;
+    background:var(--paper-2); border-radius:6px; padding:14px 18px; margin-bottom:24px;
+  }
+  .howto p{margin:0; font-size:13.5px; color:var(--ink-soft); display:flex; gap:8px;}
+  .howto b{
+    font-family:'Fraunces', serif; color:var(--steel-dark); font-size:15px; flex:0 0 auto;
+  }
+  .plan-card textarea.active-target{
+    border-color:var(--steel-dark); box-shadow:0 0 0 2px rgba(60,91,110,.18);
+    background:#fff;
+  }
+  .plan-card textarea.just-filled{
+    animation:filled-pulse .5s ease;
+  }
+  @keyframes filled-pulse{
+    0%{background:var(--steel-tint);}
+    100%{background:#fff;}
+  }
+  .plan-group{margin-bottom:22px;}
+  .plan-group .glabel{
+    font-size:12.5px; text-transform:none; color:var(--ink-soft); margin-bottom:8px;
+  }
+  .plan-grid{display:grid; grid-template-columns:1fr 1fr 1fr; gap:12px;}
+  .plan-grid.two{grid-template-columns:1fr 1fr;}
+  .plan-card{
+    border-radius:6px; padding:12px; display:flex; flex-direction:column; gap:8px;
+  }
+  .plan-card.ok{background:var(--sage-tint-2); border:1px solid var(--sage-tint);}
+  .plan-card.no{background:var(--rust-tint); border:1px solid #ddb9a9;}
+  .plan-card .starter{font-family:'Fraunces', serif; font-size:15px;}
+  .plan-card textarea{
+    width:100%; min-height:52px; resize:vertical; font-family:'Work Sans', sans-serif;
+    font-size:13.5px; border:1px solid var(--line); border-radius:4px; padding:7px 9px;
+    background:rgba(255,255,255,.55);
+  }
+  .vocab-strip{margin-top:20px;}
+  .vocab-strip .vlabel{font-size:13px; color:var(--ink-soft); margin-bottom:8px;}
+
+  /* ---------- SYNTHESE ---------- */
+  .commit-box{
+    background:var(--paper-2); border-radius:6px; padding:22px;
+    display:flex; align-items:center; gap:16px;
+  }
+  .commit-box .leaf-mark{
+    width:26px; height:26px; background:var(--sage); border-radius:0 100% 0 100%;
+    transform:rotate(45deg); flex:0 0 auto;
+  }
+  .commit-box p{margin:0; font-family:'Fraunces', serif; font-size:17px; font-style:italic;}
+
+  /* ---------- DEVOIRS (modal) ---------- */
+  .modal-backdrop{
+    position:fixed; inset:0; background:rgba(43,42,40,.5);
+    display:flex; align-items:flex-start; justify-content:center;
+    padding:36px 20px; z-index:100; overflow-y:auto;
+  }
+  .modal-backdrop[hidden]{display:none;}
+  .modal{
+    background:var(--paper); border-radius:10px; max-width:700px; width:100%;
+    box-shadow:0 20px 50px rgba(0,0,0,.25);
+  }
+  .modal-head{
+    display:flex; align-items:center; justify-content:space-between;
+    padding:20px 26px; border-bottom:1px solid var(--line);
+    position:sticky; top:0; background:var(--paper); border-radius:10px 10px 0 0;
+  }
+  .modal-head h2{font-size:21px; margin:0;}
+  .modal-head-actions{display:flex; align-items:center; gap:10px;}
+  .btn-ghost{
+    font-family:'Work Sans', sans-serif; font-size:13px; color:var(--steel-dark);
+    background:var(--steel-tint-2); border:1px solid var(--steel-tint);
+    padding:7px 14px; border-radius:100px; cursor:pointer;
+  }
+  .btn-ghost:hover{background:var(--steel-tint);}
+  .btn-close{
+    font-size:16px; background:none; border:none; color:var(--ink-soft); cursor:pointer;
+    width:30px; height:30px; border-radius:50%;
+  }
+  .btn-close:hover{background:var(--paper-2);}
+  .modal-body{padding:8px 26px 26px 26px;}
+
+  .hw-item{
+    display:flex; gap:14px; padding:20px 0; border-bottom:1px solid var(--line);
+  }
+  .hw-item:last-child{border-bottom:none;}
+  .hw-num{
+    font-family:'Fraunces', serif; font-size:20px; color:var(--steel); flex:0 0 auto; width:26px;
+  }
+  .hw-item h3{font-size:15.5px; margin-bottom:4px;}
+  .hw-item p{font-size:14px; color:var(--ink-soft); margin:0 0 10px 0;}
+  .hw-textarea{
+    display:block; width:100%; margin-top:8px; font-family:'Work Sans', sans-serif;
+    font-size:13.5px; border:1px solid var(--line); border-radius:5px; padding:9px 11px;
+    resize:vertical; background:#fff;
+  }
+  .cloze-list{margin:8px 0 0 0; padding-left:20px; font-size:14px; color:var(--ink);}
+  .cloze-list li{margin-bottom:9px;}
+  .cloze-input{
+    font-family:'Work Sans', sans-serif; font-size:13.5px; width:150px;
+    border:1px solid var(--line); border-radius:4px; padding:3px 8px; background:#fff;
+  }
+  .cloze-input.correct{border-color:var(--sage); background:var(--sage-tint-2);}
+  .cloze-input.incorrect{border-color:var(--rust); background:var(--rust-tint);}
+
+  .match-row{display:flex; align-items:center; justify-content:space-between; gap:12px; padding:6px 0; font-size:14px;}
+  .match-select{
+    font-family:'Work Sans', sans-serif; font-size:13px; padding:5px 8px; border-radius:4px;
+    border:1px solid var(--line); background:#fff; max-width:190px;
+  }
+  .match-select.correct{border-color:var(--sage); background:var(--sage-tint-2);}
+  .match-select.incorrect{border-color:var(--rust); background:var(--rust-tint);}
+
+  .intrus-set{display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px 0;}
+  .intrus-word{
+    font-size:13px; padding:6px 12px; border-radius:100px; cursor:pointer;
+    border:1px solid var(--line); background:#fff;
+  }
+  .intrus-word.picked{background:var(--steel-dark); color:var(--paper); border-color:var(--steel-dark);}
+  .intrus-word.correct{background:var(--sage); color:#fff; border-color:var(--sage);}
+  .intrus-word.incorrect{background:var(--rust); color:#fff; border-color:var(--rust);}
+
+  .btn-check{
+    font-family:'Work Sans', sans-serif; font-size:13.5px; color:var(--paper);
+    background:var(--steel-dark); border:none; padding:8px 18px; border-radius:100px;
+    cursor:pointer; margin-top:6px;
+  }
+  .btn-check:hover{background:var(--ink);}
+  .check-feedback{font-size:13px; margin-top:8px; color:var(--ink-soft);}
+
+  /* ---------- FOOTER / MARQUEE ---------- */
+  footer{padding:0; overflow:hidden; background:var(--ink);}
+  .marquee{
+    display:flex; white-space:nowrap; padding:13px 0;
+    animation:scroll 22s linear infinite;
+  }
+  .marquee span{
+    font-family:'Fraunces', serif; font-size:14.5px; color:var(--paper);
+    padding-right:34px; letter-spacing:.02em;
+  }
+  @keyframes scroll{
+    0%{transform:translateX(0);}
+    100%{transform:translateX(-50%);}
+  }
+  .credit{
+    text-align:center; font-size:11.5px; color:var(--ink-soft);
+    padding:14px 20px 30px; background:var(--paper);
+  }
+
+  @media print{
+    nav.toc, header.hero, main, footer, .credit{display:none !important;}
+    .modal-backdrop{position:static; background:none; padding:0; display:block;}
+    .modal{box-shadow:none; max-width:none; border-radius:0;}
+    .modal-head{position:static;}
+    .modal-head-actions{display:none;}
+    .btn-check{display:none;}
+    .intrus-word{cursor:default;}
+  }
+  @media (prefers-reduced-motion: reduce){
+    .marquee{animation:none;}
+    .card-inner{transition:none;}
+  }
+
+  @media (max-width:700px){
+    .cards-grid{grid-template-columns:repeat(2,1fr);}
+    .duo{grid-template-columns:1fr;}
+    .quiz-cols{grid-template-columns:1fr;}
+    .plan-grid, .plan-grid.two{grid-template-columns:1fr;}
+    header.hero h1{max-width:none;}
+  }
+</style>
+</head>
+<body>
+
+<nav class="toc">
+  <div class="toc-inner">
+    <a href="#depart">Départ</a>
+    <a href="#vocabulaire">Vocabulaire</a>
+    <a href="#test">Le test</a>
+    <a href="#conseils">Conseils</a>
+    <a href="#synthese">Synthèse</a>
+    <button type="button" class="toc-btn" id="open-devoirs">Devoirs</button>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="eyebrow">Niveau A2 · Cours individuel · 60 minutes · Leçon communicative</div>
+    <h1>Dois-tu te couper du web ?</h1>
+    <p class="sub">Une leçon sur la vie « speed », la surcharge numérique et la déconnexion — pour parler, donner des conseils et faire le point sur ses propres habitudes.</p>
+    <div class="signal-leaf" aria-hidden="true">
+      <div class="bar" style="height:14px;background:#3c5b6e;"></div>
+      <div class="bar" style="height:22px;background:#4f6b62;"></div>
+      <div class="bar" style="height:30px;background:#5d7a52;"></div>
+      <div class="bar" style="height:38px;background:#6d8a5c;"></div>
+      <div class="leaf"></div>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <!-- 1. MISE EN ROUTE -->
+  <section id="depart">
+    <div class="sec-head">
+      <h2><span class="sec-num">1</span>Mise en route</h2>
+      <span class="duration">5 min</span>
+    </div>
+    <p class="sec-intro">Deux images, deux façons de vivre. Observe-les et compare.</p>
+
+    <div class="duo">
+      <div class="duo-card stress">
+        <svg viewBox="0 0 220 140" role="img" aria-label="Une femme stressée devant son ordinateur">
+          <rect width="220" height="140" fill="#dfe7ea"/>
+          <rect x="14" y="104" width="192" height="9" rx="3" fill="#2a4351"/>
+          <rect x="24" y="113" width="7" height="16" fill="#2a4351"/>
+          <rect x="188" y="113" width="7" height="16" fill="#2a4351"/>
+          <rect x="118" y="80" width="62" height="24" rx="2" fill="#3c5b6e"/>
+          <rect x="122" y="42" width="54" height="40" rx="3" fill="#2a4351"/>
+          <rect x="127" y="47" width="44" height="30" rx="1" fill="#a9c2ce"/>
+          <line x1="131" y1="54" x2="163" y2="54" stroke="#2a4351" stroke-width="2"/>
+          <line x1="131" y1="61" x2="167" y2="61" stroke="#2a4351" stroke-width="2"/>
+          <line x1="131" y1="68" x2="155" y2="68" stroke="#2a4351" stroke-width="2"/>
+          <path d="M44 104 C42 78 55 61 75 59 C93 57 106 67 106 83 L106 104 Z" fill="#3c5b6e"/>
+          <path d="M71 61 C61 54 52 50 46 41" stroke="#3c5b6e" stroke-width="9" fill="none" stroke-linecap="round"/>
+          <path d="M89 59 C85 50 77 44 71 38" stroke="#3c5b6e" stroke-width="9" fill="none" stroke-linecap="round"/>
+          <circle cx="60" cy="35" r="17" fill="#e3ccb4"/>
+          <path d="M45 31 Q45 15 60 14 Q77 14 77 29" fill="#2a4351"/>
+          <ellipse cx="49" cy="37" rx="8.5" ry="10.5" fill="#e3ccb4"/>
+          <ellipse cx="70" cy="35" rx="8.5" ry="10.5" fill="#e3ccb4"/>
+          <polyline points="150,18 157,29 164,16 171,28 178,15" stroke="#a85940" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <h3>Une femme, un ordinateur…</h3>
+        <p>Elle a la tête dans les mains. Que se passe-t-il ? Pourquoi, à ton avis ?</p>
+      </div>
+      <div class="duo-card calm">
+        <svg viewBox="0 0 220 140" role="img" aria-label="Une femme détendue qui fait des bulles de savon dehors">
+          <rect width="220" height="140" fill="#e6ecdb"/>
+          <path d="M0 118 Q60 108 120 118 T220 116 L220 140 L0 140 Z" fill="#c9d6b9"/>
+          <path d="M78 118 C76 96 82 80 92 74 C100 70 106 74 106 82 C106 96 100 108 100 118 Z" fill="#5d7a52"/>
+          <circle cx="95" cy="60" r="15" fill="#e3ccb4"/>
+          <path d="M81 58 Q80 44 95 43 Q111 43 110 58 Q104 52 95 52 Q86 52 81 58" fill="#42592f"/>
+          <path d="M89 63 Q95 68 101 62" stroke="#42592f" stroke-width="2" fill="none" stroke-linecap="round"/>
+          <path d="M100 82 C112 78 122 66 128 54" stroke="#5d7a52" stroke-width="8" fill="none" stroke-linecap="round"/>
+          <line x1="128" y1="54" x2="136" y2="46" stroke="#8a6a4a" stroke-width="3" stroke-linecap="round"/>
+          <circle cx="139" cy="43" r="5" fill="none" stroke="#8a6a4a" stroke-width="2.5"/>
+          <circle cx="156" cy="34" r="8" fill="none" stroke="#8fae74" stroke-width="2.5"/>
+          <circle cx="174" cy="50" r="12" fill="none" stroke="#8fae74" stroke-width="2.5"/>
+          <circle cx="150" cy="60" r="5.5" fill="none" stroke="#8fae74" stroke-width="2.5"/>
+          <circle cx="188" cy="24" r="5" fill="none" stroke="#8fae74" stroke-width="2.5"/>
+          <path d="M12 40 Q30 34 46 40" stroke="#8fae74" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+          <path d="M16 54 Q34 48 50 54" stroke="#8fae74" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+        </svg>
+        <h3>Une femme fait des bulles…</h3>
+        <p>Elle sourit, dehors, sans écran. Qu'est-ce qui a changé entre les deux photos ?</p>
+      </div>
+    </div>
+
+    <div class="prompt-box">
+      <p class="q">« Dois-tu, toi aussi, te couper du web de temps en temps ? »</p>
+      <p style="margin-top:8px; font-size:14px;">Discutez à l'oral : Combien de temps passes-tu devant un écran par jour ? Comment te sens-tu à la fin de la journée ?</p>
+    </div>
+  </section>
+
+  <!-- 2. VOCABULAIRE -->
+  <section id="vocabulaire">
+    <div class="sec-head">
+      <h2><span class="sec-num">2</span>Vocabulaire</h2>
+      <span class="duration">15 min</span>
+    </div>
+    <p class="sec-intro">Clique sur une carte pour la retourner et découvrir la définition et la traduction.</p>
+
+    <div class="deck-block stress">
+      <div class="deck-title"><span class="dot steel"></span><h3>Le stress et la vie speed</h3></div>
+      <div class="cards-grid" data-deck="stress"></div>
+      <p class="card-hint">Autres mots du même thème (déjà connus, pour la discussion) :</p>
+      <div class="chipset" data-bank="stress"></div>
+      <div class="checkpoint" data-checkpoint="stress">
+        <p class="checkpoint-label">Vérifie ta compréhension — quel mot correspond ?</p>
+      </div>
+    </div>
+
+    <div class="deck-block detente">
+      <div class="deck-title"><span class="dot sage"></span><h3>La détente et la déconnexion</h3></div>
+      <div class="cards-grid" data-deck="detente"></div>
+      <p class="card-hint">Autres mots du même thème :</p>
+      <div class="chipset" data-bank="detente"></div>
+      <div class="checkpoint" data-checkpoint="detente">
+        <p class="checkpoint-label">Vérifie ta compréhension — quel mot correspond ?</p>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- 3. LE TEST -->
+  <section id="test">
+    <div class="sec-head">
+      <h2><span class="sec-num">3</span>Ai-je besoin d'une digital détox ?</h2>
+      <span class="duration">15 min</span>
+    </div>
+    <p class="sec-intro">Réponds honnêtement pour chaque phrase, puis explique ta réponse à l'oral : pourquoi « toujours » ou « jamais » ?</p>
+
+    <div class="quiz-cols">
+      <div data-quiz="left"></div>
+      <div data-quiz="right"></div>
+    </div>
+
+    <div class="discussion">
+      <h3>Zoom conversation</h3>
+      <ul>
+        <li>Dans quelles situations utilises-tu le plus ton smartphone ?</li>
+        <li>Qu'est-ce qui te rend le plus « accro » : les réseaux sociaux, les messages, les jeux, le travail ?</li>
+        <li>As-tu déjà essayé une digital détox ? Qu'est-ce qui s'est passé ?</li>
+        <li>Que ferais-tu de ton temps libre si tu utilisais deux fois moins ton téléphone ?</li>
+      </ul>
+    </div>
+
+  </section>
+
+  <!-- 4. CONSEILS -->
+  <section id="conseils">
+    <div class="sec-head">
+      <h2><span class="sec-num">4</span>Donne des conseils</h2>
+      <span class="duration">18 min</span>
+    </div>
+    <p class="sec-intro">Un(e) ami(e) a besoin de toi. Utilise le vocabulaire de la leçon et les structures ci-dessous pour l'aider.</p>
+
+    <div class="friend-card">
+      <svg viewBox="0 0 84 84" role="img" aria-label="Portrait de Sacha">
+        <circle cx="42" cy="42" r="42" fill="#cfdde1"/>
+        <clipPath id="sacha-clip"><circle cx="42" cy="42" r="42"/></clipPath>
+        <g clip-path="url(#sacha-clip)">
+          <path d="M10 90 C10 66 24 58 42 58 C60 58 74 66 74 90 Z" fill="#a85940"/>
+          <rect x="34" y="52" width="16" height="14" fill="#e3ccb4"/>
+          <circle cx="42" cy="38" r="19" fill="#e3ccb4"/>
+          <path d="M21 36 Q19 12 42 12 Q65 12 63 36 Q60 24 42 24 Q24 24 21 36 Z" fill="#3b2a20"/>
+          <path d="M21 34 Q18 48 24 58 L27 58 Q23 46 25 34 Z" fill="#3b2a20"/>
+          <path d="M63 34 Q66 48 60 58 L57 58 Q61 46 59 34 Z" fill="#3b2a20"/>
+          <circle cx="35" cy="39" r="2" fill="#2b2a28"/>
+          <circle cx="49" cy="39" r="2" fill="#2b2a28"/>
+          <path d="M31 33 Q35 31 38 33" stroke="#2b2a28" stroke-width="1.4" fill="none" stroke-linecap="round"/>
+          <path d="M46 33 Q49 31 53 33" stroke="#2b2a28" stroke-width="1.4" fill="none" stroke-linecap="round"/>
+          <path d="M35 47 Q42 51 49 47" stroke="#8a5a3a" stroke-width="2" fill="none" stroke-linecap="round"/>
+        </g>
+        <circle cx="42" cy="42" r="41" fill="none" stroke="#f3ece1" stroke-width="2"/>
+      </svg>
+      <div>
+        <h3>Le portrait de Sacha</h3>
+        <p>Sacha a 29 ans. C'est une vraie bourreau de travail : toujours en ligne, toujours sous pression, avec une avalanche de courrier chaque matin. Résultat : elle est débordée, fatiguée, et elle a mal à la tête presque tous les soirs. Le burnout n'est pas loin…</p>
+      </div>
+    </div>
+
+    <div class="howto">
+      <p><b>1</b> Clique dans une case ci-dessous — elle s'entoure en bleu.</p>
+      <p><b>2</b> Clique sur un mot dans la liste, plus bas, pour l'ajouter dans cette case.</p>
+    </div>
+
+    <div class="plan-group">
+      <p class="glabel">Recommandations — qu'est-ce que Sacha devrait faire ?</p>
+      <div class="plan-grid">
+        <div class="plan-card ok">
+          <span class="starter">Il faut…</span>
+          <textarea placeholder="écris une phrase"></textarea>
+        </div>
+        <div class="plan-card ok">
+          <span class="starter">Tu dois…</span>
+          <textarea placeholder="écris une phrase"></textarea>
+        </div>
+        <div class="plan-card ok">
+          <span class="starter">Tu peux…</span>
+          <textarea placeholder="écris une phrase"></textarea>
+        </div>
+      </div>
+    </div>
+
+    <div class="plan-group">
+      <p class="glabel">Interdictions — qu'est-ce que Sacha ne devrait plus faire ?</p>
+      <div class="plan-grid two">
+        <div class="plan-card no">
+          <span class="starter">Il ne faut pas…</span>
+          <textarea placeholder="écris une phrase"></textarea>
+        </div>
+        <div class="plan-card no">
+          <span class="starter">Tu ne dois pas…</span>
+          <textarea placeholder="écris une phrase"></textarea>
+        </div>
+      </div>
+    </div>
+
+    <div class="vocab-strip">
+      <p class="vlabel">Banque de mots — clique sur un mot pour l'ajouter dans la case sélectionnée (étape 1 ci-dessus) :</p>
+      <div class="chipset" data-bank="conseils"></div>
+    </div>
+  </section>
+
+  <!-- 5. SYNTHESE -->
+  <section id="synthese">
+    <div class="sec-head">
+      <h2><span class="sec-num">5</span>Et toi ?</h2>
+      <span class="duration">4 min</span>
+    </div>
+    <p class="sec-intro">Termine cette phrase à voix haute, avec un mot de la leçon :</p>
+    <div class="commit-box">
+      <div class="leaf-mark" aria-hidden="true"></div>
+      <p>« Cette semaine, je vais… pour me déconnecter un peu. »</p>
+    </div>
+  </section>
+
+</main>
+
+<!-- DEVOIRS — fenêtre séparée -->
+<div class="modal-backdrop" id="devoirs-backdrop" hidden>
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="devoirs-title">
+    <div class="modal-head">
+      <h2 id="devoirs-title">Devoirs</h2>
+      <div class="modal-head-actions">
+        <button type="button" class="btn-ghost" id="print-devoirs">Imprimer / PDF</button>
+        <button type="button" class="btn-close" id="close-devoirs" aria-label="Fermer">✕</button>
+      </div>
+    </div>
+
+    <div class="modal-body">
+
+      <div class="hw-item">
+        <span class="hw-num">1</span>
+        <div>
+          <h3>Un message à Sacha</h3>
+          <p>Écris un message (8 à 10 phrases) à Sacha pour l'encourager à changer ses habitudes. Utilise au moins 6 mots de la leçon et 3 structures différentes (il faut / il ne faut pas / tu dois / tu ne dois pas / tu peux).</p>
+          <textarea class="hw-textarea" rows="5" placeholder="Écris ton message ici…"></textarea>
+        </div>
+      </div>
+
+      <div class="hw-item">
+        <span class="hw-num">2</span>
+        <div>
+          <h3>Complète les phrases</h3>
+          <p>Choisis le bon mot dans la liste : <em>débordée · se mettre au vert · une avalanche · une zone zéro-tech · sous pression · prendre son temps</em>.</p>
+          <ol class="cloze-list" data-answers='["débordée","me mettre au vert","une avalanche","une zone zéro-tech","sous pression","prendre mon temps"]'>
+            <li>Après une semaine à 60 heures, elle est complètement <input type="text" class="cloze-input"> .</li>
+            <li>Le week-end, j'aime <input type="text" class="cloze-input"> à la campagne, loin de tout.</li>
+            <li>Chaque lundi matin, il reçoit <input type="text" class="cloze-input"> de messages professionnels.</li>
+            <li>Chez elle, il y a <input type="text" class="cloze-input"> : pas de téléphone, pas d'ordinateur.</li>
+            <li>Avant l'examen, tous les étudiants sont <input type="text" class="cloze-input"> .</li>
+            <li>Le soir, je préfère <input type="text" class="cloze-input"> et lire un livre plutôt que regarder mon téléphone.</li>
+          </ol>
+          <button type="button" class="btn-check" data-check="cloze">Vérifier</button>
+        </div>
+      </div>
+
+      <div class="hw-item">
+        <span class="hw-num">3</span>
+        <div>
+          <h3>Relie chaque problème à sa solution</h3>
+          <div class="match-list" data-answers='["c","f","e","a","d","b"]'>
+            <div class="match-row"><span>être sous pression</span>
+              <select class="match-select"><option value="">choisis…</option><option value="a">a. la déconnexion</option><option value="b">b. prendre soin de soi</option><option value="c">c. calmer le jeu</option><option value="d">d. prendre son temps</option><option value="e">e. couper le téléphone</option><option value="f">f. se mettre au vert</option></select></div>
+            <div class="match-row"><span>un bourreau de travail</span>
+              <select class="match-select"><option value="">choisis…</option><option value="a">a. la déconnexion</option><option value="b">b. prendre soin de soi</option><option value="c">c. calmer le jeu</option><option value="d">d. prendre son temps</option><option value="e">e. couper le téléphone</option><option value="f">f. se mettre au vert</option></select></div>
+            <div class="match-row"><span>une avalanche de courrier</span>
+              <select class="match-select"><option value="">choisis…</option><option value="a">a. la déconnexion</option><option value="b">b. prendre soin de soi</option><option value="c">c. calmer le jeu</option><option value="d">d. prendre son temps</option><option value="e">e. couper le téléphone</option><option value="f">f. se mettre au vert</option></select></div>
+            <div class="match-row"><span>le burnout</span>
+              <select class="match-select"><option value="">choisis…</option><option value="a">a. la déconnexion</option><option value="b">b. prendre soin de soi</option><option value="c">c. calmer le jeu</option><option value="d">d. prendre son temps</option><option value="e">e. couper le téléphone</option><option value="f">f. se mettre au vert</option></select></div>
+            <div class="match-row"><span>être toujours au top</span>
+              <select class="match-select"><option value="">choisis…</option><option value="a">a. la déconnexion</option><option value="b">b. prendre soin de soi</option><option value="c">c. calmer le jeu</option><option value="d">d. prendre son temps</option><option value="e">e. couper le téléphone</option><option value="f">f. se mettre au vert</option></select></div>
+            <div class="match-row"><span>être débordé(e)</span>
+              <select class="match-select"><option value="">choisis…</option><option value="a">a. la déconnexion</option><option value="b">b. prendre soin de soi</option><option value="c">c. calmer le jeu</option><option value="d">d. prendre son temps</option><option value="e">e. couper le téléphone</option><option value="f">f. se mettre au vert</option></select></div>
+          </div>
+          <button type="button" class="btn-check" data-check="match">Vérifier</button>
+        </div>
+      </div>
+
+      <div class="hw-item">
+        <span class="hw-num">4</span>
+        <div>
+          <h3>Trouve l'intrus</h3>
+          <p>Dans chaque groupe, clique sur le mot qui ne va pas avec les autres.</p>
+          <div class="intrus-set" data-answer="se mettre au vert">
+            <span class="intrus-word">le burnout</span><span class="intrus-word">être débordé(e)</span><span class="intrus-word">se mettre au vert</span><span class="intrus-word">être sous pression</span>
+          </div>
+          <div class="intrus-set" data-answer="un bourreau de travail">
+            <span class="intrus-word">la déconnexion</span><span class="intrus-word">prendre soin de soi</span><span class="intrus-word">un bourreau de travail</span><span class="intrus-word">calmer le jeu</span>
+          </div>
+          <div class="intrus-set" data-answer="le slow-food">
+            <span class="intrus-word">les délais</span><span class="intrus-word">une avalanche de courrier</span><span class="intrus-word">le slow-food</span><span class="intrus-word">être toujours au top</span>
+          </div>
+          <div class="intrus-set" data-answer="une vie speed">
+            <span class="intrus-word">une zone zéro-tech</span><span class="intrus-word">prendre son temps</span><span class="intrus-word">une vie speed</span><span class="intrus-word">couper le téléphone</span>
+          </div>
+          <button type="button" class="btn-check" data-check="intrus">Vérifier</button>
+        </div>
+      </div>
+
+      <div class="hw-item">
+        <span class="hw-num">5</span>
+        <div>
+          <h3>5 phrases avec toi</h3>
+          <p>Choisis 5 expressions de la leçon (dans les fiches ou la banque de mots) et écris une phrase vraie pour toi avec chacune.</p>
+          <textarea class="hw-textarea" rows="1" placeholder="1. …"></textarea>
+          <textarea class="hw-textarea" rows="1" placeholder="2. …"></textarea>
+          <textarea class="hw-textarea" rows="1" placeholder="3. …"></textarea>
+          <textarea class="hw-textarea" rows="1" placeholder="4. …"></textarea>
+          <textarea class="hw-textarea" rows="1" placeholder="5. …"></textarea>
+        </div>
+      </div>
+
+      <div class="hw-item">
+        <span class="hw-num">6</span>
+        <div>
+          <h3>Mini-observation</h3>
+          <p>Pendant deux jours, remarque combien de fois tu prends ton téléphone sans vraiment réfléchir. Pas besoin de compter précisément — note 2-3 phrases à raconter au prochain cours.</p>
+          <textarea class="hw-textarea" rows="3" placeholder="Tes observations…"></textarea>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="marquee" aria-hidden="true">
+    <span>crée par arinateach ✦ crée par arinateach ✦ crée par arinateach ✦ crée par arinateach ✦ crée par arinateach ✦ crée par arinateach ✦</span>
+    <span>crée par arinateach ✦ crée par arinateach ✦ crée par arinateach ✦ crée par arinateach ✦ crée par arinateach ✦ crée par arinateach ✦</span>
+  </div>
+</footer>
+<p class="credit">Vocabulaire et questionnaire adaptés du support « Dois-tu te couper du web ? » de Dorota Padzik, Les Zexperts FLE.</p>
+
+<script>
+  // ---------- data ----------
+  const stressCards = [
+    {fr:"le burnout", def:"Épuisement total, physique et mental, causé par un excès de travail et de stress.", ru:"выгорание — полное истощение из-за чрезмерной работы"},
+    {fr:"être débordé(e)", def:"Avoir trop de travail et ne plus avoir le temps de tout faire.", ru:"быть перегруженным, заваленным делами"},
+    {fr:"les délais", def:"Le temps qu'on a pour finir un travail.", ru:"сроки (крайний срок выполнения)"},
+    {fr:"une avalanche de courrier", def:"Une très grande quantité de messages ou d'e-mails à traiter.", ru:"лавина писем — огромное количество почты"},
+    {fr:"une vie speed", def:"Un rythme de vie très rapide, sans pause (familier).", ru:"бешеный, стремительный темп жизни (разг.)"},
+    {fr:"être sous pression", def:"Sentir un stress intense à cause d'obligations ou de délais.", ru:"быть под давлением"},
+    {fr:"être toujours au top", def:"Devoir être parfait(e) et performant(e) en permanence.", ru:"всегда быть на пике формы, безупречным"},
+    {fr:"un bourreau de travail", def:"Une personne qui travaille énormément et s'arrête rarement.", ru:"трудоголик"}
+  ];
+  const detenteCards = [
+    {fr:"se mettre au vert", def:"Partir se reposer à la campagne, loin du bruit et du stress.", ru:"уехать на природу, отдохнуть вдали от суеты"},
+    {fr:"une zone zéro-tech", def:"Un endroit où on n'utilise aucun appareil électronique.", ru:"зона без технологий, без гаджетов"},
+    {fr:"calmer le jeu", def:"Réduire la tension, se détendre dans une situation stressante.", ru:"разрядить обстановку, снизить напряжение"},
+    {fr:"le slow-food", def:"Une façon de manger lentement, avec des produits de qualité.", ru:"«медленная еда» — неспешное, качественное питание"},
+    {fr:"la déconnexion", def:"Le fait de ne plus être relié à Internet ou au travail.", ru:"отключение — от интернета или от работы"},
+    {fr:"couper le téléphone", def:"Éteindre ou ranger son téléphone pour ne plus être dérangé(e).", ru:"отключить телефон"},
+    {fr:"prendre soin de soi", def:"Faire des activités pour se sentir bien physiquement et mentalement.", ru:"заботиться о себе"},
+    {fr:"prendre son temps", def:"Faire les choses sans se presser, tranquillement.", ru:"не торопиться, делать не спеша"}
+  ];
+  const bankStress = ["le manque de temps","stressé(e)","une vie active","des heures supplémentaires","être en ligne","fumer","boire trop de café","avoir mal à la tête","beaucoup de responsabilités","avoir du mal à s'organiser","la fatigue"];
+  const bankDetente = ["un massage","le plaisir","des promenades","des pauses","le sommeil","une promenade","prendre un bain","boire de la camomille","faire du yoga","faire de la méditation","passer du temps avec des amis","aller au spa"];
+
+  const quizLeft = [
+    "La première chose que je fais le matin, c'est chercher mon smartphone.",
+    "Je laisse mon smartphone chez moi.",
+    "J'utilise mon smartphone quand je conduis.",
+    "Je prends mon smartphone aux toilettes.",
+    "Pour prendre des notes, j'utilise un stylo et du papier.",
+    "Facebook est ouvert quand je travaille.",
+    "J'utilise un agenda en papier.",
+    "Pendant des vacances à l'étranger, je cherche le Wi-Fi.",
+    "Je pense à ce qui se passe sur Facebook/Instagram, etc. quand je suis hors-ligne."
+  ];
+  const quizRight = [
+    "Je mange devant mon ordinateur.",
+    "Quand je vais au café avec mes amis, mon smartphone est sur la table.",
+    "Je vais à la bibliothèque.",
+    "Je suis triste quand je ne peux pas utiliser mon smartphone.",
+    "Le smartphone est avec moi dans mon lit.",
+    "J'utilise mon smartphone pour vérifier l'heure… toutes les 2 minutes.",
+    "Je passe ma pause-café au travail devant l'écran.",
+    "Je choisis les alertes et non la presse en papier.",
+    "Ma famille me dit « Laisse ton smartphone ! ».",
+    "Pour me relaxer, je fais défiler des pages, des photos, des réseaux sociaux…"
+  ];
+
+  // ---------- flip sound (synthesised, no external file needed) ----------
+  let audioCtx;
+  function playFlipSound(){
+    try{
+      audioCtx = audioCtx || new (window.AudioContext || window.webkitAudioContext)();
+      const t0 = audioCtx.currentTime;
+      const osc = audioCtx.createOscillator();
+      const gain = audioCtx.createGain();
+      osc.type = 'triangle';
+      osc.frequency.setValueAtTime(520, t0);
+      osc.frequency.exponentialRampToValueAtTime(220, t0 + 0.12);
+      gain.gain.setValueAtTime(0.001, t0);
+      gain.gain.exponentialRampToValueAtTime(0.12, t0 + 0.015);
+      gain.gain.exponentialRampToValueAtTime(0.001, t0 + 0.15);
+      osc.connect(gain).connect(audioCtx.destination);
+      osc.start(t0);
+      osc.stop(t0 + 0.16);
+    }catch(e){ /* audio not available — fail silently */ }
+  }
+
+  // ---------- render flashcards ----------
+  function renderDeck(selector, data){
+    const el = document.querySelector(selector);
+    data.forEach(item=>{
+      const card = document.createElement('div');
+      card.className = 'card';
+      card.tabIndex = 0;
+      card.setAttribute('role','button');
+      card.setAttribute('aria-pressed','false');
+      card.innerHTML = `
+        <div class="card-inner">
+          <div class="card-face card-front">${item.fr}</div>
+          <div class="card-face card-back">
+            <p class="def">${item.def}</p>
+            <p class="ru">${item.ru}</p>
+          </div>
+        </div>`;
+      function toggle(){
+        card.classList.toggle('flipped');
+        card.setAttribute('aria-pressed', card.classList.contains('flipped'));
+        playFlipSound();
+      }
+      card.addEventListener('click', toggle);
+      card.addEventListener('keydown', e=>{ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); toggle(); }});
+      el.appendChild(card);
+    });
+  }
+  renderDeck('[data-deck="stress"]', stressCards);
+  renderDeck('[data-deck="detente"]', detenteCards);
+
+  function renderChips(selector, words, cls){
+    const el = document.querySelector(selector);
+    words.forEach(w=>{
+      const c = document.createElement('span');
+      c.className = 'chip ' + cls;
+      c.textContent = w;
+      el.appendChild(c);
+    });
+  }
+  renderChips('[data-bank="stress"]', bankStress, 'stress');
+  renderChips('[data-bank="detente"]', bankDetente, 'detox');
+
+  // ---------- vocab strip in conseils (clickable, inserts into the selected textarea) ----------
+  let activeField = document.querySelector('.plan-card textarea');
+  activeField.classList.add('active-target');
+  document.querySelectorAll('.plan-card textarea').forEach(t=>{
+    t.addEventListener('focus', ()=>{
+      document.querySelectorAll('.plan-card textarea').forEach(x=>x.classList.remove('active-target'));
+      t.classList.add('active-target');
+      activeField = t;
+    });
+  });
+  const conseilsWords = [...stressCards.map(c=>c.fr), ...detenteCards.map(c=>c.fr)];
+  (function(){
+    const el = document.querySelector('[data-bank="conseils"]');
+    conseilsWords.forEach(w=>{
+      const c = document.createElement('span');
+      c.className = 'chip pickable ' + (stressCards.some(s=>s.fr===w) ? 'stress' : 'detox');
+      c.textContent = w;
+      c.addEventListener('click', ()=>{
+        if(!activeField) activeField = document.querySelector('.plan-card textarea');
+        activeField.value += (activeField.value && !activeField.value.endsWith(' ') ? ' ' : '') + w + ' ';
+        activeField.classList.remove('just-filled');
+        void activeField.offsetWidth;
+        activeField.classList.add('just-filled');
+        activeField.focus();
+      });
+      el.appendChild(c);
+    });
+  })();
+
+  // ---------- quiz ----------
+  function renderQuiz(selector, items){
+    const el = document.querySelector(selector);
+    const opts = ['Toujours','Souvent','Rarement','Jamais'];
+    items.forEach(text=>{
+      const row = document.createElement('div');
+      row.className = 'quiz-item';
+      const p = document.createElement('p');
+      p.textContent = text;
+      const optsWrap = document.createElement('div');
+      optsWrap.className = 'quiz-opts';
+      opts.forEach(o=>{
+        const b = document.createElement('button');
+        b.type = 'button';
+        b.textContent = o;
+        b.addEventListener('click', ()=>{
+          optsWrap.querySelectorAll('button').forEach(x=>x.classList.remove('active'));
+          b.classList.add('active');
+        });
+        optsWrap.appendChild(b);
+      });
+      row.appendChild(p);
+      row.appendChild(optsWrap);
+      el.appendChild(row);
+    });
+  }
+  renderQuiz('[data-quiz="left"]', quizLeft);
+  renderQuiz('[data-quiz="right"]', quizRight);
+
+  // ---------- vocab checkpoints ----------
+  const checkpointStress = [
+    {q:"Épuisement total à cause du travail.", opts:["le burnout","les délais","un bourreau de travail","être sous pression"], correct:"le burnout"},
+    {q:"Une personne qui travaille énormément.", opts:["être débordé(e)","un bourreau de travail","être toujours au top","une vie speed"], correct:"un bourreau de travail"},
+    {q:"Sentir un stress intense à cause d'obligations.", opts:["les délais","être sous pression","une avalanche de courrier","être débordé(e)"], correct:"être sous pression"},
+    {q:"Une très grande quantité de messages à traiter.", opts:["les délais","une vie speed","une avalanche de courrier","être toujours au top"], correct:"une avalanche de courrier"}
+  ];
+  const checkpointDetente = [
+    {q:"Partir se reposer loin du bruit et du stress.", opts:["se mettre au vert","la déconnexion","prendre son temps","le slow-food"], correct:"se mettre au vert"},
+    {q:"Réduire la tension dans une situation stressante.", opts:["prendre soin de soi","calmer le jeu","une zone zéro-tech","couper le téléphone"], correct:"calmer le jeu"},
+    {q:"Ne plus être relié à Internet ou au travail.", opts:["la déconnexion","prendre son temps","le slow-food","une zone zéro-tech"], correct:"la déconnexion"},
+    {q:"Un endroit sans aucun appareil électronique.", opts:["couper le téléphone","une zone zéro-tech","prendre soin de soi","se mettre au vert"], correct:"une zone zéro-tech"}
+  ];
+  function renderCheckpoint(selector, items){
+    const wrap = document.querySelector(selector);
+    items.forEach(item=>{
+      const row = document.createElement('div');
+      row.className = 'cp-item';
+      const p = document.createElement('p');
+      p.className = 'cp-prompt';
+      p.textContent = '« ' + item.q + ' »';
+      const opts = document.createElement('div');
+      opts.className = 'cp-opts';
+      item.opts.forEach(o=>{
+        const b = document.createElement('button');
+        b.type = 'button';
+        b.textContent = o;
+        b.addEventListener('click', ()=>{
+          const allBtns = opts.querySelectorAll('button');
+          allBtns.forEach(x=>x.disabled = true);
+          if(o === item.correct){
+            b.classList.add('correct');
+          }else{
+            b.classList.add('incorrect');
+            allBtns.forEach(x=>{ if(x.textContent === item.correct) x.classList.add('correct'); });
+          }
+        });
+        opts.appendChild(b);
+      });
+      row.appendChild(p);
+      row.appendChild(opts);
+      wrap.appendChild(row);
+    });
+  }
+  renderCheckpoint('[data-checkpoint="stress"]', checkpointStress);
+  renderCheckpoint('[data-checkpoint="detente"]', checkpointDetente);
+
+  // ---------- devoirs modal ----------
+  const backdrop = document.getElementById('devoirs-backdrop');
+  function openDevoirs(){ backdrop.hidden = false; document.body.style.overflow = 'hidden'; }
+  function closeDevoirs(){ backdrop.hidden = true; document.body.style.overflow = ''; }
+  document.getElementById('open-devoirs').addEventListener('click', openDevoirs);
+  document.getElementById('close-devoirs').addEventListener('click', closeDevoirs);
+  backdrop.addEventListener('click', e=>{ if(e.target === backdrop) closeDevoirs(); });
+  document.addEventListener('keydown', e=>{ if(e.key === 'Escape' && !backdrop.hidden) closeDevoirs(); });
+
+  document.getElementById('print-devoirs').addEventListener('click', ()=> window.print());
+  window.addEventListener('beforeprint', ()=>{
+    document.querySelectorAll('.hw-textarea').forEach(t=>{ t.style.height = (t.scrollHeight + 4) + 'px'; });
+  });
+
+  // ---------- devoirs: cloze checker ----------
+  document.querySelectorAll('[data-check="cloze"]').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      const list = btn.previousElementSibling;
+      const answers = JSON.parse(list.dataset.answers);
+      const inputs = list.querySelectorAll('.cloze-input');
+      inputs.forEach((inp, i)=>{
+        const norm = v => v.trim().toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'');
+        inp.classList.remove('correct','incorrect');
+        inp.classList.add(norm(inp.value) === norm(answers[i]) ? 'correct' : 'incorrect');
+      });
+    });
+  });
+
+  // ---------- devoirs: matching checker ----------
+  document.querySelectorAll('[data-check="match"]').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      const list = btn.previousElementSibling;
+      const answers = JSON.parse(list.dataset.answers);
+      const selects = list.querySelectorAll('.match-select');
+      selects.forEach((sel, i)=>{
+        sel.classList.remove('correct','incorrect');
+        sel.classList.add(sel.value === answers[i] ? 'correct' : 'incorrect');
+      });
+    });
+  });
+
+  // ---------- devoirs: intrus (click to pick, then vérifier) ----------
+  document.querySelectorAll('.intrus-set').forEach(set=>{
+    set.querySelectorAll('.intrus-word').forEach(w=>{
+      w.addEventListener('click', ()=>{
+        set.querySelectorAll('.intrus-word').forEach(x=>x.classList.remove('picked'));
+        w.classList.add('picked');
+      });
+    });
+  });
+  document.querySelectorAll('[data-check="intrus"]').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      const item = btn.closest('.hw-item');
+      item.querySelectorAll('.intrus-set').forEach(set=>{
+        const answer = set.dataset.answer;
+        set.querySelectorAll('.intrus-word').forEach(w=>{
+          w.classList.remove('correct','incorrect');
+          if(w.classList.contains('picked')){
+            w.classList.add(w.textContent === answer ? 'correct' : 'incorrect');
+          }
+          if(w.textContent === answer) w.classList.add('correct');
+        });
+      });
+    });
+  });
+</script>
+
+</body>
+</html>
