@@ -1,0 +1,612 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Générations déconnectées · Français A2</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,400&family=Work+Sans:wght@400;500;600&family=Caveat:wght@500&display=swap">
+<style>
+/* Layout: one long lesson sheet; each étape opens with a notification-style badge, tasks sit on light "screens" framed in beige */
+:root{
+  --paper:#F4ECDF;      /* fond beige */
+  --card:#FBF7F0;       /* carte claire */
+  --beige:#D9C4A3;      /* beige arinateach */
+  --sand:#A88F6A;       /* beige foncé : numéros, accents */
+  --blue:#3E5C76;       /* bleu arinateach */
+  --blue-soft:#DCE6EF;
+  --ink:#2B2B2B;
+  --muted:#6B5E4E;
+  --white:#FFFFFF;
+  --ok:#4F7A4A; --ok-bg:#E3EEDC;
+  --no:#A24B3A; --no-bg:#F5E1DA;
+  --display:"Fraunces",Georgia,"Times New Roman",serif;
+  --body:"Work Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --hand:"Caveat","Comic Sans MS",cursive;
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+body{background:var(--paper);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.6;
+  background-image:linear-gradient(rgba(62,92,118,.045) 1px,transparent 1px),linear-gradient(90deg,rgba(62,92,118,.045) 1px,transparent 1px);background-size:22px 22px}
+.wrap{max-width:860px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:28px 0}
+h1,h2,h3{font-family:var(--display);color:var(--blue);text-wrap:balance;margin:0}
+p{margin:0}
+.brand{text-align:center;font-family:var(--display);font-weight:700;color:var(--sand);letter-spacing:.14em;text-transform:uppercase;font-size:.8rem}
+.hero{text-align:center;padding-block:14px 6px;display:grid;gap:10px;justify-items:center}
+.hero h1{font-size:clamp(2.1rem,6vw,3.2rem);font-weight:700;line-height:1.05}
+.hero .sub{font-family:var(--display);font-style:italic;color:var(--blue);font-size:1.15rem}
+.hero svg{width:min(460px,100%);height:auto}
+.goals{background:var(--card);border:1px solid var(--beige);border-radius:4px;padding:16px 20px;margin-top:18px}
+.goals h2{font-size:1.15rem;margin-bottom:6px}
+.goals ul{margin:0;padding-left:1.2em;display:grid;gap:4px}
+
+.step{margin-top:44px;display:grid;gap:14px}
+.step-head{display:flex;align-items:center;gap:12px;flex-wrap:wrap;border-bottom:2px dashed var(--beige);padding-bottom:8px}
+.step-no{display:grid;place-items:center;width:34px;height:34px;border-radius:50%;background:var(--blue);color:var(--white);font-family:var(--display);font-weight:700;font-size:1.05rem;flex:none;position:relative}
+.step-no::after{content:"";position:absolute;top:-2px;right:-2px;width:10px;height:10px;border-radius:50%;background:var(--sand);border:2px solid var(--paper)}
+.step-head h2{font-size:1.45rem;font-weight:600}
+.tag{margin-left:auto;font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;font-weight:600;color:var(--blue);background:var(--blue-soft);padding:2px 10px;border-radius:999px;font-variant-numeric:tabular-nums}
+.task{background:var(--card);border:1px solid var(--beige);border-radius:4px;padding:16px 18px;display:grid;gap:12px;min-width:0}
+.instr{font-weight:600;font-size:1.02rem;color:var(--blue)}
+.instr b{font-family:var(--display);color:var(--sand);margin-right:4px}
+ol,ul{margin:0}
+.qs{padding-left:1.3em;display:grid;gap:4px}
+button{font:inherit;cursor:pointer}
+button:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-visible{outline:3px solid var(--blue);outline-offset:2px}
+.btn{background:var(--blue);color:var(--white);border:0;border-radius:3px;padding:8px 16px;font-weight:600;justify-self:start}
+.btn.ghost{background:transparent;color:var(--blue);border:1.5px solid var(--blue)}
+.row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.fb{font-size:.92rem;color:var(--muted);min-height:1.4em}
+.ex{font-style:italic;color:var(--muted);font-size:.92rem}
+
+/* 1 slider */
+.meter{display:grid;gap:10px;background:var(--white);border:1px solid var(--beige);border-radius:4px;padding:14px 16px}
+.meter input[type=range]{width:100%;accent-color:var(--blue)}
+.meter .scale{display:flex;justify-content:space-between;font-size:.8rem;color:var(--muted);font-variant-numeric:tabular-nums}
+.meter .say{font-family:var(--display);font-size:1.15rem;color:var(--blue)}
+.meter .say strong{color:var(--sand);font-variant-numeric:tabular-nums}
+
+/* 2 picture + hypotheses */
+.pic{background:var(--white);border:1px solid var(--beige);border-radius:4px;padding:8px;overflow:hidden}
+.pic img{display:block;width:100%;height:auto;border-radius:2px}
+.audio .ainfo{display:grid;gap:6px;min-width:0;flex:1}
+.audio audio{width:100%;max-width:440px;height:40px}
+.hyp{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+@media (max-width:560px){.hyp{grid-template-columns:1fr}}
+.hyp button{text-align:left;background:var(--white);border:1.5px solid var(--beige);border-radius:4px;padding:10px 12px;color:var(--ink);display:grid;gap:2px}
+.hyp button small{font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--sand);font-weight:600}
+.hyp button[aria-pressed="true"]{border-color:var(--blue);background:var(--blue-soft)}
+
+/* 3 matching */
+.verbs{display:flex;flex-wrap:wrap;gap:8px;padding:10px;border:1.5px dashed var(--beige);border-radius:4px;min-height:52px;background:var(--paper)}
+.chip{border:1.5px solid var(--blue);background:var(--white);color:var(--blue);border-radius:999px;padding:4px 12px;font-size:.95rem;font-weight:600}
+.chip.sel{background:var(--blue);color:var(--white)}
+.chip.ok{border-color:var(--ok);background:var(--ok-bg);color:var(--ok)}
+.chip.no{border-color:var(--no);background:var(--no-bg);color:var(--no)}
+.ends{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:8px}
+.end{cursor:pointer;display:flex;align-items:center;gap:10px;background:var(--white);border:1.5px solid var(--beige);border-radius:4px;padding:6px 10px;text-align:left;color:var(--ink);min-height:46px}
+.end .slot{min-width:92px;min-height:30px;border-bottom:1.5px dashed var(--sand);display:flex;align-items:center}
+.intrus{display:grid;gap:10px}
+.set{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.set .n{font-family:var(--display);font-weight:700;color:var(--sand);width:1.5em}
+.set button{border:1.5px solid var(--beige);background:var(--white);border-radius:3px;padding:4px 12px;color:var(--ink)}
+.set button.ok{border-color:var(--ok);background:var(--ok-bg)} .set button.no{border-color:var(--no);background:var(--no-bg);text-decoration:line-through}
+
+/* 4 audio */
+.audio{flex-wrap:wrap;display:flex;gap:14px;align-items:center;background:var(--blue);color:var(--white);border-radius:6px;padding:14px 18px}
+.audio .wave{display:flex;gap:3px;align-items:center;height:34px;flex:none}
+.audio .wave i{display:block;width:4px;border-radius:2px;background:var(--beige)}
+.audio h3{color:var(--white);font-size:1.15rem}
+.audio p{font-size:.9rem;opacity:.9}
+.people{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+@media (max-width:560px){.people{grid-template-columns:1fr}}
+.person{background:var(--white);border:1px solid var(--beige);border-radius:4px;padding:10px 12px;display:flex;gap:10px;align-items:center}
+.person .av{width:40px;height:40px;border-radius:50%;display:grid;place-items:center;font-family:var(--display);font-weight:700;color:var(--white);flex:none}
+.person b{display:block;font-family:var(--display);color:var(--blue)}
+.person span{font-size:.88rem;color:var(--muted)}
+.choices{display:grid;gap:8px}
+.choice{display:flex;gap:10px;align-items:flex-start;background:var(--white);border:1.5px solid var(--beige);border-radius:3px;padding:8px 12px;text-align:left;color:var(--ink)}
+.choice .l{font-family:var(--display);font-weight:700;color:var(--sand)}
+.choice.ok{border-color:var(--ok);background:var(--ok-bg)} .choice.no{border-color:var(--no);background:var(--no-bg)}
+.tablebox{overflow-x:auto}
+table{border-collapse:collapse;width:100%;background:var(--white);min-width:440px}
+th,td{border:.75pt solid var(--beige);padding:7px 10px;text-align:left;vertical-align:middle}
+th{background:var(--blue-soft);color:var(--blue);font-weight:600}
+.grid td.c,.grid th.c{text-align:center;width:16%}
+.tick{width:30px;height:30px;border-radius:4px;border:1.5px solid var(--beige);background:var(--white);color:var(--white);font-weight:700;line-height:1}
+.tick[aria-pressed="true"]{background:var(--blue);border-color:var(--blue)}
+.tick.ok{outline:3px solid var(--ok);outline-offset:1px}
+.tick.no{outline:3px solid var(--no);outline-offset:1px}
+
+/* 5 grammar */
+.quotes{background:var(--paper);border-left:5px solid var(--blue);padding:12px 18px;border-radius:0 4px 4px 0;display:grid;gap:6px}
+.quotes p{display:flex;gap:10px;flex-wrap:wrap;justify-content:space-between}
+.quotes .who{font-size:.85rem;color:var(--muted);font-style:italic}
+.quotes mark{background:var(--blue-soft);color:var(--blue);font-weight:600;padding:0 3px;border-radius:2px}
+.rule{background:var(--white);border:1px dashed var(--sand);border-radius:4px;padding:12px 14px;display:grid;gap:12px}
+.rule .row button{border:1.5px solid var(--beige);background:var(--white);border-radius:3px;padding:3px 10px;font-size:.92rem;color:var(--ink);text-align:left}
+.rule .row button[aria-pressed="true"]{background:var(--blue);color:var(--white);border-color:var(--blue)}
+.rule .row button.ok{background:var(--ok-bg);border-color:var(--ok);color:var(--ok)}
+.rule .row button.no{background:var(--no-bg);border-color:var(--no);color:var(--no)}
+.fix{display:grid;gap:10px;padding-left:1.3em}
+.fix li{display:grid;gap:4px}
+.fix .wrong{text-decoration:underline wavy var(--no);text-underline-offset:4px}
+input[type=text],textarea{font:inherit;width:100%;border:0;border-bottom:1.5px solid var(--beige);background:transparent;padding:4px 2px;color:var(--ink)}
+input.ok{border-bottom-color:var(--ok);background:var(--ok-bg)} input.no{border-bottom-color:var(--no);background:var(--no-bg)}
+
+/* 6 voice message */
+.vm{background:var(--white);border:1px solid var(--beige);border-radius:18px 18px 18px 4px;padding:16px 18px;max-width:640px;display:grid;gap:8px}
+.vm .from{display:flex;align-items:center;gap:8px;font-size:.85rem;color:var(--muted)}
+.vm .from b{color:var(--blue);font-family:var(--display);font-size:1rem}
+.vm p{line-height:2.1}
+select{font:inherit;border:1.5px solid var(--beige);border-radius:3px;background:var(--paper);color:var(--blue);font-weight:600;padding:1px 4px}
+select.ok{border-color:var(--ok);background:var(--ok-bg)} select.no{border-color:var(--no);background:var(--no-bg)}
+.day{background:var(--white);border:1.5px solid var(--beige);border-radius:4px;display:grid}
+.day .top{background:var(--beige);padding:8px 14px;font-family:var(--display);font-weight:700;color:var(--blue)}
+.day label{display:grid;grid-template-columns:130px minmax(0,1fr);gap:10px;align-items:center;padding:8px 14px;border-top:1px dotted var(--beige)}
+.day label span{font-weight:600;color:var(--sand)}
+@media (max-width:560px){.day label{grid-template-columns:1fr;gap:2px}}
+
+/* 7 data quiz */
+.data{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+@media (max-width:560px){.data{grid-template-columns:1fr}}
+.stat{background:var(--white);border:1px solid var(--beige);border-radius:4px;padding:12px 14px;display:grid;gap:8px;align-content:start}
+.stat p{font-size:.95rem}
+.stat .opts{display:flex;gap:6px;flex-wrap:wrap}
+.stat .opts button{border:1.5px solid var(--beige);background:var(--paper);border-radius:999px;padding:2px 12px;font-variant-numeric:tabular-nums;color:var(--ink)}
+.stat .opts button.ok{background:var(--ok-bg);border-color:var(--ok);color:var(--ok);font-weight:600}
+.stat .opts button.no{background:var(--no-bg);border-color:var(--no);color:var(--no)}
+.stat .big{font-family:var(--display);font-size:1.6rem;font-weight:700;color:var(--blue);line-height:1;font-variant-numeric:tabular-nums}
+.fact{background:var(--paper);border-left:5px solid var(--blue);padding:12px 16px;border-radius:0 4px 4px 0;display:grid;gap:6px}
+.fact h3{font-size:1.05rem}
+.fact .src{font-style:italic;font-size:.8rem;color:var(--muted)}
+.roles{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+@media (max-width:620px){.roles{grid-template-columns:1fr}}
+.role{background:var(--white);border:1.5px solid var(--beige);border-radius:4px;padding:12px 14px;display:grid;gap:6px;align-content:start}
+.role h3{font-size:1.05rem}
+.charter{background:var(--white);border:1.5px solid var(--blue);border-radius:4px;display:grid}
+.charter .top{background:var(--blue);color:var(--white);padding:8px 14px;font-family:var(--display);font-weight:700;display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap}
+.charter .top span{font-family:var(--body);font-weight:500;font-size:.88rem;font-variant-numeric:tabular-nums}
+.charter label{display:flex;gap:10px;align-items:flex-start;padding:8px 14px;border-top:1px dotted var(--beige);cursor:pointer}
+.charter input[type=checkbox]{accent-color:var(--blue);width:18px;height:18px;margin-top:3px;flex:none}
+.charter .own{display:flex;gap:10px;align-items:center;padding:8px 14px;border-top:1px dotted var(--beige)}
+.phrases{background:var(--paper);border-left:5px solid var(--beige);padding:12px 16px;border-radius:0 4px 4px 0;display:grid;gap:8px}
+.phrases h3{font-size:1.1rem}
+.ph-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px}
+.ph-grid div{font-size:.95rem}
+.ph-grid b{display:block;font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--sand)}
+
+/* 8 post */
+.post{background:var(--white);max-width:460px;border:1px solid var(--beige);border-radius:10px;padding:14px 16px;display:grid;gap:10px}
+.post .head{display:flex;gap:10px;align-items:center}
+.post .av{width:38px;height:38px;border-radius:50%;background:var(--beige);display:grid;place-items:center;font-family:var(--display);font-weight:700;color:var(--blue)}
+.post .head b{font-family:var(--display);color:var(--blue)}
+.post .head span{display:block;font-size:.8rem;color:var(--muted)}
+.post textarea{border:1px solid var(--beige);border-radius:6px;padding:8px 10px;min-height:84px;resize:vertical}
+.post .foot{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
+.count{font-size:.85rem;color:var(--muted);font-variant-numeric:tabular-nums}
+.count.over{color:var(--no);font-weight:600}
+.posted{font-family:var(--hand);font-size:1.4rem;color:var(--sand)}
+
+/* homework */
+.hw{margin-top:56px;background:var(--blue);color:var(--white);border-radius:6px;padding:22px clamp(16px,4vw,28px);display:grid;gap:14px}
+.hw h2{color:var(--white);font-size:1.6rem}
+.hw .card{background:var(--card);color:var(--ink);border-radius:4px;padding:14px 16px;display:grid;gap:8px}
+.hw .card .instr{color:var(--blue)}
+.hw ol{padding-left:1.3em;display:grid;gap:6px}
+.hw ul{padding-left:1.2em;display:grid;gap:4px}
+
+footer{margin-top:56px;background:var(--beige);overflow:hidden;padding-block:12px calc(12px + env(safe-area-inset-bottom,0px))}
+.marq{display:flex;width:max-content;animation:m 26s linear infinite}
+.marq span{font-family:var(--display);font-style:italic;font-size:1.05rem;color:var(--blue);padding-inline:22px;white-space:nowrap}
+.marq span::after{content:"✦";margin-left:44px;color:var(--white);font-style:normal}
+@keyframes m{to{transform:translateX(-50%)}}
+@media (prefers-reduced-motion:reduce){.marq{animation:none}}
+</style>
+
+<div class="wrap">
+  <div class="brand">arinateach · Français A2</div>
+  <header class="hero">
+    <svg viewBox="0 0 460 120" role="img" aria-label="Un vieux téléphone, une télé et un smartphone reliés par un câble coupé">
+      <path d="M70 92 C130 118 160 60 205 88" fill="none" stroke="#A88F6A" stroke-width="3" stroke-dasharray="2 7" stroke-linecap="round"/>
+      <path d="M262 88 C305 112 330 62 382 88" fill="none" stroke="#A88F6A" stroke-width="3" stroke-dasharray="2 7" stroke-linecap="round"/>
+      <g transform="translate(222 82)" stroke="#3E5C76" stroke-width="2.5" stroke-linecap="round"><path d="M-8 -8 L8 8 M8 -8 L-8 8"/></g>
+      <!-- vieux téléphone -->
+      <g transform="translate(30 30)">
+        <rect x="4" y="30" width="72" height="44" rx="10" fill="#D9C4A3"/>
+        <path d="M0 22 Q40 2 80 22 L74 32 Q40 18 6 32Z" fill="#3E5C76"/>
+        <circle cx="40" cy="52" r="15" fill="#FBF7F0" stroke="#3E5C76" stroke-width="2"/>
+        <circle cx="40" cy="52" r="4" fill="#3E5C76"/>
+      </g>
+      <!-- télé -->
+      <g transform="translate(176 14)">
+        <path d="M38 6 L54 22 M70 6 L54 22" stroke="#3E5C76" stroke-width="2.5" stroke-linecap="round"/>
+        <rect x="0" y="22" width="108" height="66" rx="8" fill="#3E5C76"/>
+        <rect x="9" y="30" width="72" height="50" rx="5" fill="#DCE6EF"/>
+        <circle cx="94" cy="40" r="4" fill="#D9C4A3"/><circle cx="94" cy="54" r="4" fill="#D9C4A3"/>
+        <rect x="14" y="88" width="10" height="10" fill="#3E5C76"/><rect x="84" y="88" width="10" height="10" fill="#3E5C76"/>
+      </g>
+      <!-- smartphone -->
+      <g transform="translate(380 18)">
+        <rect x="0" y="0" width="50" height="92" rx="9" fill="#3E5C76"/>
+        <rect x="5" y="10" width="40" height="70" rx="3" fill="#FBF7F0"/>
+        <rect x="10" y="16" width="30" height="16" rx="3" fill="#D9C4A3"/>
+        <rect x="10" y="37" width="30" height="16" rx="3" fill="#DCE6EF"/>
+        <rect x="10" y="58" width="30" height="16" rx="3" fill="#D9C4A3"/>
+        <circle cx="46" cy="4" r="7" fill="#A88F6A"/><text x="46" y="7.5" text-anchor="middle" font-size="9" font-family="Work Sans, sans-serif" font-weight="600" fill="#FFFFFF">9</text>
+      </g>
+    </svg>
+    <h1>Générations déconnectées</h1>
+    <p class="sub">Sur l'écran, devant la télé ou au téléphone ?</p>
+  </header>
+
+  <section class="goals" aria-labelledby="obj">
+    <h2 id="obj">À la fin de la leçon, tu peux…</h2>
+    <ul>
+      <li>dire ce que tu fais sur ton téléphone et sur Internet ;</li>
+      <li>utiliser <em>sur</em>, <em>devant</em> et <em>au</em> : sur les réseaux, devant la télé, au téléphone ;</li>
+      <li>dire combien de temps tu passes à faire quelque chose ;</li>
+      <li>comprendre trois personnes de trois générations ;</li>
+      <li>négocier des règles pour un dimanche sans écrans.</li>
+    </ul>
+  </section>
+
+  <!-- 1 -->
+  <section class="step">
+    <div class="step-head"><span class="step-no">1</span><h2>Pour commencer</h2><span class="tag">5 min</span></div>
+    <div class="task">
+      <p class="instr"><b>A.</b> Devine : combien de temps par jour est-ce que tu passes sur ton téléphone ? Bouge le curseur. Puis regarde ton temps d'écran dans les réglages de ton téléphone. Tu avais raison ?</p>
+      <div class="meter">
+        <label for="hours" class="say">Je pense que je passe <strong id="hoursOut">3 heures</strong> par jour sur mon téléphone.</label>
+        <input type="range" id="hours" min="0" max="10" step="0.5" value="3">
+        <div class="scale"><span>0 h</span><span>2 h</span><span>4 h</span><span>6 h</span><span>8 h</span><span>10 h</span></div>
+      </div>
+    </div>
+    <div class="task">
+      <p class="instr"><b>B.</b> Réponds aux questions.</p>
+      <ol class="qs">
+        <li>Le matin, qu'est-ce que tu fais en premier : tu regardes ton téléphone ou tu prends ton café ?</li>
+        <li>Quelle application est-ce que tu ouvres le plus souvent ? Pourquoi ?</li>
+        <li>Tu peux passer une journée entière sans téléphone ?</li>
+        <li>Dans ta famille, qui est le plus connecté ? Et le moins connecté ?</li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- 2 -->
+  <section class="step">
+    <div class="step-head"><span class="step-no">2</span><h2>Un dimanche chez Mamie</h2><span class="tag">6 min</span></div>
+    <div class="task">
+      <p class="instr"><b>A.</b> Regarde l'image. Où sont ces personnes ? Qui est-ce ? Qu'est-ce qu'elles font ? Décris l'image.</p>
+      <div class="pic">
+        <img src="famille.webp" width="1248" height="832" alt="Un salon : une grand-mère dans un fauteuil parle au téléphone, une femme à table regarde une tablette avec un casque, un adolescent sur le canapé regarde son smartphone, et seul le chat regarde la télé.">
+      </div>
+    </div>
+    <div class="task">
+      <p class="instr"><b>B.</b> Le titre de la leçon est « Générations déconnectées ». À ton avis, qu'est-ce que ça veut dire ? Choisis une idée et explique avec « Je pense que… parce que… ».</p>
+      <div class="hyp" id="hyp"></div>
+    </div>
+    <div class="task">
+      <p class="instr"><b>C.</b> Et toi, qu'en penses-tu ?</p>
+      <ol class="qs">
+        <li>Les écrans rapprochent les générations ou ils les séparent ?</li>
+        <li>Tes grands-parents utilisent quel écran ? Pour faire quoi ?</li>
+        <li>Regarder son téléphone pendant un repas en famille, c'est normal ou impoli ?</li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- 3 -->
+  <section class="step">
+    <div class="step-head"><span class="step-no">3</span><h2>Les mots de l'écran</h2><span class="tag">7 min</span></div>
+    <div class="task">
+      <p class="instr"><b>A.</b> Associe. Clique sur un verbe, puis sur la bonne fin de phrase.</p>
+      <div class="verbs" id="verbs" aria-label="Verbes à placer"></div>
+      <div class="ends" id="ends"></div>
+      <div class="row"><button class="btn" id="mCheck" type="button">Vérifier</button><button class="btn ghost" id="mReset" type="button">Recommencer</button><span class="fb" id="mFb"></span></div>
+    </div>
+    <div class="task">
+      <p class="instr"><b>B.</b> Trouve l'intrus dans chaque groupe. Explique pourquoi.</p>
+      <div class="intrus" id="intrus"></div>
+    </div>
+  </section>
+
+  <!-- 4 -->
+  <section class="step">
+    <div class="step-head"><span class="step-no">4</span><h2>Trois générations, un dimanche</h2><span class="tag">10 min</span></div>
+    <div class="audio">
+      <span class="wave" aria-hidden="true" id="wave"></span>
+      <div class="ainfo"><h3>Reportage radio · 2 minutes</h3><p>Une journaliste visite la famille Martin, à Nantes.</p><audio id="player" controls preload="metadata" src="reportage.mp3">Ton navigateur ne lit pas l'audio.</audio></div>
+    </div>
+    <div class="people">
+      <div class="person"><span class="av" style="background:#3E5C76">J</span><div><b>Josette</b><span>74 ans · la grand-mère</span></div></div>
+      <div class="person"><span class="av" style="background:#A88F6A">N</span><div><b>Nathalie</b><span>46 ans · la fille de Josette</span></div></div>
+      <div class="person"><span class="av" style="background:#5B7A94">H</span><div><b>Hugo</b><span>15 ans · le fils de Nathalie</span></div></div>
+    </div>
+    <div class="task">
+      <p class="instr"><b>A.</b> Écoute une première fois. Quelle phrase résume le reportage ?</p>
+      <div class="choices" id="mc"></div>
+      <span class="fb" id="mcFb"></span>
+    </div>
+    <div class="task">
+      <p class="instr"><b>B.</b> Écoute encore. Qui fait quoi ? Coche les cases. Attention : parfois, il y a deux personnes.</p>
+      <div class="tablebox">
+        <table class="grid">
+          <thead><tr><th>Qui…</th><th class="c">Josette</th><th class="c">Nathalie</th><th class="c">Hugo</th></tr></thead>
+          <tbody id="grid"></tbody>
+        </table>
+      </div>
+      <div class="row"><button class="btn" id="gCheck" type="button">Vérifier</button><span class="fb" id="gFb"></span></div>
+    </div>
+  </section>
+
+  <!-- 5 -->
+  <section class="step">
+    <div class="step-head"><span class="step-no">5</span><h2>Sur, devant ou au ?</h2><span class="tag">6 min</span></div>
+    <div class="task">
+      <p class="instr"><b>A.</b> Lis ces phrases du reportage. Observe les mots en couleur, puis trouve la règle.</p>
+      <div class="quotes">
+        <p><span>Je passe trois heures par jour <mark>sur</mark> mon téléphone.</span><span class="who">Hugo</span></p>
+        <p><span>Je passe des heures <mark>à</mark> scroller <mark>sur</mark> TikTok.</span><span class="who">Hugo</span></p>
+        <p><span>Je lis les actualités <mark>sur</mark> Internet.</span><span class="who">Nathalie</span></p>
+        <p><span>Je regarde des séries <mark>sur</mark> ma tablette.</span><span class="who">Nathalie</span></p>
+        <p><span>Le soir, je suis <mark>devant</mark> la télé.</span><span class="who">Josette</span></p>
+        <p><span>Je passe des heures <mark>au</mark> téléphone avec ma sœur.</span><span class="who">Josette</span></p>
+      </div>
+      <div class="rule" id="rule"></div>
+      <div class="row"><button class="btn" id="rCheck" type="button">Vérifier</button><span class="fb" id="rFb"></span></div>
+    </div>
+    <div class="task">
+      <p class="instr"><b>B.</b> Chaque phrase a une erreur. Trouve-la et écris la phrase correcte.</p>
+      <ol class="fix" id="fix">
+        <li><span class="wrong">Je regarde des vidéos à Internet.</span><input type="text" id="e1" data-k="sur internet" data-bad="a internet" aria-label="Phrase 1 corrigée"></li>
+        <li><span class="wrong">Ma grand-mère parle des heures sur le téléphone avec sa sœur.</span><input type="text" id="e2" data-k="au telephone" data-bad="sur le telephone" aria-label="Phrase 2 corrigée"></li>
+        <li><span class="wrong">Le soir, on mange sur la télé.</span><input type="text" id="e3" data-k="devant la tele" data-bad="sur la tele" aria-label="Phrase 3 corrigée"></li>
+        <li><span class="wrong">Mon frère passe trois heures de jouer sur son PC.</span><input type="text" id="e4" data-k="a jouer" data-bad="de jouer" aria-label="Phrase 4 corrigée"></li>
+        <li><span class="wrong">Tu lis les actualités au ton smartphone ?</span><input type="text" id="e5" data-k="sur ton smartphone" data-bad="au ton" aria-label="Phrase 5 corrigée"></li>
+      </ol>
+      <div class="row"><button class="btn" id="eCheck" type="button">Vérifier</button><span class="fb" id="eFb"></span></div>
+    </div>
+  </section>
+
+  <!-- 6 -->
+  <section class="step">
+    <div class="step-head"><span class="step-no">6</span><h2>À toi !</h2><span class="tag">8 min</span></div>
+    <div class="task">
+      <p class="instr"><b>A.</b> Hugo ne répond pas. Josette lui envoie un message vocal. Complète la transcription avec <em>sur</em>, <em>devant</em>, <em>au</em> ou <em>à</em>.</p>
+      <div class="vm" id="vm">
+        <div class="from"><b>Mamie Josette</b> · message vocal · 0:34</div>
+        <p id="vmText"></p>
+      </div>
+      <div class="row"><button class="btn" id="vCheck" type="button">Vérifier</button><span class="fb" id="vFb"></span></div>
+    </div>
+    <div class="task">
+      <p class="instr"><b>B.</b> Ta journée numérique. Écris une phrase pour chaque moment de ta journée avec <em>passer + durée + sur / devant / au + à + infinitif</em>.</p>
+      <p class="ex">Exemple : Le matin, je passe vingt minutes sur Instagram à regarder des stories.</p>
+      <div class="day">
+        <div class="top">Ma journée numérique</div>
+        <label><span>Le matin</span><input type="text" id="d1"></label>
+        <label><span>À midi</span><input type="text" id="d2"></label>
+        <label><span>L'après-midi</span><input type="text" id="d3"></label>
+        <label><span>Le soir</span><input type="text" id="d4"></label>
+        <label><span>Le week-end</span><input type="text" id="d5"></label>
+      </div>
+      <p class="ex">Puis lis ta journée à ton professeur. Il pose deux questions. Exemple : « Et le soir, tu es devant la télé ou sur ton téléphone ? »</p>
+    </div>
+  </section>
+
+  <!-- 7 -->
+  <section class="step">
+    <div class="step-head"><span class="step-no">7</span><h2>On en parle !</h2><span class="tag">15 min</span></div>
+    <div class="task">
+      <p class="instr"><b>A.</b> Les Français et les écrans. Devine le bon chiffre, puis clique pour vérifier.</p>
+      <div class="data" id="data"></div>
+      <div class="fact">
+        <h3>En France, on se déconnecte…</h3>
+        <p><strong>À l'école :</strong> depuis septembre 2025, le téléphone portable est interdit à l'école primaire et au collège. C'est la « pause numérique » : les élèves laissent leur téléphone dans un casier ou une pochette.</p>
+        <p><strong>Au travail :</strong> depuis 2017, les salariés ont le « droit à la déconnexion » : le soir et le week-end, ils ne sont pas obligés de répondre aux messages du travail.</p>
+        <p class="src">Chiffres : Baromètre du numérique 2025 (Arcep, Arcom, Credoc).</p>
+      </div>
+      <ol class="qs">
+        <li>Quel chiffre te surprend ? Pourquoi ?</li>
+        <li>Dans le reportage, Hugo dit que la pause numérique, « au début, c'était dur ». La pause numérique, c'est une bonne idée pour toi ?</li>
+        <li>Le droit à la déconnexion existe dans ton pays ? Tu réponds aux messages du travail le soir ?</li>
+        <li>Pour toi, quelle génération est la plus déconnectée… des autres ?</li>
+      </ol>
+    </div>
+    <div class="task">
+      <p class="instr"><b>B.</b> Jeu de rôle : le dimanche déconnecté. C'est dimanche, la famille Martin déjeune chez Josette. Mamie veut zéro écran toute la journée. Hugo, lui, ne veut pas laisser son téléphone. Discutez et trouvez un accord. Choisissez ensemble trois règles pour la charte de la famille.</p>
+      <div class="roles">
+        <div class="role"><h3>Toi · Hugo</h3><p>Tu attends un message important de tes amis. Tu veux poster une vidéo de skate cet après-midi. Mais tu aimes beaucoup ta grand-mère… Propose des solutions.</p></div>
+        <div class="role"><h3>Ton professeur · Mamie Josette</h3><p>Pour toi, le dimanche, c'est sacré : on mange, on parle, on joue aux cartes. Tu acceptes un peu d'écran… mais seulement si Hugo fait un effort.</p></div>
+      </div>
+      <div class="charter">
+        <div class="top">Charte du dimanche · famille Martin <span id="chCount">0 / 3 règles</span></div>
+        <div id="charter"></div>
+        <div class="own"><input type="text" id="ownRule" placeholder="Notre règle à nous : …" aria-label="Votre propre règle"></div>
+      </div>
+      <div class="phrases">
+        <h3>Phrases utiles</h3>
+        <div class="ph-grid">
+          <div><b>Proposer</b>On pourrait… / Je propose de…<br>Et si on regardait un film ensemble ?</div>
+          <div><b>Accepter</b>D'accord, bonne idée !<br>Ça marche. / Pas de problème.</div>
+          <div><b>Refuser</b>Ah non, je ne suis pas d'accord.<br>Ce n'est pas possible parce que…</div>
+          <div><b>Négocier</b>D'accord, mais seulement si…<br>Une heure, pas plus !<br>Et toi, tu passes combien de temps devant la télé ?</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 8 -->
+  <section class="step">
+    <div class="step-head"><span class="step-no">8</span><h2>Le dernier post</h2><span class="tag">3 min</span></div>
+    <div class="task">
+      <p class="instr"><b>A.</b> Écris un post de 150 caractères maximum : une chose que tu fais souvent sur ton téléphone et une chose que tu veux faire sans écran cette semaine. Utilise <em>sur</em>, <em>devant</em> ou <em>au</em>.</p>
+      <div class="post">
+        <div class="head"><span class="av">A2</span><div><b>moi</b><span>maintenant · public</span></div></div>
+        <textarea id="post" aria-label="Ton post" placeholder="Je passe trop de temps sur… Cette semaine, je vais…"></textarea>
+        <div class="foot"><span class="count" id="count">0 / 150</span><button class="btn" id="publish" type="button">Publier</button></div>
+        <span class="posted" id="posted" hidden></span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Devoirs -->
+  <section class="hw" aria-labelledby="hw">
+    <h2 id="hw">Devoirs</h2>
+    <div class="card">
+      <p class="instr"><b>A.</b> Fais des phrases avec les éléments. Ajoute <em>sur</em>, <em>devant</em>, <em>au</em> ou <em>à</em>. Conjugue les verbes.</p>
+      <p class="ex">Exemple : Mamie / parler une heure / téléphone / avec sa sœur → Mamie parle une heure au téléphone avec sa sœur.</p>
+      <ol>
+        <li>Hugo / passer trois heures / son PC / jouer → ______</li>
+        <li>Nathalie / regarder des séries / sa tablette / le soir → ______</li>
+        <li>Le dimanche, nous / ne pas manger / la télé → ______</li>
+        <li>Je / passer trente minutes / Internet / lire les actualités → ______</li>
+        <li>Tu / passer beaucoup de temps / les réseaux ? → ______</li>
+        <li>Mes parents / être / téléphone / avec ma tante → ______</li>
+      </ol>
+    </div>
+    <div class="card">
+      <p class="instr"><b>B.</b> Mini-enquête : une autre génération.</p>
+      <p>Interviewe une personne d'une autre génération : tes parents, tes grands-parents, un voisin ou un collègue. Pose-lui ces quatre questions (en russe ou en français, comme tu veux) :</p>
+      <ul>
+        <li>Combien de temps par jour est-ce que tu passes sur ton téléphone ?</li>
+        <li>Qu'est-ce que tu fais sur Internet ?</li>
+        <li>Tu préfères parler au téléphone ou envoyer des messages ?</li>
+        <li>Qu'est-ce que tu faisais avant, sans smartphone ?</li>
+      </ul>
+      <p>Puis enregistre un message vocal en français (1 à 2 minutes) : présente ses habitudes et compare-les avec les tiennes. On l'écoute ensemble au prochain cours !</p>
+    </div>
+  </section>
+</div>
+
+<footer aria-label="créé par arinateach">
+  <div class="marq" aria-hidden="true">
+    <span>créé par arinateach</span><span>créé par arinateach</span><span>créé par arinateach</span><span>créé par arinateach</span><span>créé par arinateach</span><span>créé par arinateach</span>
+    <span>créé par arinateach</span><span>créé par arinateach</span><span>créé par arinateach</span><span>créé par arinateach</span><span>créé par arinateach</span><span>créé par arinateach</span>
+  </div>
+</footer>
+
+<script>
+const $=(s,r=document)=>r.querySelector(s), $$=(s,r=document)=>[...r.querySelectorAll(s)];
+const norm=s=>s.toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g,"").replace(/[’']/g," ").replace(/\s+/g," ").trim();
+const shuffle=a=>a.map(v=>[Math.random(),v]).sort((x,y)=>x[0]-y[0]).map(x=>x[1]);
+const pressGroup=(btns)=>btns.forEach(b=>{b.setAttribute("aria-pressed","false");b.addEventListener("click",()=>{btns.forEach(x=>x.setAttribute("aria-pressed","false"));b.setAttribute("aria-pressed","true")})});
+
+/* 1 slider */
+const h=$("#hours");
+const fmt=v=>{const n=+v;if(n===0)return"0 heure";const hh=Math.floor(n),half=n%1?" et demie":"";return hh===0?"une demi-heure":`${hh===1?"une heure":hh+" heures"}${half}`};
+h.addEventListener("input",()=>$("#hoursOut").textContent=fmt(h.value));
+
+/* 2 hypotheses */
+[["Idée 1","Les grands-parents ne sont pas sur Internet."],["Idée 2","Les jeunes sont toujours connectés, mais ils ne parlent pas avec leur famille."],["Idée 3","Les générations ne se comprennent pas."],["Idée 4","Chaque génération a son écran : la télé, le téléphone, le smartphone."]]
+.forEach(([t,s])=>{const b=document.createElement("button");b.type="button";b.innerHTML=`<small>${t}</small><span>${s}</span>`;$("#hyp").append(b)});
+pressGroup($$("#hyp button"));
+
+/* 3A matching */
+const ends=[
+ ["des messages vocaux",["envoyer"]],
+ ["des podcasts",["écouter"]],
+ ["les actualités",["lire"]],
+ ["des nouvelles de sa famille",["prendre"]],
+ ["pendant des heures",["scroller"]],
+ ["des mèmes",["partager","envoyer","liker","poster"]],
+ ["des vidéos sur TikTok",["poster","regarder","liker","partager"]],
+ ["des stories sur Insta",["regarder","poster","liker","partager"]],
+ ["des photos",["liker","envoyer","poster","partager","regarder"]]];
+const verbs=["envoyer","écouter","lire","prendre","scroller","partager","poster","regarder","liker"];
+let selV=null;
+function buildMatch(){
+ $("#verbs").innerHTML="";$("#ends").innerHTML="";$("#mFb").textContent="";selV=null;
+ shuffle(verbs).forEach(v=>{const c=document.createElement("button");c.type="button";c.className="chip";c.textContent=v;c.dataset.v=v;
+  c.onclick=e=>{e.stopPropagation();if(c.parentElement.classList.contains("slot")){c.classList.remove("ok","no","sel");$("#verbs").append(c);selV=null;$$(".chip").forEach(x=>x.classList.remove("sel"));return}
+   $$(".chip").forEach(x=>x.classList.remove("sel"));if(selV===c){selV=null;return}selV=c;c.classList.add("sel")};
+  $("#verbs").append(c)});
+ shuffle(ends).forEach(([t,ok])=>{const b=document.createElement("div");b.setAttribute("role","button");b.tabIndex=0;b.className="end";b.dataset.ok=ok.join("|");
+  b.onkeydown=e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();b.click()}};
+  b.innerHTML=`<span class="slot"></span><span>${t}</span>`;
+  b.onclick=()=>{if(!selV)return;const s=$(".slot",b);const old=$(".chip",s);if(old){old.classList.remove("ok","no");$("#verbs").append(old)}
+   selV.classList.remove("sel","ok","no");s.append(selV);selV=null};
+  $("#ends").append(b)});
+}
+$("#mCheck").onclick=()=>{let ok=0;$$(".end").forEach(e=>{const c=$(".chip",e);if(!c)return;const g=e.dataset.ok.split("|").includes(c.dataset.v);c.classList.toggle("ok",g);c.classList.toggle("no",!g);if(g)ok++});
+ $("#mFb").textContent=ok===9?"Bravo ! Maintenant, fais une phrase vraie pour toi avec trois expressions.":`${ok} / 9 bien placés`};
+$("#mReset").onclick=buildMatch;buildMatch();
+
+/* 3B intrus */
+[[["un podcast","une série","une story","un stylo"],3],[["envoyer","poster","partager","dormir"],3],[["le smartphone","la tablette","le journal en papier","le PC"],2],[["Instagram","TikTok","la radio","WhatsApp"],2]]
+.forEach(([ws,ans],n)=>{const s=document.createElement("div");s.className="set";s.innerHTML=`<span class="n">${n+1}.</span>`;
+ ws.forEach((w,i)=>{const b=document.createElement("button");b.type="button";b.textContent=w;
+  b.onclick=()=>{$$("button",s).forEach(x=>x.classList.remove("ok","no"));b.classList.add(i===ans?"ok":"no")};s.append(b)});
+ $("#intrus").append(s)});
+
+/* 4 audio wave decoration */
+[10,20,14,28,18,32,12,24,30,16,22,8,26,14,20].forEach(v=>{const i=document.createElement("i");i.style.height=v+"px";$("#wave").append(i)});
+
+/* 4A global MC */
+[["Les trois générations utilisent les écrans, mais pas de la même façon.",1],["La grand-mère n'utilise jamais son téléphone.",0],["Hugo n'aime pas les déjeuners en famille.",0]]
+.forEach(([t,v],i)=>{const b=document.createElement("button");b.type="button";b.className="choice";b.innerHTML=`<span class="l">${"abc"[i]}</span><span>${t}</span>`;
+ b.onclick=()=>{$$(".choice").forEach(x=>x.classList.remove("ok","no"));b.classList.add(v?"ok":"no");$("#mcFb").textContent=v?"Oui ! Donne un exemple pour chaque personne.":"Non. Écoute encore le début du reportage."};$("#mc").append(b)});
+
+/* 4B grid */
+const rows=[["envoie des messages vocaux","J"],["passe beaucoup de temps au téléphone","JN"],["regarde la télé le soir","J"],["lit les actualités sur Internet","N"],["écoute des podcasts","N"],["regarde des séries sur sa tablette","N"],["scrolle pendant des heures","H"],["poste des vidéos","H"],["partage des mèmes","H"],["prend des nouvelles de sa famille","J"]];
+rows.forEach(([t,a],r)=>{const tr=document.createElement("tr");tr.innerHTML=`<td>${t}</td>`;
+ "JNH".split("").forEach(p=>{const td=document.createElement("td");td.className="c";const b=document.createElement("button");b.type="button";b.className="tick";b.textContent="✓";b.dataset.ok=a.includes(p)?"1":"0";
+  b.setAttribute("aria-pressed","false");b.setAttribute("aria-label",`${t} : ${{J:"Josette",N:"Nathalie",H:"Hugo"}[p]}`);
+  b.onclick=()=>{b.setAttribute("aria-pressed",b.getAttribute("aria-pressed")==="true"?"false":"true");$$(".tick").forEach(x=>x.classList.remove("ok","no"));$("#gFb").textContent=""};
+  td.append(b);tr.append(td)});
+ $("#grid").append(tr)});
+$("#gCheck").onclick=()=>{let ok=0;$$("#grid tr").forEach(tr=>{let g=true;
+  $$(".tick",tr).forEach(b=>{const on=b.getAttribute("aria-pressed")==="true",should=b.dataset.ok==="1";
+   b.classList.toggle("ok",on&&should);b.classList.toggle("no",on!==should);if(on!==should)g=false});if(g)ok++});
+ $("#gFb").textContent=`${ok} / ${rows.length} lignes correctes`};
+
+/* 5A rule */
+const rule=[
+ ["On dit « sur » avec…",["Internet, le téléphone, la tablette, les réseaux","la télé"],0],
+ ["On dit « devant » avec…",["Internet","la télé"],1],
+ ["« Au téléphone », c'est quand…",["on parle avec quelqu'un","on regarde des vidéos"],0],
+ ["Après « passer + du temps », on met…",["à + infinitif (passer une heure à scroller)","de + infinitif (passer une heure de scroller)"],0]];
+rule.forEach(([q,opts,a],i)=>{const d=document.createElement("div");d.innerHTML=`<div>${q}</div>`;const r=document.createElement("div");r.className="row";r.dataset.a=a;
+ opts.forEach((o,j)=>{const b=document.createElement("button");b.type="button";b.textContent=o;b.dataset.j=j;r.append(b)});
+ d.append(r);$("#rule").append(d);pressGroup($$("button",r));
+ $$("button",r).forEach(b=>b.addEventListener("click",()=>{$$("button",r).forEach(x=>x.classList.remove("ok","no"))}))});
+$("#rCheck").onclick=()=>{let ok=0;$$("#rule .row").forEach(r=>{$$("button",r).forEach(b=>{b.classList.remove("ok","no");if(b.getAttribute("aria-pressed")==="true"){const g=b.dataset.j===r.dataset.a;b.classList.add(g?"ok":"no");if(g)ok++}})});
+ $("#rFb").textContent=`${ok} / 4`};
+
+/* 5B error correction */
+$("#eCheck").onclick=()=>{let ok=0;$$("#fix input").forEach(i=>{const v=norm(i.value);if(!v){i.classList.remove("ok","no");return}
+ const g=v.includes(norm(i.dataset.k))&&!v.includes(norm(i.dataset.bad));i.classList.toggle("ok",g);i.classList.toggle("no",!g);if(g)ok++});
+ $("#eFb").textContent=`${ok} / 5 correct`};
+
+/* 6A voice message gaps */
+const vm=["Coucou mon chéri, c'est Mamie ! Tu ne réponds pas ",["au"]," téléphone… Tu es encore ",["sur"]," les réseaux ? Ta maman dit que tu passes tes soirées ",["à"]," jouer ",["sur"]," ton PC ! Moi, ce soir, je suis ",["devant"]," la télé : il y a un vieux film avec Catherine Deneuve. Dimanche, tu viens déjeuner ? Mais attention : pas de téléphone ",["à"]," table ! Gros bisous !"];
+const opts=["…","sur","devant","au","à"];
+let gi=0;vm.forEach(p=>{if(typeof p==="string"){$("#vmText").append(document.createTextNode(p))}else{gi++;const s=document.createElement("select");s.id="g"+gi;s.dataset.a=p[0];s.setAttribute("aria-label","Trou "+gi);
+ opts.forEach(o=>{const op=document.createElement("option");op.textContent=o;op.value=o==="…"?"":o;s.append(op)});s.onchange=()=>s.classList.remove("ok","no");$("#vmText").append(s)}});
+$("#vCheck").onclick=()=>{let ok=0;$$("#vmText select").forEach(s=>{if(!s.value){s.classList.remove("ok","no");return}const g=s.value===s.dataset.a;s.classList.toggle("ok",g);s.classList.toggle("no",!g);if(g)ok++});
+ $("#vFb").textContent=ok===6?"Parfait ! Lis le message à voix haute, comme Mamie.":`${ok} / 6`};
+
+/* 7A data quiz */
+[["En moyenne, combien d'heures par jour les Français passent-ils devant un écran ?",["2 h","4 h","7 h"],1,"4 h"],
+ ["Combien de Français pensent passer trop de temps sur les écrans ?",["12 %","42 %","82 %"],1,"42 %"],
+ ["Combien de Français ont un smartphone ?",["61 %","75 %","91 %"],2,"91 %"],
+ ["Combien de Français vont sur les réseaux sociaux tous les jours ?",["37 %","67 %","97 %"],1,"67 %"]]
+.forEach(([q,o,a,big])=>{const d=document.createElement("div");d.className="stat";d.innerHTML=`<p>${q}</p><div class="opts"></div><div class="big" hidden>${big}</div>`;
+ o.forEach((t,j)=>{const b=document.createElement("button");b.type="button";b.textContent=t;
+  b.onclick=()=>{$$(".opts button",d).forEach(x=>x.classList.remove("ok","no"));b.classList.add(j===a?"ok":"no");if(j!==a)$$(".opts button",d)[a].classList.add("ok");$(".big",d).hidden=false};
+  $(".opts",d).append(b)});
+ $("#data").append(d)});
+
+/* 7B charter */
+const rulesList=["Pas de téléphone à table.","Les téléphones restent dans une boîte pendant le déjeuner.","On peut répondre au téléphone seulement pour une urgence.","Après le déjeuner, une heure de jeux de société, sans écran.","Le soir, on regarde un film ensemble devant la télé.","Hugo apprend à Mamie à envoyer un message vocal… et Mamie lui apprend à jouer à la belote."];
+rulesList.forEach((t,i)=>{const l=document.createElement("label");l.innerHTML=`<input type="checkbox" id="c${i}"><span>${t}</span>`;$("#charter").append(l)});
+const upd=()=>{const n=$$("#charter input:checked").length+($("#ownRule").value.trim()?1:0);$("#chCount").textContent=`${n} / 3 règles`;
+ $$("#charter input").forEach(c=>c.disabled=!c.checked&&n>=3)};
+$("#charter").addEventListener("change",upd);$("#ownRule").addEventListener("input",upd);
+
+/* 8 post */
+const ta=$("#post");
+ta.addEventListener("input",()=>{const n=ta.value.length;$("#count").textContent=`${n} / 150`;$("#count").classList.toggle("over",n>150);$("#posted").hidden=true});
+$("#publish").onclick=()=>{const n=ta.value.trim().length;const p=$("#posted");p.hidden=false;
+ p.textContent=!n?"Ton post est vide !":n>150?"Trop long ! Coupe un peu.":"Publié ! ♥ 12 · Ton professeur a liké ton post."};
+</script>
+
+</body></html>
